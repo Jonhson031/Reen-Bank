@@ -2,15 +2,16 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
+button {
+    border: none;
+    outline: none;
+}
 
 html,
 body {
     height: 100%;
 }
-button{
-    border: none;
-    outline: none;
-}
+
 body {
     font-size: 1rem;
     font-weight: 400;
@@ -19,13 +20,18 @@ body {
     line-height: 160%;
     /* 2.4rem */
     background-color: #fff;
+
+    &.lock {
+        overflow: hidden;
+    }
 }
 
 .wrapper {
     min-height: 100%;
     display: flex;
     flex-direction: column;
-    overflow: clip;
+    // overflow: clip;
+    // overflow-y: scroll;
 }
 
 .wrapper main {
@@ -44,6 +50,22 @@ body {
     font-family: "DM Sans";
     font-size: 3em;
     font-weight: 700;
+}
+
+.overlay {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.2s;
+
+    &.active {
+        visibility: visible;
+        opacity: 1;
+        z-index: 10;
+    }
 }
 
 .header {
@@ -91,6 +113,7 @@ body {
     &.active {
         opacity: 1;
         visibility: visible;
+        z-index: 10;
     }
 
     background-color: #D4F3E7;
@@ -365,6 +388,7 @@ body {
         &.active {
             visibility: visible;
             opacity: 1;
+            z-index: 2;
         }
     }
 
@@ -507,7 +531,8 @@ body {
             }
         }
     }
-    &__block-value{
+
+    &__block-value {
         min-width: 100.75px;
     }
 
@@ -738,11 +763,13 @@ body {
         justify-content: space-between;
         gap: 4.06em;
     }
-    &__accounts-detailed{
+
+    &__accounts-detailed {
         flex: 0 1 79%;
         display: flex;
         justify-content: space-between;
     }
+
     &__accounts-row &__block {
         position: relative;
         border-radius: 0 0.75rem 0.75rem 0;
@@ -965,5 +992,213 @@ body {
 
     &__transactions-all>&__row>&__block {
         width: 100%;
+    }
+}
+
+.account {
+    // ? Modal windows
+
+    &__modal,
+    &__message {
+        position: fixed;
+        z-index: 15;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        height: 100%;
+        box-sizing: border-box;
+        border-radius: 1.5em;
+        overflow: auto;
+        transition: all 0.5s;
+        padding: 4.5em 5em;
+        border-radius: 2rem;
+        box-shadow: 0 0 200px 25px rgba(51, 183, 134, 0.25);
+        width: 29.8%;
+        font-family: 1em;
+        visibility: hidden;
+        opacity: 0;
+
+        & form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        overflow-y: auto;
+
+        &.active {
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+
+    &__modal-add {
+        height: 32.1875rem;
+    }
+
+    &__modal-withdraw {
+        height: 49.4375rem;
+    }
+
+    &__modal-fund {}
+
+    &__fund-section {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    // .account__title
+
+    &__title {
+        color: #33B786;
+        font-family: "DM Sans";
+        font-size: 3rem;
+        font-weight: 700;
+        line-height: 114%;
+        margin-bottom: 2.5rem;
+    }
+
+    // .account__input
+
+    &__input {
+        font-family: "DM Sans";
+        font-size: 1rem;
+        font-weight: 700;
+        line-height: 1;
+
+        & label {
+            color: #252525;
+            margin-bottom: 0.44rem;
+            display: block;
+        }
+
+        & input,
+        & select {
+            font-family: "DM Sans";
+            font-size: 1rem;
+            font-weight: 700;
+            line-height: 1;
+            padding: 1.31rem 0 1.37em 1.5em;
+            border-radius: 0.75rem;
+            border: 1px solid #8A8A8A;
+            box-shadow: 0 0 50px 0.5px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            box-sizing: border-box;
+
+            &::placeholder {
+                color: #B8B8B8;
+            }
+        }
+
+        & select {
+            color: #B8B8B8;
+            appearance: none;
+
+            & option {
+                color: #252525;
+            }
+        }
+    }
+
+    &__input-select {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        justify-content: space-between;
+        column-gap: 2.5rem;
+
+        h3 {
+            grid-column: 1 / -1;
+            color: #252525;
+            font-family: "DM Sans";
+            font-size: 1rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 0.44rem;
+        }
+    }
+
+    &__input-radio {
+        display: flex;
+        align-items: center;
+        border-radius: 0.75rem;
+        border: 1px solid #8A8A8A;
+        background: #FFF;
+        box-shadow: 0 0 50px 0.5px rgba(0, 0, 0, 0.05);
+        padding: 1.35rem 0rem 1.35rem 2rem;
+        margin: 0;
+
+        input[type="radio"] {
+            accent-color: #E74F5B;
+        }
+
+        & input {
+            width: initial;
+            margin: 0;
+            margin-right: 0.5rem;
+        }
+    }
+
+    // .account__buttons
+
+    &__buttons {
+        display: flex;
+        gap: 2.5rem;
+        margin-top: 3rem;
+        flex: 0 1 100%;
+        justify-content: space-between;
+    }
+
+    // .account__button
+
+    &__button {
+        padding: 1.25rem 2rem;
+        width: 100%;
+        border-radius: 0.75rem;
+        background-color: #D4D4D4;
+        color: #252525;
+        font-family: "DM Sans";
+        font-size: 1.5rem;
+        font-weight: 700;
+        line-height: 1;
+        max-height: 4rem;
+    }
+
+    // .account__button-green
+
+    &__button-green {
+        background-color: #33B786;
+        color: #fff;
+    }
+
+    // .account__message
+
+    &__message {
+        position: fixed;
+        width: 37.1%;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        height: 29.9375rem;
+        justify-content: flex-end;
+
+        & h3 {
+            color: #6C6C6C;
+            font-family: "DM Sans";
+            font-size: 1.5rem;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 2rem;
+
+            & span {
+                color: #33B786;
+            }
+        }
+    }
+
+    &__message-add {
+        height: 35.4375rem;
     }
 }

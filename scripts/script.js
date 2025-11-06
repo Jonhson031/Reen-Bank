@@ -21,6 +21,8 @@ const sectionBtnList = document.querySelector('.dashboard__sections-list');
 const sectionBtn = document.querySelectorAll('.dashboard__item');
 const sections = document.querySelectorAll('.dashboard__section');
 const dashboardTitle = document.querySelector('.dashboard__title');
+const overlay = document.querySelector('.overlay');
+const accountsRowDetailed = document.querySelector('.section__accounts-detailed');
 
 // Login
 document.querySelector('.header__button').addEventListener('click', (e) => {
@@ -186,7 +188,7 @@ const user1 = {
                 },
             ]
         },
-        
+
     ],
 }
 
@@ -221,7 +223,6 @@ const displayAccountsOverview = function (user) {
 displayAccountsOverview(user1);
 
 const displayAccountsDetailed = function (user) {
-    const accountsRowDetailed = document.querySelector('.section__accounts-detailed');
     accountsRowDetailed.innerHTML = '';
 
     user.accounts.forEach((account, i) => {
@@ -286,6 +287,95 @@ const calcDisplaySummary = function (user) {
 }
 calcDisplaySummary(user1);
 
+
+// Modal
+const modalActive = function (modal) {
+    modal.classList.add('active');
+    overlay.classList.add('active');
+    document.body.classList.add('lock');
+}
+const modalRemoveActive = function (modal) {
+    modal.classList.remove('active');
+    overlay.classList.remove('active');
+    document.body.classList.remove('lock');
+}
+// Hide modal by esc
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        const activeModal = document.querySelector('.modal.active');
+        if (activeModal) modalRemoveActive(activeModal);
+    }
+});
+
+// Hide modal by clicling on overlay
+overlay.addEventListener('click', () => {
+    const activeModal = document.querySelector('.modal.active');
+    if (activeModal) modalRemoveActive(activeModal);
+});
+const modalFunc = function (modal) {
+    modalActive(modal);
+    const cancelBtn = modal.querySelector('.account__button-cancel');
+    if (cancelBtn) {
+        cancelBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            modalRemoveActive(modal);
+        })
+    };
+}
+
+const toggleActiveAccount = function (user, containerTransactionsAccounts, containerTransactionsAll, sortedAccountMovements) {
+    document.querySelectorAll('.section__accounts-row').forEach(row => {
+        const allBlocks = row.querySelectorAll('.section__block');
+
+        // Remove 'active' from all blocks first
+        allBlocks.forEach(block => block.classList.remove('active'));
+
+        // Set first block active by default
+        if (allBlocks.length > 0) allBlocks[0].classList.add('active');
+
+        // Handle clicks
+        row.addEventListener('click', function (e) {
+            const clickedBlock = e.target.closest('.section__block');
+            // Ignore clicks outside block or on add button
+            if (!clickedBlock || clickedBlock.classList.contains('section__accounts-add')) return;
+
+            // Fund and Withdraw buttons
+            if (e.target.classList.contains('section__accounts-fund')) {
+                e.stopPropagation();
+                const modal = document.querySelector('.account__modal-fund')
+                modalFunc(modal);
+                return
+            }
+            if (e.target.classList.contains('section__accounts-withdraw')) {
+                e.stopPropagation();
+                const modal = document.querySelector('.account__modal-withdraw')
+                modalFunc(modal);
+                return
+            }
+
+
+            // Clear containers
+            containerTransactionsAll.innerHTML = '';
+            containerTransactionsAccounts.innerHTML = '';
+
+            // Toggle active class
+            allBlocks.forEach(block => block.classList.remove('active'));
+            clickedBlock.classList.add('active');
+
+            const currentAccount = user.accounts.find(account => account.name === clickedBlock.querySelector('h4').textContent);
+            const sortedCurrentMovements = currentAccount.movements.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            sortedCurrentMovements.slice(0, 8).forEach(mov => sortedAccountMovements(mov, containerTransactionsAccounts));
+            sortedCurrentMovements.forEach(mov => sortedAccountMovements(mov, containerTransactionsAll));
+
+            // Fund Button 
+            const fundButton = clickedBlock.querySelector('.section__accounts-fund');
+
+        });
+    });
+};
+
+
 // Movements
 const movements = function (user) {
     containerTransactionsOverview.innerHTML = '';
@@ -294,8 +384,6 @@ const movements = function (user) {
 
 
     const sortedMovements = allMovements.sort((a, b) => new Date(b.date) - new Date(a.date));
-    // const currentAccountMovements = user.accounts.find(account => account.name  === );
-    // console.log(currentAccountMovements);
 
     function movementData(mov) {
         const movementDate = mov.date
@@ -334,44 +422,13 @@ const movements = function (user) {
         container.insertAdjacentHTML('beforeend', transactionsFull);
     }
 
-    // By default show first account movements
+    // By default, show first account movements
     user.accounts[0].movements.sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 8).forEach(mov => sortedAccountMovements(mov, containerTransactionsAccounts))
     user.accounts[0].movements.sort((a, b) => new Date(b.date) - new Date(a.date)).forEach(mov => sortedAccountMovements(mov, containerTransactionsAll))
 
-    const toggleActiveAccount = function () {
-        document.querySelectorAll('.section__accounts-row').forEach(row => {
-            const allBlocks = row.querySelectorAll('.section__block');
-            allBlocks.forEach(block => block.classList.remove('active'));
 
-            //  1. Set the first block as active by default
-            if (allBlocks.length > 0) allBlocks[0].classList.add('active');
-
-
-            // 2. Handle clicks
-            row.addEventListener('click', function (e) {
-                const clickedBlock = e.target.closest('.section__block');
-
-                // Stop if clicked outside a block or on the "add" button
-                if (!clickedBlock || clickedBlock.classList.contains('section__accounts-add')) return;
-
-                // Clean Containers
-                containerTransactionsAll.innerHTML = '';
-                containerTransactionsAccounts.innerHTML = '';
-
-                // Remove 'active' from all blocks, then add to clicked one
-                allBlocks.forEach(block => block.classList.remove('active'));
-                clickedBlock.classList.add('active');
-
-                // Display transactions for each account
-                const currentAccount = user1.accounts.find(account => account.name === clickedBlock.querySelector('h4').textContent);
-                const sortedCurrentMovements = currentAccount.movements.sort((a, b) => new Date(b.date) - new Date(a.date))
-                sortedCurrentMovements.slice(0, 8).forEach(mov => sortedAccountMovements(mov, containerTransactionsAccounts));
-                sortedCurrentMovements.forEach(mov => sortedAccountMovements(mov, containerTransactionsAll));
-            });
-        });
-    };
-
-    toggleActiveAccount();
+    // Call external toggleActiveAccount
+    toggleActiveAccount(user, containerTransactionsAccounts, containerTransactionsAll, sortedAccountMovements);
 }
 
 
@@ -435,3 +492,24 @@ sectionBtnList.addEventListener('click', function (e) {
 
     movements(user1);
 })
+
+
+// Fund Account Button
+
+// accountsRowDetailed.addEventListener('click', function (e) {
+//     // Check if the click was on a Fund button
+//     if (e.target.classList.contains('section__accounts-fund')) {
+//         e.stopPropagation();
+//     }
+
+//     const clickedBlock = e.target.closest('.section__block');
+//     if (!clickedBlock || clickedBlock.classList.contains('section__accounts-add')) return;
+
+//     // Find the "Fund" button inside this block
+//     const fundButton = clickedBlock.querySelector('.section__accounts-fund');
+
+//     fundButton.addEventListener('click', function (e) {
+//         document.querySelector('.account__modal-add').classList.add('active');
+//         overlay.classList.add('active');
+//     })
+// });
