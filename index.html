@@ -3,9 +3,11 @@
 
 <head>
     <meta charset="UTF-8">
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fake Bank</title>
     <link rel="stylesheet" href="css/main.css">
+    <script defer src="scripts/script.js"></script>
 </head>
 
 <body>
@@ -496,12 +498,12 @@
                         <form action="" method="post">
                             <div class="account__input">
                                 <label for="account__amount-withdraw">Amount</label>
-                                <input type="text" name="account__amount-withdraw" id="account__amount-withdraw"
+                                <input type="number" name="account__amount-withdraw" id="account__amount-withdraw"
                                     placeholder="100.00">
                             </div>
                             <div class="account__input">
                                 <label for="account__number">Account Number</label>
-                                <input type="text" name="account__number" id="account__number"
+                                <input type="number" name="account__number" id="account__number"
                                     placeholder="00 00 00 00 00">
                             </div>
                             <div class="account__input">
@@ -536,11 +538,13 @@
                         <form action="" method="post" id="form__fund">
                             <div class="account__input-select">
                                 <h3>Select Payment Method</h3>
-                                <label for="account__directpay" class="account__input account__input-radio">
-                                    <input type="radio" name="account__payment" id="account__directpay">
+                                <label for="account__directpay" class="account__input account__input-radio"
+                                    data-payment="directpay">
+                                    <input type="radio" name="account__payment" id="account__directpay" checked>
                                     Direct Pay
                                 </label>
-                                <label for="account__credit" class="account__input account__input-radio">
+                                <label for="account__credit" class="account__input account__input-radio"
+                                    data-payment="credit">
                                     <input type="radio" name="account__payment" id="account__credit">
                                     Credit Card
                                 </label>
@@ -548,19 +552,20 @@
                             <div class="account__fund-section active" id="form__fund-directpay">
                                 <div class="account__input">
                                     <label for="account__amount-fund--direct">Amount</label>
-                                    <input type="text" name="account__amount-fund--direct"
-                                        id="account__amount-fund--direct" placeholder="100.00">
+                                    <input type="number" name="account__amount-fund--direct"
+                                        id="account__amount-fund--direct" placeholder="100.00" data-source="Direct Pay">
                                 </div>
                             </div>
                             <div class="account__fund-section" id="form__fund-credit">
                                 <div class="account__input">
                                     <label for="account__amount-fund--credit">Amount</label>
-                                    <input type="text" name="account__amount-fund--credit"
-                                        id="account__amount-fund--credit" placeholder="100.00">
+                                    <input type="number" name="account__amount-fund--credit"
+                                        id="account__amount-fund--credit" placeholder="100.00"
+                                        data-source="Credit Card">
                                 </div>
                                 <div class="account__input">
                                     <label for="account__card-num">Card Number</label>
-                                    <input type="text" name="account__card-num" id="account__card-num"
+                                    <input type="number" name="account__card-num" id="account__card-num"
                                         placeholder="0000 0000 0000 0000">
                                 </div>
                                 <div class="account__input">
@@ -575,7 +580,7 @@
                                 </div>
                                 <div class="account__input">
                                     <label for="account__card-cvc">CVC</label>
-                                    <input type="text" name="account__card-cvc" id="account__card-cvc"
+                                    <input type="number" name="account__card-cvc" id="account__card-cvc"
                                         placeholder="000">
                                 </div>
                             </div>
@@ -593,7 +598,6 @@
             </div>
         </div>
     </div>
-    <script src="scripts/script.js"></script>
 </body>
 
 </html>

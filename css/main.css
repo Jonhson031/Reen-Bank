@@ -430,6 +430,7 @@ body.lock {
 .section__block {
   padding: 0 2.5em;
   cursor: pointer;
+  box-sizing: border-box;
 }
 .section__block h4 {
   color: #46237A;
@@ -464,6 +465,11 @@ body.lock {
   border-radius: 0.75rem;
   background: #D4F3E7;
   padding: 2.6em 2.7em;
+}
+.section__content-accounts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.87em;
 }
 .section__add {
   position: relative;
@@ -603,14 +609,17 @@ body.lock {
 }
 
 .section__accounts-row {
-  display: flex;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 4.06em;
 }
 .section__accounts-detailed {
-  flex: 0 1 79%;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4.06em;
+  flex-wrap: wrap;
 }
 .section__accounts-row .section__block {
   position: relative;
@@ -655,6 +664,8 @@ body.lock {
   grid-template-rows: auto 1fr;
   grid-template-columns: auto auto;
   background-color: rgba(240, 240, 240, 0.75);
+  max-height: 11.5rem;
+  box-sizing: border-box;
 }
 .section__accounts-row .section__accounts-add p {
   align-self: flex-end;
@@ -745,22 +756,24 @@ body.lock {
   background-color: #33B786;
 }
 
+.section__accounts-transactions {
+  grid-template-columns: repeat(3, 1fr);
+}
 .section__transactions-all > .section__row {
   -moz-column-gap: 5.5em;
        column-gap: 5.5em;
 }
 .section__transactions-all > .section__row > .section__block {
-  width: 100%;
+  flex: 0 1 33%;
 }
 
 .account__modal, .account__message {
   position: fixed;
-  z-index: 15;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #fff;
-  height: 100%;
+  max-height: 100%;
   box-sizing: border-box;
   border-radius: 1.5em;
   overflow: auto;
@@ -782,17 +795,36 @@ body.lock {
 .account__modal.active, .account__message.active {
   visibility: visible;
   opacity: 1;
+  z-index: 15;
 }
 .account__modal-add {
   height: 32.1875rem;
 }
-.account__modal-withdraw {
-  height: 49.4375rem;
+.account__modal-fund {
+  margin-top: 3rem;
+  padding-bottom: 5rem;
+}
+.account__modal-fund form {
+  position: relative;
 }
 .account__fund-section {
+  position: absolute;
+  max-height: 0;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  visibility: hidden;
+  opacity: 0;
+  display: none;
+  transition: max-height 0.4s ease, opacity 0.3s ease;
+}
+.account__fund-section.active {
+  transition: all 0.3s;
+  position: initial;
+  visibility: visible;
+  opacity: 1;
+  display: flex;
+  max-height: initial;
 }
 .account__title {
   color: #33B786;

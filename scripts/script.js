@@ -23,6 +23,7 @@ const sections = document.querySelectorAll('.dashboard__section');
 const dashboardTitle = document.querySelector('.dashboard__title');
 const overlay = document.querySelector('.overlay');
 const accountsRowDetailed = document.querySelector('.section__accounts-detailed');
+const modalFund = document.querySelector('.account__modal-fund');
 
 // Login
 document.querySelector('.header__button').addEventListener('click', (e) => {
@@ -188,7 +189,78 @@ const user1 = {
                 },
             ]
         },
-
+        {
+            name: 'Savings Account',
+            currency: 'USD',
+            movements: [
+                {
+                    amount: 400,
+                    date: '2020-11-18T21:31:17.178Z',
+                    source: 'Direct Deposit'
+                },
+                {
+                    amount: 953.2,
+                    date: '2020-12-23T07:42:02.383Z',
+                    source: 'Credit Card'
+                },
+                {
+                    amount: -42.5,
+                    date: '2021-01-28T09:15:04.904Z',
+                    source: 'Jane Doe'
+                },
+                {
+                    amount: 2400,
+                    date: '2021-04-01T10:17:24.185Z',
+                    source: 'Direct Deposit'
+                },
+                {
+                    amount: -642.21,
+                    date: '2021-05-08T14:11:59.604Z',
+                    source: 'Credit Card'
+                },
+                {
+                    amount: -213.9,
+                    date: '2021-05-27T17:01:17.194Z',
+                    source: 'Jane Doe'
+                },
+                {
+                    amount: 719.97,
+                    date: '2021-07-11T23:36:17.929Z',
+                    source: 'Direct Deposit'
+                },
+                {
+                    amount: 2743,
+                    date: '2021-07-12T10:51:36.790Z',
+                    source: 'Credit Card'
+                }
+            ]
+        },
+        {
+            name: 'Holiday Savings',
+            currency: 'USD',
+            movements: [
+                {
+                    amount: 155.5,
+                    date: '2022-11-18T21:31:17.178Z',
+                    source: 'Transfer'
+                },
+                {
+                    amount: 144.4,
+                    date: '2022-12-23T07:42:02.383Z',
+                    source: 'Credit Card'
+                },
+                {
+                    amount: -42.5,
+                    date: '2023-01-28T09:15:04.904Z',
+                    source: 'Jane Doe'
+                },
+                {
+                    amount: 1400,
+                    date: '2023-04-01T10:17:24.185Z',
+                    source: 'Direct Deposit'
+                },
+            ]
+        },
     ],
 }
 
@@ -260,32 +332,27 @@ const formatedDate = function (movDate) {
     return formated;
 }
 
-// All movements combined
 
+// All movements combined
 const getAllMovements = function (user) {
     return user.accounts.flatMap(account =>
         account.movements
     )
 };
-const allMovements = getAllMovements(user1);
 
-// Calcule and Print Balance
-const calcPrintBalance = function () {
+// Calcule and Display Balance. 
+const displayBalance = function (user) {
+    const allMovements = getAllMovements(user);
+    const income = Number(allMovements.filter(mov => mov.amount > 0).reduce((acc, curr) => acc + curr.amount, 0).toFixed(2));
+    labelSumIn.forEach(label => label.textContent = `$ ${income}`);
+    const expenses = Number(allMovements.filter(mov => mov.amount < 0).reduce((acc, curr) => acc + curr.amount, 0).toFixed(2));
+    labelSumOut.forEach(label => label.textContent = `$ ${Math.abs(expenses)}`);
+
     const totalBalance = Number(allMovements.reduce((sum, curr) => sum + curr.amount, 0).toFixed(2));
     labelBalance.textContent = `$ ${totalBalance}`;
-    user1.totalBalance = totalBalance;
+    user.totalBalance = totalBalance;
 }
-calcPrintBalance();
-
-// // display summary
-const calcDisplaySummary = function (user) {
-    const income = Number(allMovements.filter(mov => mov.amount > 0).reduce((acc, curr) => acc + curr.amount, 0).toFixed(2));
-
-    const expenses = Number(allMovements.filter(mov => mov.amount < 0).reduce((acc, curr) => acc + curr.amount, 0).toFixed(2));
-    labelSumIn.forEach(label => label.textContent = `$ ${income}`);
-    labelSumOut.forEach(label => label.textContent = `$ ${Math.abs(expenses)}`);
-}
-calcDisplaySummary(user1);
+displayBalance(user1)
 
 
 // Modal
@@ -323,61 +390,215 @@ const modalFunc = function (modal) {
     };
 }
 
-const toggleActiveAccount = function (user, containerTransactionsAccounts, containerTransactionsAll, sortedAccountMovements) {
-    document.querySelectorAll('.section__accounts-row').forEach(row => {
-        const allBlocks = row.querySelectorAll('.section__block');
+const modalMessage = function (message, amount, user) {
+    overlay.classList.add('active');
+    message.classList.add('active');
+    body.classList.add('lock');
 
-        // Remove 'active' from all blocks first
-        allBlocks.forEach(block => block.classList.remove('active'));
+    message.querySelector('button').addEventListener('click', e => {
+        e.preventDefault();
+        overlay.classList.remove('active');
+        message.classList.remove('active');
+        body.classList.remove('lock');
+    })
 
-        // Set first block active by default
-        if (allBlocks.length > 0) allBlocks[0].classList.add('active');
+    if (message.classList.contains('account__message-add')) {
+        message.querySelector('span').textContent = `${amount}`; // amount here is new acount name
+        const newAccount = user.accounts.find(acc => acc.name === amount);
+        message.querySelector('.account__button-green').addEventListener('click', (e) => {
+            e.preventDefault();
+            overlay.classList.remove('active');
+            message.classList.remove('active');
+            body.classList.remove('lock');
+            modalFunc(modalFund);
+            accountFund(modalFund, user, newAccount);
+        })
 
-        // Handle clicks
-        row.addEventListener('click', function (e) {
-            const clickedBlock = e.target.closest('.section__block');
-            // Ignore clicks outside block or on add button
-            if (!clickedBlock || clickedBlock.classList.contains('section__accounts-add')) return;
+    } else message.querySelector('span').textContent = `$${amount}`;
+}
 
-            // Fund and Withdraw buttons
-            if (e.target.classList.contains('section__accounts-fund')) {
-                e.stopPropagation();
-                const modal = document.querySelector('.account__modal-fund')
-                modalFunc(modal);
-                return
-            }
-            if (e.target.classList.contains('section__accounts-withdraw')) {
-                e.stopPropagation();
-                const modal = document.querySelector('.account__modal-withdraw')
-                modalFunc(modal);
-                return
-            }
+// Fund Acounts
+function accountFund(modal, user, currentAccount) {
+    const radioBtns = modal.querySelectorAll('.account__input-radio');
+    const btnFund = modal.querySelector('.account__button-green');
+    const message = document.querySelector('.account__message-fund');
+    // Remove old listener (important if modal opens multiple times)
+    const newBtnFund = btnFund.cloneNode(true);
+    btnFund.parentNode.replaceChild(newBtnFund, btnFund);
 
-
-            // Clear containers
-            containerTransactionsAll.innerHTML = '';
-            containerTransactionsAccounts.innerHTML = '';
-
-            // Toggle active class
-            allBlocks.forEach(block => block.classList.remove('active'));
-            clickedBlock.classList.add('active');
-
-            const currentAccount = user.accounts.find(account => account.name === clickedBlock.querySelector('h4').textContent);
-            const sortedCurrentMovements = currentAccount.movements.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-            sortedCurrentMovements.slice(0, 8).forEach(mov => sortedAccountMovements(mov, containerTransactionsAccounts));
-            sortedCurrentMovements.forEach(mov => sortedAccountMovements(mov, containerTransactionsAll));
-
-            // Fund Button 
-            const fundButton = clickedBlock.querySelector('.section__accounts-fund');
-
+    // Switch visibility when radio buttons are clicked
+    radioBtns.forEach(btn => {
+        btn.addEventListener('click', function () {
+            document.querySelectorAll('.account__fund-section').forEach(section => section.classList.remove('active'));
+            const payment = document.getElementById(`form__fund-${btn.dataset.payment}`);
+            if (payment) payment.classList.add('active');
         });
+    });
+
+    // Handle fund button click only once
+    newBtnFund.addEventListener('click', function (e) {
+        e.preventDefault();
+        const activePayment = modal.querySelector('.account__fund-section.active');
+
+        if (!activePayment) return; // no payment method selected
+
+        const input = activePayment.querySelector('input[type="number"], input[type="text"]');
+        const amountValue = parseFloat(input?.value || 0);
+
+
+        if (amountValue > 0) {
+            const newMovement = {
+                amount: Number(amountValue.toFixed(2)),
+                date: new Date(),
+                source: `${input.dataset.source}`
+            };
+
+            currentAccount.movements.push(newMovement);
+
+            // Reset input, close modal, update UI
+            if (input) input.value = '';
+            modalRemoveActive(modal);
+            movements(user);
+            displayBalance(user)
+            displayAccountsDetailed(user);
+            displayAccountsOverview(user);
+            modalMessage(message, amountValue);
+        }
+    });
+};
+
+const accountWithdraw = function (modal, user, currentAccount) {
+    const btnWithdraw = modal.querySelector('.account__button-green');
+    const newBtnWithdraw = btnWithdraw.cloneNode(true);
+    const calcBalance = Number(currentAccount.movements.map(mov => mov.amount).reduce((acc, curr) => acc + curr, 0).toFixed(2));
+    btnWithdraw.parentNode.replaceChild(newBtnWithdraw, btnWithdraw);
+
+    const message = document.querySelector('.account__message-withdraw');
+
+    // Handle fund button click only once
+    newBtnWithdraw.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        const input = modal.querySelector('input[type="number"], input[type="text"]');
+        const amountValue = parseFloat(input?.value || 0);
+
+        if (amountValue > 0 && amountValue <= calcBalance) {
+            const newMovement = {
+                amount: Number(-amountValue.toFixed(2)),
+                date: new Date(),
+                source: `Withdraw`,
+            };
+
+            currentAccount.movements.push(newMovement);
+
+            // Reset input, close modal, update UI
+            if (input) input.value = '';
+            movements(user);
+            modalRemoveActive(modal);
+            displayBalance(user)
+            displayAccountsDetailed(user);
+            displayAccountsOverview(user);
+            modalMessage(message, amountValue);
+        }
+    });
+}
+
+const accountAdd = function (modal, user) {
+    const btnWithdraw = modal.querySelector('.account__button-green');
+    const newBtnWithdraw = btnWithdraw.cloneNode(true);
+    btnWithdraw.parentNode.replaceChild(newBtnWithdraw, btnWithdraw);
+
+    const message = document.querySelector('.account__message-add');
+
+    // Handle fund button click only once
+    newBtnWithdraw.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        const input = modal.querySelector('input[type="text"]');
+        const accountName = input.value
+        if (accountName.trim().length > 0 && user.accounts.find(acc => acc.name !== accountName)) {
+            const newAccount = {
+                name: accountName,
+                currency: 'USD',
+                movements: [],
+            };
+
+            user.accounts.push(newAccount);
+
+            // Reset input, close modal, update UI
+            if (input) input.value = '';
+            movements(user);
+            modalRemoveActive(modal);
+            displayBalance(user)
+            displayAccountsDetailed(user);
+            displayAccountsOverview(user);
+            modalMessage(message, accountName, user);
+        }
+    });
+}
+
+const toggleActiveAccount = function (user, containerTransactionsAccounts, containerTransactionsAll, sortedAccountMovements) {
+    const currentRow = document.querySelector('.dashboard__section.active').querySelector('.section__accounts-row')
+
+    const modalWithdraw = document.querySelector('.account__modal-withdraw');
+    const modalAdd = document.querySelector('.account__modal-add');
+
+    if (!currentRow) return;
+
+    // Remove 'active' from all blocks first
+    const allBlocks = currentRow.querySelectorAll('.section__block');
+    allBlocks.forEach(block => block.classList.remove('active'));
+
+    // Set first block active by default
+    if (allBlocks.length > 0) allBlocks[0].classList.add('active');
+
+    // Handle clicks
+    currentRow.addEventListener('click', function (e) {
+        const clickedBlock = e.target.closest('.section__block');
+        if (clickedBlock && clickedBlock.classList.contains('section__accounts-add')) {
+            e.stopPropagation();
+            modalFunc(modalAdd);
+            accountAdd(modalAdd, user);
+            return;
+        }
+
+        // Ignore clicks outside block or on add button
+        if (!clickedBlock || clickedBlock.classList.contains('section__accounts-add')) return;
+        document.querySelectorAll('.section__block').forEach(block => block.classList.remove('active'));
+
+        // Clear containers
+        containerTransactionsAll.innerHTML = '';
+        containerTransactionsAccounts.innerHTML = '';
+
+        // Toggle active class
+        allBlocks.forEach(block => block.classList.remove('active'));
+        clickedBlock.classList.add('active');
+
+        const currentAccount = user.accounts.find(account => account.name === clickedBlock.querySelector('h4').textContent);
+        const sortedCurrentMovements = currentAccount.movements.sort((a, b) => new Date(b.date) - new Date(a.date));
+        sortedCurrentMovements.slice(0, 8).forEach(mov => sortedAccountMovements(mov, containerTransactionsAccounts));
+        sortedCurrentMovements.forEach(mov => sortedAccountMovements(mov, containerTransactionsAll));
+
+        // Fund and Withdraw buttons
+        if (e.target.classList.contains('section__accounts-fund')) {
+            e.stopPropagation();
+            modalFunc(modalFund);
+            accountFund(modalFund, user, currentAccount);
+            return
+        }
+        if (e.target.classList.contains('section__accounts-withdraw')) {
+            e.stopPropagation();
+            modalFunc(modalWithdraw);
+            accountWithdraw(modalWithdraw, user, currentAccount);
+            return
+        }
     });
 };
 
 
 // Movements
-const movements = function (user) {
+function movements(user) {
+    const allMovements = getAllMovements(user);
     containerTransactionsOverview.innerHTML = '';
     containerTransactionsAll.innerHTML = '';
     containerTransactionsAccounts.innerHTML = '';
@@ -387,10 +608,10 @@ const movements = function (user) {
 
     function movementData(mov) {
         const movementDate = mov.date
-        const amount = Number(mov.amount.toFixed(2));
+        const amount = Number(parseFloat(mov.amount).toFixed(2));
         const type = amount > 0 ? 'deposit' : 'withdrawal'
         const source = mov.source;
-        const date = new Date(movementDate);
+        const date = new Date(movementDate).toLocaleString();
         const displayDate = formatedDate(date);
         const displayMovement = amount > 0 ? '+ ' + amount : '- ' + Math.abs(amount);
 
@@ -430,7 +651,7 @@ const movements = function (user) {
     // Call external toggleActiveAccount
     toggleActiveAccount(user, containerTransactionsAccounts, containerTransactionsAll, sortedAccountMovements);
 }
-
+movements(user1);
 
 // Change name, id of account
 labelName.textContent = user1.owner;
@@ -478,6 +699,12 @@ function toggleValue(value) {
     //   }
 }
 
+
+
+
+
+
+
 // Change section
 sectionBtnList.addEventListener('click', function (e) {
     const currentBtn = e.target.closest('.dashboard__item');
@@ -493,23 +720,19 @@ sectionBtnList.addEventListener('click', function (e) {
     movements(user1);
 })
 
+document.querySelectorAll('.section__transactions-btn').forEach(btn => {
+    btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        sectionBtn.forEach(btn => {
+            btn.classList.remove('active')
+            if (btn.dataset.btn === 'transactions') {
+                btn.classList.add('active');
+                dashboardTitle.textContent = btn.dataset.btn.at(0).toUpperCase() + btn.dataset.btn.slice(1);
+            }
+        });
 
-// Fund Account Button
-
-// accountsRowDetailed.addEventListener('click', function (e) {
-//     // Check if the click was on a Fund button
-//     if (e.target.classList.contains('section__accounts-fund')) {
-//         e.stopPropagation();
-//     }
-
-//     const clickedBlock = e.target.closest('.section__block');
-//     if (!clickedBlock || clickedBlock.classList.contains('section__accounts-add')) return;
-
-//     // Find the "Fund" button inside this block
-//     const fundButton = clickedBlock.querySelector('.section__accounts-fund');
-
-//     fundButton.addEventListener('click', function (e) {
-//         document.querySelector('.account__modal-add').classList.add('active');
-//         overlay.classList.add('active');
-//     })
-// });
+        sections.forEach(section => section.classList.remove('active'));
+        sectionTransactions.classList.add('active');
+        movements(user1);
+    })
+})
