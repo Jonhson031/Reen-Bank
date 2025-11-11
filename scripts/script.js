@@ -24,6 +24,7 @@ const dashboardTitle = document.querySelector('.dashboard__title');
 const overlay = document.querySelector('.overlay');
 const accountsRowDetailed = document.querySelector('.section__accounts-detailed');
 const modalFund = document.querySelector('.account__modal-fund');
+const accountAddOverview = document.querySelector('.section__accound-add');
 
 // Login
 document.querySelector('.header__button').addEventListener('click', (e) => {
@@ -117,78 +118,6 @@ const user1 = {
             ]
         },
 
-        {
-            name: 'Savings Account',
-            currency: 'USD',
-            movements: [
-                {
-                    amount: 400,
-                    date: '2020-11-18T21:31:17.178Z',
-                    source: 'Direct Deposit'
-                },
-                {
-                    amount: 953.2,
-                    date: '2020-12-23T07:42:02.383Z',
-                    source: 'Credit Card'
-                },
-                {
-                    amount: -42.5,
-                    date: '2021-01-28T09:15:04.904Z',
-                    source: 'Jane Doe'
-                },
-                {
-                    amount: 2400,
-                    date: '2021-04-01T10:17:24.185Z',
-                    source: 'Direct Deposit'
-                },
-                {
-                    amount: -642.21,
-                    date: '2021-05-08T14:11:59.604Z',
-                    source: 'Credit Card'
-                },
-                {
-                    amount: -213.9,
-                    date: '2021-05-27T17:01:17.194Z',
-                    source: 'Jane Doe'
-                },
-                {
-                    amount: 719.97,
-                    date: '2021-07-11T23:36:17.929Z',
-                    source: 'Direct Deposit'
-                },
-                {
-                    amount: 2743,
-                    date: '2021-07-12T10:51:36.790Z',
-                    source: 'Credit Card'
-                }
-            ]
-        },
-        {
-            name: 'Holiday Savings',
-            currency: 'USD',
-            movements: [
-                {
-                    amount: 155.5,
-                    date: '2022-11-18T21:31:17.178Z',
-                    source: 'Transfer'
-                },
-                {
-                    amount: 144.4,
-                    date: '2022-12-23T07:42:02.383Z',
-                    source: 'Credit Card'
-                },
-                {
-                    amount: -42.5,
-                    date: '2023-01-28T09:15:04.904Z',
-                    source: 'Jane Doe'
-                },
-                {
-                    amount: 1400,
-                    date: '2023-04-01T10:17:24.185Z',
-                    source: 'Direct Deposit'
-                },
-            ]
-        },
         {
             name: 'Savings Account',
             currency: 'USD',
@@ -516,7 +445,8 @@ const accountAdd = function (modal, user) {
 
         const input = modal.querySelector('input[type="text"]');
         const accountName = input.value
-        if (accountName.trim().length > 0 && user.accounts.find(acc => acc.name !== accountName)) {
+        const accountExist = user.accounts.find(acc => acc.name === accountName);
+        if (accountName.trim().length > 0 && !accountExist) {
             const newAccount = {
                 name: accountName,
                 currency: 'USD',
@@ -666,19 +596,21 @@ document.querySelectorAll('.section__accounts-row').forEach(row => row.addEventL
     e.stopPropagation();
     const block = clickedHide.closest('.section__block');
     const value = block.querySelector('.section__block-value');
-
-    toggleValue(value);
+    const img = clickedHide.querySelector('img');
+    toggleValue(value, img);
 }))
 
 // Hide values all together
 document.querySelector('.section__hide').addEventListener('click', function (e) {
     e.preventDefault();
+    const img = document.querySelector('.section__hide > img');
+
     const values = sectionOverwiew.querySelectorAll('.section__block-value');
     values.forEach(value => {
-        toggleValue(value);
+        toggleValue(value, img);
     })
 })
-function toggleValue(value) {
+function toggleValue(value, img) {
     if (value.dataset.originalValue) {
         // Restore
         value.textContent = value.dataset.originalValue;
@@ -689,14 +621,13 @@ function toggleValue(value) {
         value.textContent = 'XXXXXXX';
     }
 
-    //   // Optional: toggle icon
-    //   const img = clickedHide.querySelector('img');
-    //   const firstValue = values[0];
-    //   if (firstValue.dataset.originalValue) {
-    //     img.src = 'images/icons/eye-open.svg';
-    //   } else {
-    //     img.src = 'images/icons/eye-closed.svg';
-    //   }
+    // Optional: toggle icon
+    if (value.dataset.originalValue) {
+        img.src = 'images/icons/eye-open.svg';
+    } else {
+
+        img.src = 'images/icons/eye-closed.svg';
+    }
 }
 
 
@@ -735,4 +666,10 @@ document.querySelectorAll('.section__transactions-btn').forEach(btn => {
         sectionTransactions.classList.add('active');
         movements(user1);
     })
+})
+
+
+accountAddOverview.addEventListener('click', function (e) {
+    e.preventDefault();
+
 })
