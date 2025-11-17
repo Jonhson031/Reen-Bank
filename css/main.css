@@ -88,6 +88,7 @@ body.lock {
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
+  overflow: clip;
 }
 
 .wrapper main {
@@ -496,8 +497,8 @@ body.lock {
   padding: 2.6em 2.7em;
 }
 .section__content-accounts {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 2.87em;
 }
 .section__add {
@@ -612,7 +613,6 @@ body.lock {
   flex-direction: column;
   margin-top: 2em;
   padding: 1.5em;
-  width: 100%;
   height: 13.5625em;
   border-radius: 0.9375rem;
   background-image: url("../images/banner.svg");
@@ -987,8 +987,28 @@ body.lock {
 
 @media (max-width: 1440px) {
   .dashboard__header {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 1rem;
+  }
+  .dashboard__title {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .dashboard__account-info {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .dashboard__left {
+    grid-column: 1/span 2;
+    grid-row: 2;
+  }
+  .dashboard__left {
+    margin-left: 0;
+  }
+  .dashboard__search {
+    flex: 0 1 90%;
   }
   .dashboard__section--overview {
     display: grid;
@@ -997,5 +1017,87 @@ body.lock {
     justify-content: initial;
     display: flex;
     flex-direction: column;
+  }
+  .section__accounts-transactions {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 1023px) {
+  .section__content {
+    gap: 1em;
+  }
+  .section__content-accounts {
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+  }
+}
+@media (max-width: 767px) {
+  .dashboard__sidebar.sticky {
+    display: none;
+  }
+  .dashboard__content {
+    margin-left: 0;
+  }
+  .section {
+    /* ---- Row 1 ---- */
+    /* ---- Row 2 ---- */
+  }
+  .section__content-accounts .section__block {
+    border-radius: 0.75rem;
+    background: #D4F3E7;
+    padding: 1.5em 1.5em;
+  }
+  .section__accounts-transactions {
+    grid-template-columns: 0.9fr;
+    gap: 2em;
+  }
+  .section__statistics-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+  }
+  .section__statistics-img {
+    display: none;
+  }
+  .section__statistics-range {
+    margin: 0.5em;
+  }
+  .section__transactions-all > .section__row {
+    gap: 2em;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  .section__transactions-list--full .section__transactions-info {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .section__transactions-info {
+    display: grid;
+    -moz-column-gap: 1rem;
+         column-gap: 1rem;
+    row-gap: 1rem;
+    align-items: center;
+  }
+  .section__transactions-circle {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .section__transactions-date {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .section__transactions-list--full .section__transactions-value {
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: flex-end;
+  }
+  .section__transactions-source {
+    grid-column: 1/span 2;
+    /* circle + under date */
+    grid-row: 2;
+  }
+  .section__transactions-status {
+    grid-column: 2/span 3;
+    /* under value */
+    grid-row: 2;
+    text-align: right;
   }
 }
