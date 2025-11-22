@@ -30,7 +30,10 @@
         <div class="dashboard">
             <div class="overlay"></div>
             <div class="dashboard__container">
-                <div class="dashboard__sidebar sticky">
+                <div class="burger">
+                    <span></span>
+                </div>
+                <div class="dashboard__sidebar">
                     <div class="dashboard__logo logo">
                         <img src="images/logo.svg" alt="Logo Reen Bank">
                     </div>
@@ -757,7 +760,78 @@
                     </ul>
                 </div>
             </section>
-            <section class="faqs"></section>
+            <section class="faqs">
+                <div class="faqs__container">
+                    <h2 class="faqs__title">FAQs</h2>
+                    <div class="faqs__content faqs__content-1 active">
+                        <h3 class="faqs__question">How do I sign up for an account with Reen Bank?</h3>
+                        <p class="faqs__text">
+                            You can sign up for an account with Reen Bank online by visiting our
+                            website and filling out the online application form. Once your application is approved, you
+                            will receive instructions for setting up your account and accessing our online banking
+                            platform.
+                        </p>
+                    </div>
+                    <div class="faqs__content faqs__content-2">
+                        <h3 class="faqs__question">What types of accounts does Reen Bank offer?</h3>
+                        <p class="faqs__text">
+                            Reen Bank offers a variety of accounts to suit your financial needs, including savings
+                            accounts, checking accounts, and credit cards. We also offer loans, investment services, and
+                            other financial products.
+                        </p>
+                    </div>
+                    <div class="faqs__content faqs__content-3">
+                        <h3 class="faqs__question">Is Reen Bank FDIC insured?</h3>
+                        <p class="faqs__text">
+                            Yes, Reen Bank is FDIC insured, which means that your deposits are insured up to $250,000
+                            per depositor, per insured bank, for each account ownership category.
+                        </p>
+                    </div>
+                    <div class="faqs__content faqs__content-4">
+                        <h3 class="faqs__question">How can I access my Reen Bank account online?</h3>
+                        <p class="faqs__text">
+                            You can access your Reen Bank account online by logging into our secure online banking
+                            platform using your username and password. From there, you can view your account balances,
+                            transfer funds, pay bills, and more.
+                        </p>
+                    </div>
+                    <div class="faqs__content faqs__content-5">
+                        <h3 class="faqs__question">What security measures does Reen Bank have in place to protect my
+                            financial information?</h3>
+                        <p class="faqs__text">
+                            Reen Bank takes the security of your financial information seriously and has a number of
+                            measures in place to protect against unauthorized access and fraud. These measures include
+                            encryption, two-factor authentication, fraud detection, and regular security updates and
+                            monitoring.
+                        </p>
+                    </div>
+                    <div class="faqs__tabs">
+                        <button class="faqs__tab faqs__tab-1 active" data-tab="1">
+                            <span>How do I sign up for an account with Reen Bank?</span>
+                            <span class="icon-fi-br-arrow-small-right"></span>
+                        </button>
+                        <button class="faqs__tab faqs__tab-2" data-tab="2">
+                            <span>What types of accounts does Reen Bank offer?</span>
+                            <span class="icon-fi-br-arrow-small-right"> </span>
+                        </button>
+                        <button class="faqs__tab faqs__tab-3" data-tab="3">
+                            <span>Is Reen Bank FDIC insured?</span>
+                            <span class="icon-fi-br-arrow-small-right"></span>
+                        </button>
+                        <button class="faqs__tab faqs__tab-4" data-tab="4">
+                            <span>How can I access my Reen Bank account online?</span>
+                            <span class="icon-fi-br-arrow-small-right"></span>
+                        </button>
+                        <button class="faqs__tab faqs__tab-5" data-tab="5">
+                            <span>
+                                What security measures does Reen Bank have in place to
+                                protect my financial information?
+                            </span>
+                            <span class="icon-fi-br-arrow-small-right"></span>
+                        </button>
+                    </div>
+                </div>
+            </section>
             <section class="support">
                 <div class="support__container">
                     <h2 class="support__title">Supported by various finance services</h2>
@@ -778,7 +852,51 @@
                 </div>
             </section>
         </main>
-        <footer class="footer"></footer>
+        <footer class="footer">
+            <div class="footer__container">
+                <div class="footer__content">
+                    <nav class="footer__navigation">
+                        <div class="footer__block">
+                            <h3 class="footer__block-title">HELP</h3>
+                            <ul class="footer__block-list">
+                                <li class="footer__block-item"><a href="#">Help Center</a></li>
+                                <li class="footer__block-item"><a href="#">Contact Us</a></li>
+                                <li class="footer__block-item"><a href="#">How to Use</a></li>
+                        </div>
+                        <div class="footer__block">
+                            <h3 class="footer__block-title">ABOUT</h3>
+                            <ul class="footer__block-list">
+                                <li class="footer__block-item"><a href="#">About Reem Bank</a></li>
+                                <li class="footer__block-item"><a href="#">Terms & Conditions</a></li>
+                                <li class="footer__block-item"><a href="#">Privacy Policy</a></li>
+                        </div>
+                    </nav>
+                    <div class="footer__logo logo">
+                        <img src="images/logo.svg" alt="Logo Reen Bank">
+                        <span>Reen Bank</span>
+                    </div>
+                    <div class="footer__bottom">
+                        <div class="footer__copyright">2023 ReenBank. All rights reserved!</div>
+                        <div class="footer__socials">
+                            <ul class="socials__list">
+                                <li class="socials__item"><span class="icon-facebook"></span></li>
+                                <li class="socials__item"><span class="icon-instagram"></span></li>
+                                <li class="socials__item"><span class="icon-twitter"></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer__banner">
+                    <div class="footer__question">New to Reem Bank?</div>
+                    <h2 class="footer__title">Enter your Email and Get Started Now</h2>
+                    <form action="" method="post" class="footer__form">
+                        <input type="email" name="footer__email" id="footer__email" placeholder="Enter your Email"
+                            required>
+                        <button class="footer__button button-green button">Get Started</button>
+                    </form>
+                </div>
+            </div>
+        </footer>
         <div class="login">
             <div class="overlay-login"></div>
             <div class="login__container">

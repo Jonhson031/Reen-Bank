@@ -365,6 +365,10 @@ const modalMessage = function (message, amount = null, user) {
             message.classList.remove('active');
             dashboard.classList.remove('active');
             body.classList.remove('lock');
+            document.querySelectorAll('.dashboard__item').forEach(btn => btn.classList.remove('active'));
+            document.querySelector('.dashboard__item').classList.add('active');
+            document.querySelectorAll('.dashboard__section').forEach(section => section.classList.remove('active'));
+            sectionOverwiew.classList.add('active');
         })
     }
     if (message.classList.contains('account__message-register')) {
@@ -711,13 +715,14 @@ if (login) {
     const loginText = document.querySelector('.login__text');
     const loginBox = document.querySelector('.login__box');
     const registerBox = document.querySelector('.register__box');
+    body.classList.add('lock');
     document.querySelector('.login__button').addEventListener('click', function (e) {
         e.preventDefault();
         currentUser = users.find(user => user.email === loginEmail.value);
         if (currentUser?.password === loginPassword.value) {
             login.classList.remove('active');
             dashboard.classList.add('active');
-            body.classList.add('lock');
+            // body.classList.add('lock');
             // document.querySelector('main').style.display = 'none';
             labelName.textContent = currentUser.owner;
             labelAccountNum.textContent = currentUser.id;
@@ -847,3 +852,44 @@ imageChangeInput.addEventListener('change', function (e) {
         img.onload = () => URL.revokeObjectURL(url);
     })
 })
+
+
+// FAQs Tabs
+const faqsTabs = document.querySelector('.faqs__tabs');
+faqsTabs.addEventListener('click', function (e) {
+    const clickedTab = e.target.closest('.faqs__tab');
+    if (!clickedTab) return;
+    // Remove active from all
+    document.querySelectorAll('.faqs__content').forEach(content => content.classList.remove('active'));
+    document.querySelectorAll('.faqs__tab').forEach(tab => tab.classList.remove('active'));
+    // Add active to clicked
+    clickedTab.classList.add('active');
+    document.querySelector(`.faqs__content-${clickedTab.dataset.tab}`).classList.add('active');
+})
+
+
+
+
+// Fix it and Fix Login btn
+const burgerBtn = document.querySelector('.burger');
+const sidebar = document.querySelector('.dashboard__sidebar');
+if (burgerBtn) {
+    burgerBtn.addEventListener('click', function () {
+        burgerBtn.classList.toggle('active');
+        overlay.classList.toggle('active');
+        sidebar.classList.toggle('active');
+    })
+    overlay.addEventListener('click', function () {
+        burgerBtn.classList.remove('active');
+        overlay.classList.remove('active');
+        sidebar.classList.remove('active');
+    })
+    sectionBtnList.addEventListener('click', function (e) {
+        if (e.target.closest('.dashboard__item')) {
+            burgerBtn.classList.remove('active');
+            overlay.classList.remove('active');
+            sidebar.classList.remove('active');
+            console.log(1);
+        }
+    })
+}
