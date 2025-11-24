@@ -30,6 +30,9 @@ const modalFund = document.querySelector('.account__modal-fund');
 const accountAddOverview = document.querySelector('.section__accound-add');
 const modalWithdraw = document.querySelector('.account__modal-withdraw');
 const modalAdd = document.querySelector('.account__modal-add');
+const burgerBtn = document.querySelector('.burger');
+const sidebar = document.querySelector('.dashboard__sidebar');
+const logoutBtn = document.querySelector('.dashboard__logout');
 
 // Login
 document.querySelector('.header__button').addEventListener('click', (e) => {
@@ -340,6 +343,7 @@ const modalMessage = function (message, amount = null, user) {
         overlay.classList.remove('active');
         message.classList.remove('active');
         // body.classList.remove('lock');
+
     })
 
     if (message.classList.contains('account__message-add')) {
@@ -357,19 +361,6 @@ const modalMessage = function (message, amount = null, user) {
     }
     if (message.classList.contains('.account__message-fund') || message.classList.contains('.account__message-withdraw')) {
         message.querySelector('span').textContent = `$${amount}`;
-    }
-    if (message.classList.contains('account__message-logout')) {
-        message.querySelector('.account__button-green').addEventListener('click', (e) => {
-            e.preventDefault();
-            overlay.classList.remove('active');
-            message.classList.remove('active');
-            dashboard.classList.remove('active');
-            body.classList.remove('lock');
-            document.querySelectorAll('.dashboard__item').forEach(btn => btn.classList.remove('active'));
-            document.querySelector('.dashboard__item').classList.add('active');
-            document.querySelectorAll('.dashboard__section').forEach(section => section.classList.remove('active'));
-            sectionOverwiew.classList.add('active');
-        })
     }
     if (message.classList.contains('account__message-register')) {
         overlayLogin.classList.add('active');
@@ -499,12 +490,32 @@ const accountAdd = function (modal, user) {
 }
 
 // Logout
-const logoutBtn = document.querySelector('.dashboard__logout');
+const sidebarRemoveActive = function () {
+    burgerBtn.classList.remove('active');
+    overlay.classList.remove('active');
+    sidebar.classList.remove('active');
+}
 logoutBtn.addEventListener('click', function (e) {
     e.preventDefault();
     const message = document.querySelector('.account__message-logout');
     modalMessage(message)
     // dashboard.classList.remove('active');
+    message.querySelector('button').addEventListener('click', e => {
+        e.preventDefault();
+        message.classList.remove('active');
+        sidebarRemoveActive();
+    })
+    message.querySelector('.account__button-green').addEventListener('click', (e) => {
+        e.preventDefault();
+        message.classList.remove('active');
+        dashboard.classList.remove('active');
+        body.classList.remove('lock');
+        document.querySelectorAll('.dashboard__item').forEach(btn => btn.classList.remove('active'));
+        document.querySelector('.dashboard__item').classList.add('active');
+        document.querySelectorAll('.dashboard__section').forEach(section => section.classList.remove('active'));
+        sectionOverwiew.classList.add('active');
+        sidebarRemoveActive();
+    })
 });
 
 // Account Add button at overview section
@@ -715,9 +726,9 @@ if (login) {
     const loginText = document.querySelector('.login__text');
     const loginBox = document.querySelector('.login__box');
     const registerBox = document.querySelector('.register__box');
-    body.classList.add('lock');
     document.querySelector('.login__button').addEventListener('click', function (e) {
         e.preventDefault();
+        body.classList.add('lock');
         currentUser = users.find(user => user.email === loginEmail.value);
         if (currentUser?.password === loginPassword.value) {
             login.classList.remove('active');
@@ -870,9 +881,7 @@ faqsTabs.addEventListener('click', function (e) {
 
 
 
-// Fix it and Fix Login btn
-const burgerBtn = document.querySelector('.burger');
-const sidebar = document.querySelector('.dashboard__sidebar');
+// Sidebar
 if (burgerBtn) {
     burgerBtn.addEventListener('click', function () {
         burgerBtn.classList.toggle('active');
@@ -880,16 +889,11 @@ if (burgerBtn) {
         sidebar.classList.toggle('active');
     })
     overlay.addEventListener('click', function () {
-        burgerBtn.classList.remove('active');
-        overlay.classList.remove('active');
-        sidebar.classList.remove('active');
+        sidebarRemoveActive();
     })
     sectionBtnList.addEventListener('click', function (e) {
         if (e.target.closest('.dashboard__item')) {
-            burgerBtn.classList.remove('active');
-            overlay.classList.remove('active');
-            sidebar.classList.remove('active');
-            console.log(1);
+            sidebarRemoveActive();
         }
     })
 }
