@@ -1,5 +1,4 @@
 'use strict';
-
 const login = document.querySelector('.login');
 const loginEmail = document.getElementById('login__email');
 const loginPassword = document.getElementById('login__password');
@@ -33,12 +32,11 @@ const modalAdd = document.querySelector('.account__modal-add');
 const burgerBtn = document.querySelector('.burger');
 const sidebar = document.querySelector('.dashboard__sidebar');
 const logoutBtn = document.querySelector('.dashboard__logout');
+const images = document.querySelectorAll('.profile-image');
 
-// Login
 document.querySelector('.header__button').addEventListener('click', (e) => {
     e.preventDefault();
     login.classList.add('active');
-    // body.style.overflow = 'hidden';
 })
 
 // Users
@@ -48,6 +46,7 @@ const users = [
         email: 'test@email.com',
         id: '1234567890',
         password: 'test',
+        img: 'images/profile-img.svg',
         accounts: [
             {
                 name: 'Main Account',
@@ -197,7 +196,41 @@ const users = [
     }
 ]
 
-// Display acounts overview
+/**
+ * Persist the in-memory `users` array to localStorage.
+ */
+const saveUsers = function () {
+    try {
+        localStorage.setItem('users', JSON.stringify(users));
+    } catch (err) {
+        console.error('Saving users to localStorage failed', err);
+    }
+};
+
+/**
+ * Load users from localStorage into the in-memory `users` array.
+ * Replaces the default fixtures if stored data exists.
+ */
+const loadUsers = function () {
+    try {
+        const stored = localStorage.getItem('users');
+        if (!stored) return;
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed)) {
+            users.splice(0, users.length, ...parsed);
+        }
+    } catch (err) {
+        console.error('Loading users from localStorage failed', err);
+    }
+};
+
+// Initialize from storage
+loadUsers();
+
+/**
+ * Render the accounts overview blocks for a user.
+ * @param {Object} user
+ */
 const displayAccountsOverview = function (user) {
     const accountsRowOverview = document.querySelector('.section__content-accounts');
     const accountsRowTransactions = document.querySelector('.section__accounts-transactions');
@@ -225,7 +258,10 @@ const displayAccountsOverview = function (user) {
         accountsRowTransactions.insertAdjacentHTML('beforeend', htmlTransactions);
     })
 }
-// Display acounts detailed
+/**
+ * Render detailed account blocks (with action buttons) for a user.
+ * @param {Object} user
+ */
 const displayAccountsDetailed = function (user) {
     accountsRowDetailed.innerHTML = '';
 
@@ -249,7 +285,11 @@ const displayAccountsDetailed = function (user) {
 }
 
 
-// Date
+/**
+ * Format a movement date for display.
+ * @param {string|Date} movDate
+ * @returns {string}
+ */
 const formatedDate = function (movDate) {
     let date = new Date(movDate);
     // const showData = `${day}/`
@@ -264,14 +304,21 @@ const formatedDate = function (movDate) {
 }
 
 
-// All movements combined
+/**
+ * Return a flat list of all movements across a user's accounts.
+ * @param {Object} user
+ * @returns {Array}
+ */
 const getAllMovements = function (user) {
     return user.accounts.flatMap(account =>
         account.movements
     )
 };
 
-// Calcule and Display Balance. 
+/**
+ * Calculate totals and update balance/income/expense labels.
+ * @param {Object} user
+ */
 const displayBalance = function (user) {
     const allMovements = getAllMovements(user);
     const income = Number(allMovements.filter(mov => mov.amount > 0).reduce((acc, curr) => acc + curr.amount, 0).toFixed(2));
@@ -285,16 +332,16 @@ const displayBalance = function (user) {
 }
 
 
-// Modal
+/** Activate modal UI */
 const modalActive = function (modal) {
     modal.classList.add('active');
     overlay.classList.add('active');
-    // document.body.classList.add('lock');
 }
+
+/** Deactivate modal UI */
 const modalRemoveActive = function (modal) {
     modal.classList.remove('active');
     overlay.classList.remove('active');
-    // document.body.classList.remove('lock');
 }
 
 // Hide modal by esc
@@ -312,7 +359,7 @@ overlay.addEventListener('click', () => {
 });
 
 
-// Modals functions
+/** Open modal and attach cancel handler if present */
 const modalFunc = function (modal) {
     modalActive(modal);
     const cancelBtn = modal.querySelector('.account__button-cancel');
@@ -324,7 +371,7 @@ const modalFunc = function (modal) {
     };
 }
 
-// Display UI
+/** Update all visible UI pieces for a user */
 const displayUI = function (user) {
     movements(user);
     displayBalance(user)
@@ -332,18 +379,21 @@ const displayUI = function (user) {
     displayAccountsOverview(user);
 }
 
-// Modal message
+/**
+ * Show a generic modal message and optionally attach actions.
+ * @param {HTMLElement} message
+ * @param {any} [amount]
+ * @param {Object} [user]
+ */
 const modalMessage = function (message, amount = null, user) {
+    if (!message) return;
     overlay.classList.add('active');
     message.classList.add('active');
-    // body.classList.add('lock');
 
     message.querySelector('button').addEventListener('click', e => {
         e.preventDefault();
         overlay.classList.remove('active');
         message.classList.remove('active');
-        // body.classList.remove('lock');
-
     })
 
     if (message.classList.contains('account__message-add')) {
@@ -375,7 +425,12 @@ const modalMessage = function (message, amount = null, user) {
     }
 }
 
-// Fund Acounts
+/**
+ * Handle funding an account via the fund modal.
+ * @param {HTMLElement} modal
+ * @param {Object} user
+ * @param {Object} currentAccount
+ */
 const accountFund = function (modal, user, currentAccount) {
     const radioBtns = modal.querySelectorAll('.account__input-radio');
     const btnFund = modal.querySelector('.account__button-green');
@@ -412,6 +467,8 @@ const accountFund = function (modal, user, currentAccount) {
             };
 
             currentAccount.movements.push(newMovement);
+            // Persist change
+            saveUsers();
 
             // Reset input, close modal, update UI
             if (input) input.value = '';
@@ -422,7 +479,12 @@ const accountFund = function (modal, user, currentAccount) {
     });
 };
 
-// Withdraw Acounts
+/**
+ * Handle withdrawing from an account via the withdraw modal.
+ * @param {HTMLElement} modal
+ * @param {Object} user
+ * @param {Object} currentAccount
+ */
 const accountWithdraw = function (modal, user, currentAccount) {
     const btnWithdraw = modal.querySelector('.account__button-green');
     const newBtnWithdraw = btnWithdraw.cloneNode(true);
@@ -446,6 +508,8 @@ const accountWithdraw = function (modal, user, currentAccount) {
             };
 
             currentAccount.movements.push(newMovement);
+            // Persist change
+            saveUsers();
 
             // Reset input, close modal, update UI
             if (input) input.value = '';
@@ -456,7 +520,11 @@ const accountWithdraw = function (modal, user, currentAccount) {
     });
 }
 
-// Add Account
+/**
+ * Handle adding a new account for the user.
+ * @param {HTMLElement} modal
+ * @param {Object} user
+ */
 const accountAdd = function (modal, user) {
     const btnAdd = modal.querySelector('.account__button-green');
     const newBtnAdd = btnAdd.cloneNode(true);
@@ -479,6 +547,9 @@ const accountAdd = function (modal, user) {
             };
 
             user.accounts.push(newAccount);
+
+            // Persist new account
+            saveUsers();
 
             // Reset input, close modal, update UI
             if (input) input.value = '';
@@ -525,7 +596,9 @@ accountAddOverview.addEventListener('click', function (e) {
     accountAdd(modalAdd, currentUser);
 })
 
-// Toggle active account
+/**
+ * Toggle which account block is active and render related transactions.
+ */
 const toggleActiveAccount = function (user, containerTransactionsAccounts, containerTransactionsAll, sortedAccountMovements) {
     const currentRow = document.querySelector('.dashboard__section.active').querySelector('.section__accounts-row')
 
@@ -582,7 +655,10 @@ const toggleActiveAccount = function (user, containerTransactionsAccounts, conta
 };
 
 
-// Movements
+/**
+ * Render recent movements for overview, per-account, and full lists.
+ * @param {Object} user
+ */
 function movements(user) {
     const allMovements = getAllMovements(user);
     containerTransactionsOverview.innerHTML = '';
@@ -638,7 +714,7 @@ function movements(user) {
     toggleActiveAccount(user, containerTransactionsAccounts, containerTransactionsAll, sortedAccountMovements);
 }
 
-// Hide / Show values
+/** Toggle visibility of a numeric value (mask/unmask) */
 const toggleValue = function (value, img) {
     if (value.dataset.originalValue) {
         // Restore
@@ -654,7 +730,6 @@ const toggleValue = function (value, img) {
     if (value.dataset.originalValue) {
         img.src = 'images/icons/eye-open.svg';
     } else {
-
         img.src = 'images/icons/eye-closed.svg';
     }
 }
@@ -682,7 +757,7 @@ document.querySelector('.section__hide').addEventListener('click', function (e) 
     })
 })
 
-// Change section
+/** Attach handlers for changing dashboard sections */
 const changeSectiton = function (user) {
     sectionBtnList.addEventListener('click', function (e) {
         const currentBtn = e.target.closest('.dashboard__item');
@@ -733,10 +808,10 @@ if (login) {
         if (currentUser?.password === loginPassword.value) {
             login.classList.remove('active');
             dashboard.classList.add('active');
-            // body.classList.add('lock');
             // document.querySelector('main').style.display = 'none';
             labelName.textContent = currentUser.owner;
             labelAccountNum.textContent = currentUser.id;
+            images.forEach(img => img.src = currentUser.img)
             displayUI(currentUser);
             changeSectiton(currentUser);
         }
@@ -813,6 +888,7 @@ const registerUser = function () {
         email: userEmail.value,
         id: Date.now().toString().slice(-10),
         password: userPassword.value,
+        img: 'images/profile-img-placeholder.webp',
         accounts: [
             {
                 name: 'Main Account',
@@ -834,8 +910,12 @@ const registerUser = function () {
     modalMessage(message, null, currentUser);
     labelName.textContent = currentUser.owner;
     labelAccountNum.textContent = currentUser.id;
+    images.forEach(img => img.src = currentUser.img)
     displayUI(currentUser);
     changeSectiton(currentUser);
+
+    // Store users in localStorage
+    saveUsers();
 }
 
 const registerInputs = document.querySelector('.register__form').querySelectorAll('input');
@@ -856,12 +936,18 @@ const imageChangeInput = document.getElementById('image-change');
 imageChangeInput.addEventListener('change', function (e) {
     const file = e.target.files[0];
     if (!file.type.startsWith('image/')) return;
-    const images = document.querySelectorAll('.profile-image');
     const url = URL.createObjectURL(file);
     images.forEach(img => {
         img.src = url;
         img.onload = () => URL.revokeObjectURL(url);
     })
+    // Update current user's profile image and persist
+    if (typeof currentUser !== 'undefined' && currentUser) {
+        currentUser.img = url;
+        const idx = users.findIndex(u => u.email === currentUser.email);
+        if (idx >= 0) users[idx].img = url;
+        saveUsers();
+    }
 })
 
 
@@ -877,8 +963,6 @@ faqsTabs.addEventListener('click', function (e) {
     clickedTab.classList.add('active');
     document.querySelector(`.faqs__content-${clickedTab.dataset.tab}`).classList.add('active');
 })
-
-
 
 
 // Sidebar
@@ -897,3 +981,4 @@ if (burgerBtn) {
         }
     })
 }
+

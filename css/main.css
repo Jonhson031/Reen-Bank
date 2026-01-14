@@ -224,6 +224,10 @@ img {
   text-decoration: underline;
 }
 
+button {
+  background-color: inherit;
+}
+
 .button {
   color: #33B786;
   font-family: "DM Sans";
@@ -231,7 +235,6 @@ img {
   font-weight: 500;
   border-radius: 0.625rem;
   border: 3px solid #33B786;
-  background: #D4F3E7;
   padding: clamp(0.75rem, 0.6916rem + 0.292vw, 1rem) clamp(1.75rem, 1.5748rem + 0.8759vw, 2.5rem);
   background-color: #D4F3E7;
   transition: all 0.2s;
@@ -305,6 +308,7 @@ img {
   display: inline-block;
   margin-left: 0.5rem;
 }
+
 .services__container {
   padding-top: 7.5em;
   padding-bottom: 7.5em;
@@ -832,6 +836,7 @@ img {
   display: flex;
   flex-direction: column;
   gap: 2.5em;
+  flex-grow: 0.8;
 }
 .dashboard__item {
   color: #555;
@@ -845,7 +850,6 @@ img {
   color: #33B786;
 }
 .dashboard__logout {
-  flex-grow: 0.8;
   color: #555;
   font-family: "DM Sans";
   font-size: 1.25rem;
@@ -924,18 +928,15 @@ img {
   max-width: 100%;
   height: 56px;
   width: 56px;
-  -o-object-fit: contain;
-     object-fit: contain;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
 }
 .dashboard__sections {
   margin-top: 5em;
 }
 .dashboard__section {
-  position: relative;
-  display: none;
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity 5.25s ease;
+  /* responsive header adjustments removed (kept explicit rules) */
 }
 .dashboard__section.active {
   transition: opacity 0.25s ease;
@@ -1369,12 +1370,14 @@ img {
   width: 10rem;
   height: 10rem;
   margin: 0 auto;
+  border-radius: 50%;
 }
 .section__profile-image img {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
+  border-radius: 50%;
 }
 .section__profile-image-edit {
   position: absolute;
@@ -1945,12 +1948,10 @@ img {
   }
   .section__transactions-source {
     grid-column: 1/span 2;
-    /* circle + under date */
     grid-row: 2;
   }
   .section__transactions-status {
     grid-column: 2/span 3;
-    /* under value */
     grid-row: 2;
     text-align: right;
   }
