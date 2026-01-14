@@ -902,7 +902,6 @@ button {
 
 // ? Dashboard: works after login
 .dashboard {
-
     position: fixed;
     display: block;
     visibility: hidden;
@@ -1102,7 +1101,9 @@ button {
 
     // .dashboard__section
     &__section {
-        /* responsive header adjustments removed (kept explicit rules) */
+        display: none;
+        visibility: hidden;
+        opacity: 0;
 
         &.active {
             transition: opacity 0.25s ease;

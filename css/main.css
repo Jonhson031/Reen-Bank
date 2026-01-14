@@ -936,7 +936,9 @@ button {
   margin-top: 5em;
 }
 .dashboard__section {
-  /* responsive header adjustments removed (kept explicit rules) */
+  display: none;
+  visibility: hidden;
+  opacity: 0;
 }
 .dashboard__section.active {
   transition: opacity 0.25s ease;

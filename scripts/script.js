@@ -898,7 +898,6 @@ const registerUser = function () {
         ],
     };
     users.push(newUser);
-    console.log(users);
 
     // Clear form
     userName.value = '';
