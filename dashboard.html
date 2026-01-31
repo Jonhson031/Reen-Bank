@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Reen Bank</title>
+    <link rel="stylesheet" href="css/main.css">
+    <script type="module" src="scripts/controller.js"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="dashboard">
+            <div class="overlay"></div>
+            <div class="dashboard__container">
+                <div class="burger">
+                    <span></span>
+                </div>
+                <div class="dashboard__sidebar">
+                    <div class="dashboard__logo logo">
+                        <img src="images/logo.svg" alt="Logo Reen Bank">
+                    </div>
+                    <ul class="dashboard__sections-list">
+                        <li class="dashboard__item active" data-btn="overview">
+                            Overview
+                        </li>
+                        <li class="dashboard__item" data-btn="accounts">
+                            Accounts
+                        </li>
+                        <li class="dashboard__item" data-btn="transactions">
+                            Transactions
+                        </li>
+                        <li class="dashboard__item" data-btn="profile">
+                            Profile
+                        </li>
+                    </ul>
+                    <button class="dashboard__logout">Logout</button>
+                </div>
+                <div class="dashboard__content">
+                    <div class="dashboard__header">
+                        <h1 class="dashboard__title">Overview</h1>
+                        <div class="dashboard__account-info">
+                            <div class="dashboard__account-name">Maureen Oguche</div>
+                            <div class="dashboard__account-number">1234567890</div>
+                        </div>
+                        <div class="dashboard__left">
+                            <form action="submit" class="dashboard__search" id="dashboard__search">
+                                <button class="dashboard__search-icon">
+                                    <img src="images/icons/search-icon.svg" alt="search icon">
+                                </button>
+                                <input class="dashboard__search-input" placeholder="Search"
+                                    name="dashboard__search-input" id="dashboard__search-input" required>
+                            </form>
+                            <div class="dashboard__notifications">
+                                <img src="images/icons/notifications-icon.svg" alt="bell black icon">
+                            </div>
+                            <div class="dashboard__img">
+                                <img src="images/profile-img-placeholder.webp" alt="profile image"
+                                    class="profile-image">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dashboard__sections">
+                        <section class="dashboard__section dashboard__section--overview active" id="section-overview">
+                            <div class="section__column">
+                                <div class="section__row">
+                                    <div class="section__header">
+                                        <h3 class="section__title">Current Account Balance</h3>
+                                        <button class="section__hide">
+                                            <img src="images/icons/eye-closed.svg" alt="closed eye black icon">
+                                        </button>
+                                        <div class="section__sort">
+                                            <img class="section__calendar" src="images/icons/calendar.svg"
+                                                alt="calendar icon">
+                                            <select name="section__sort-select">
+                                                <option value="Apr 25 - May 21, 2025">Apr 25 - May 21, 2025</option>
+                                                <option value="Mar 25 - Apr 21, 2025">Mar 25 - Apr 21, 2025</option>
+                                                <option value="Feb 25 - Mar 21, 2025">Feb 25 - Mar 21, 2025</option>
+                                            </select>
+                                            <img class="section__arrow" src="images/icons/arrow.svg"
+                                                alt="arrow down icon">
+                                        </div>
+                                    </div>
+                                    <div class="section__content section__content-balance">
+                                        <div class="section__logo">
+                                            <img src="images/green-logo.svg" alt="green logo">
+                                        </div>
+                                        <div class="section__block">
+                                            <h4>Current Balance</h4>
+                                            <p class="section__block-value total-balance">$ 44,500.00</p>
+                                        </div>
+                                        <div class="section__block">
+                                            <h4>Income</h4>
+                                            <p class="section__block-value section__statistics-value--income">$
+                                                54,500.00
+                                            </p>
+                                        </div>
+                                        <div class="section__block">
+                                            <h4>Expense</h4>
+                                            <p class="section__block-value section__statistics-value--expense">$
+                                                10,000.00
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="section__row">
+                                    <div class="section__header">
+                                        <h3 class="section__title">Accounts</h3>
+                                        <button class="section__add section__accound-add"></button>
+                                    </div>
+                                    <div class="section__content section__content-accounts">
+                                        <div class="section__block">
+                                            <h4>Main Account</h4>
+                                            <p class="section__block-value main-account">$ 44,500.00</p>
+                                        </div>
+                                        <div class="section__block">
+                                            <h4>School Savings</h4>
+                                            <p class="section__block-value school-savings">$ 54,500.00</p>
+                                        </div>
+                                        <div class="section__block">
+                                            <h4>Holiday Plan</h4>
+                                            <p class="section__block-value holiday-plan">$ 10,000.00</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="section__row section__statistics">
+                                    <div class="section__header">
+                                        <h3 class="section__title">Statistics</h3>
+                                        <div class="section__sort section__statistics-sort">
+                                            <select>
+                                                <option value="This Month">This Month</option>
+                                                <option value="Last Month">Last Month</option>
+                                            </select>
+                                            <img class="section__arrow" src="images/icons/arrow.svg"
+                                                alt="arrow down icon">
+                                        </div>
+                                    </div>
+                                    <div class="section__content">
+                                        <div class="section__statistics-row">
+                                            <div class="section__statistics-img">
+                                                <img src="images/green-logo.svg" alt="green logo">
+                                            </div>
+                                            <p>Income</p>
+                                            <div class="section__statistics-range">
+                                                <span class="section__statistics-range--income"></span>
+                                            </div>
+                                            <div
+                                                class="section__statistics-value section__block-value section__statistics-value--income">
+                                                $ 54,500.00
+                                            </div>
+                                        </div>
+                                        <div class="section__statistics-row">
+                                            <div class="section__statistics-img">
+                                                <img src="images/red-logo.svg" alt="red logo">
+                                            </div>
+                                            <p>Expense</p>
+                                            <div class="section__statistics-range">
+                                                <span class="section__statistics-range--expense"></span>
+                                            </div>
+                                            <div
+                                                class="section__statistics-value section__block-value section__statistics-value--expense">
+                                                $
+                                                10,000.00
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="section__column">
+                                <div class="section__header">
+                                    <h3 class="section__title">Transactions</h3>
+                                    <button class="section__transactions-btn">
+                                        <img src="images/icons/green-arrow.svg" alt="green arrow icon">
+                                    </button>
+                                </div>
+                                <ul class="section__transactions-list">
+                                    <li class="section__transactions-info">
+                                        <div class="section__transactions-name">Oluwaben Jamin</div>
+                                        <div class="section__transactions-date">06.Mar.2023 - 09:39</div>
+                                        <div class="section__transactions-value">- 10,000.00</div>
+                                    </li>
+                                    <li class="section__transactions-info">
+                                        <div class="section__transactions-name">Oluwaben Jamin</div>
+                                        <div class="section__transactions-date">06.Mar.2023 - 09:39</div>
+                                        <div class="section__transactions-value">+ 10,000.00</div>
+                                    </li>
+                                    <li class="section__transactions-info">
+                                        <div class="section__transactions-name">Oluwaben Jamin</div>
+                                        <div class="section__transactions-date">06.Mar.2023 - 09:39</div>
+                                        <div class="section__transactions-value">- 10,000.00</div>
+                                    </li>
+                                    <li class="section__transactions-info">
+                                        <div class="section__transactions-name">Oluwaben Jamin</div>
+                                        <div class="section__transactions-date">06.Mar.2023 - 09:39</div>
+                                        <div class="section__transactions-value">+ 10,000.00</div>
+                                    </li>
+                                    <li class="section__transactions-info">
+                                        <div class="section__transactions-name">Oluwaben Jamin</div>
+                                        <div class="section__transactions-date">06.Mar.2023 - 09:39</div>
+                                        <div class="section__transactions-value">- 10,000.00</div>
+                                    </li>
+                                    <li class="section__transactions-info">
+                                        <div class="section__transactions-name">Oluwaben Jamin</div>
+                                        <div class="section__transactions-date">06.Mar.2023 - 09:39</div>
+                                        <div class="section__transactions-value">+ 10,000.00</div>
+                                    </li>
+                                    <li class="section__transactions-info">
+                                        <div class="section__transactions-name">Oluwaben Jamin</div>
+                                        <div class="section__transactions-date">06.Mar.2023 - 09:39</div>
+                                        <div class="section__transactions-value">- 10,000.00</div>
+                                    </li>
+                                    <li class="section__transactions-info">
+                                        <div class="section__transactions-name">Oluwaben Jamin</div>
+                                        <div class="section__transactions-date">06.Mar.2023 - 09:39</div>
+                                        <div class="section__transactions-value">+ 10,000.00</div>
+                                    </li>
+                                    <li class="section__transactions-info">
+                                        <div class="section__transactions-name">Oluwaben Jamin</div>
+                                        <div class="section__transactions-date">06.Mar.2023 - 09:39</div>
+                                        <div class="section__transactions-value">- 10,000.00</div>
+                                    </li>
+                                    <li class="section__transactions-info">
+                                        <div class="section__transactions-name">Oluwaben Jamin</div>
+                                        <div class="section__transactions-date">06.Mar.2023 - 09:39</div>
+                                        <div class="section__transactions-value">+ 10,000.00</div>
+                                    </li>
+                                </ul>
+                                <div class="section__banner">
+                                    <div class="section__banner-btn"><img src="images/icons/arrow-banner.svg"
+                                            alt="arrow">
+                                    </div>
+                                    <p>
+                                        <span>Upgrade to PRO</span>
+                                        Sign in on more than one device
+                                    </p>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="dashboard__section dashboard__section--accounts section__accounts"
+                            id="section-accounts">
+                            <div class="section__row section__accounts-row">
+                                <div class="section__accounts-detailed">
+                                    <div class="section__block active">
+                                        <h4>Main Account</h4>
+                                        <div class="section__accounts-hide">
+                                            <img src="images/icons/eye-closed.svg" alt="eye closed icon">
+                                        </div>
+                                        <p class="section__block-value main-account">$ 44,500.00</p>
+                                        <div class="section__accounts-buttons">
+                                            <button class="section__accounts-fund section__account-button">Fund</button>
+                                            <button
+                                                class="section__accounts-withdraw section__account-button">Withdraw</button>
+                                        </div>
+                                    </div>
+                                    <div class="section__block">
+                                        <h4>School Savings</h4>
+                                        <div class="section__accounts-hide">
+                                            <img src="images/icons/eye-closed.svg" alt="eye closed icon">
+                                        </div>
+                                        <p class="section__block-value school-savings">$ 54,500.00</p>
+                                        <div class="section__accounts-buttons">
+                                            <button class="section__accounts-fund section__account-button">Fund</button>
+                                            <button
+                                                class="section__accounts-withdraw section__account-button">Withdraw</button>
+                                        </div>
+                                    </div>
+                                    <div class="section__block">
+                                        <h4>Holiday Plan</h4>
+                                        <div class="section__accounts-hide">
+                                            <img src="images/icons/eye-closed.svg" alt="eye closed icon">
+                                        </div>
+                                        <p class="section__block-value holiday-plan">$ 10,000.00</p>
+                                        <div class="section__accounts-buttons">
+                                            <button class="section__accounts-fund section__account-button">Fund</button>
+                                            <button
+                                                class="section__accounts-withdraw section__account-button">Withdraw</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="section__block section__accounts-add">
+                                    <button class="section__add"></button>
+                                    <h4>Add Account</h4>
+                                    <p>$ 00,000.00</p>
+                                </div>
+                            </div>
+                            <div class="section__transactions">
+                                <div class="section__header section__transaction-header">
+                                    <h3 class="section__title">Transactions</h3>
+                                    <button class="section__transactions-btn">
+                                        <span>View All</span>
+                                        <img src="images/icons/green-arrow.svg" alt="green arrow icon">
+                                    </button>
+                                </div>
+                                <ul
+                                    class="section__transactions-list section__transactions-list--accounts section__transactions-list--full">
+                                    <li class="section__transactions-info">
+                                        <div class="section__transactions-circle section__transactions-circle--red">
+                                        </div>
+                                        <div class="section__transactions-name">Oluwaben Jamin</div>
+                                        <div class="section__transactions-source">Bank Transfer</div>
+                                        <div class="section__transactions-date">06.Mar.2023 - 09:39</div>
+                                        <div class="section__transactions-value">- 10,000.00</div>
+                                        <div class="section__transactions-status">Completed</div>
+                                    </li>
+                                    <li class="section__transactions-info">
+                                        <div class="section__transactions-circle section__transactions-circle--green">
+                                        </div>
+                                        <div class="section__transactions-name">Oluwaben Jamin</div>
+                                        <div class="section__transactions-source">Direct Pay</div>
+                                        <div class="section__transactions-date">06.Mar.2023 - 09:39</div>
+                                        <div class="section__transactions-value">- 10,000.00</div>
+                                        <div class="section__transactions-status">Completed</div>
+                                    </li>
+                                    <li class="section__transactions-info">
+                                        <div class="section__transactions-circle section__transactions-circle--red">
+                                        </div>
+                                        <div class="section__transactions-name">Oluwaben Jamin</div>
+                                        <div class="section__transactions-source">Bank Transfer</div>
+                                        <div class="section__transactions-date">06.Mar.2023 - 09:39</div>
+                                        <div class="section__transactions-value">- 10,000.00</div>
+                                        <div class="section__transactions-status">Completed</div>
+                                    </li>
+                                    <li class="section__transactions-info">
+                                        <div class="section__transactions-circle section__transactions-circle--green">
+                                        </div>
+                                        <div class="section__transactions-name">Oluwaben Jamin</div>
+                                        <div class="section__transactions-source">Direct Pay</div>
+                                        <div class="section__transactions-date">06.Mar.2023 - 09:39</div>
+                                        <div class="section__transactions-value">- 10,000.00</div>
+                                        <div class="section__transactions-status">Completed</div>
+                                    </li>
+                                    <li class="section__transactions-info">
+                                        <div class="section__transactions-circle section__transactions-circle--red">
+                                        </div>
+                                        <div class="section__transactions-name">Oluwaben Jamin</div>
+                                        <div class="section__transactions-source">Bank Transfer</div>
+                                        <div class="section__transactions-date">06.Mar.2023 - 09:39</div>
+                                        <div class="section__transactions-value">- 10,000.00</div>
+                                        <div class="section__transactions-status">Completed</div>
+                                    </li>
+                                    <li class="section__transactions-info">
+                                        <div class="section__transactions-circle section__transactions-circle--green">
+                                        </div>
+                                        <div class="section__transactions-name">Oluwaben Jamin</div>
+                                        <div class="section__transactions-source">Direct Pay</div>
+                                        <div class="section__transactions-date">06.Mar.2023 - 09:39</div>
+                                        <div class="section__transactions-value">- 10,000.00</div>
+                                        <div class="section__transactions-status">Completed</div>
+                                    </li>
+                                    <li class="section__transactions-info">
+                                        <div class="section__transactions-circle section__transactions-circle--red">
+                                        </div>
+                                        <div class="section__transactions-name">Oluwaben Jamin</div>
+                                        <div class="section__transactions-source">Bank Transfer</div>
+                                        <div class="section__transactions-date">06.Mar.2023 - 09:39</div>
+                                        <div class="section__transactions-value">- 10,000.00</div>
+                                        <div class="section__transactions-status">Completed</div>
+                                    </li>
+                                    <li class="section__transactions-info">
+                                        <div class="section__transactions-circle section__transactions-circle--green">
+                                        </div>
+                                        <div class="section__transactions-name">Oluwaben Jamin</div>
+                                        <div class="section__transactions-source">Direct Pay</div>
+                                        <div class="section__transactions-date">06.Mar.2023 - 09:39</div>
+                                        <div class="section__transactions-value">- 10,000.00</div>
+                                        <div class="section__transactions-status">Completed</div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="dashboard__section dashboard__section--transactions section__transactions-all"
+                            id="section-transactions">
+                            <div class="section__row section__accounts-row section__accounts-transactions">
+                                <div class="section__block">
+                                    <h4>Main Account</h4>
+                                    <div class="section__accounts-hide">
+                                        <img src="images/icons/eye-closed.svg" alt="eye closed icon">
+                                    </div>
+                                    <p class="section__block-value main-account">$ 44,500.00</p>
+                                </div>
+                                <div class="section__block">
+                                    <h4>School Savings</h4>
+                                    <div class="section__accounts-hide">
+                                        <img src="images/icons/eye-closed.svg" alt="eye closed icon">
+                                    </div>
+                                    <p class="section__block-value school-savings">$ 54,500.00</p>
+                                </div>
+                                <div class="section__block active">
+                                    <h4>Holiday Plan</h4>
+                                    <div class="section__accounts-hide">
+                                        <img src="images/icons/eye-closed.svg" alt="eye closed icon">
+                                    </div>
+                                    <p class="section__block-value holiday-plan">$ 10,000.00</p>
+                                </div>
+                            </div>
+                            <div class="section__transactions">
+                                <ul
+                                    class="section__transactions-list section__transactions-list--full section__transactions-list--all">
+                                    <li class="section__transactions-info">
+                                        <div class="section__transactions-circle section__transactions-circle--red">
+                                        </div>
+                                        <div class="section__transactions-name">Oluwaben Jamin</div>
+                                        <div class="section__transactions-source">Bank Transfer</div>
+                                        <div class="section__transactions-date">06.Mar.2023 - 09:39</div>
+                                        <div class="section__transactions-value">- 10,000.00</div>
+                                        <div class="section__transactions-status">Completed</div>
+                                    </li>
+                                    <li class="section__transactions-info">
+                                        <div class="section__transactions-circle section__transactions-circle--green">
+                                        </div>
+                                        <div class="section__transactions-name">Oluwaben Jamin</div>
+                                        <div class="section__transactions-source">Direct Pay</div>
+                                        <div class="section__transactions-date">06.Mar.2023 - 09:39</div>
+                                        <div class="section__transactions-value">- 10,000.00</div>
+                                        <div class="section__transactions-status">Completed</div>
+                                    </li>
+                                    <li class="section__transactions-info">
+                                        <div class="section__transactions-circle section__transactions-circle--red">
+                                        </div>
+                                        <div class="section__transactions-name">Oluwaben Jamin</div>
+                                        <div class="section__transactions-source">Bank Transfer</div>
+                                        <div class="section__transactions-date">06.Mar.2023 - 09:39</div>
+                                        <div class="section__transactions-value">- 10,000.00</div>
+                                        <div class="section__transactions-status">Completed</div>
+                                    </li>
+                                    <li class="section__transactions-info">
+                                        <div class="section__transactions-circle section__transactions-circle--green">
+                                        </div>
+                                        <div class="section__transactions-name">Oluwaben Jamin</div>
+                                        <div class="section__transactions-source">Direct Pay</div>
+                                        <div class="section__transactions-date">06.Mar.2023 - 09:39</div>
+                                        <div class="section__transactions-value">- 10,000.00</div>
+                                        <div class="section__transactions-status">Completed</div>
+                                    </li>
+                                    <li class="section__transactions-info">
+                                        <div class="section__transactions-circle section__transactions-circle--red">
+                                        </div>
+                                        <div class="section__transactions-name">Oluwaben Jamin</div>
+                                        <div class="section__transactions-source">Bank Transfer</div>
+                                        <div class="section__transactions-date">06.Mar.2023 - 09:39</div>
+                                        <div class="section__transactions-value">- 10,000.00</div>
+                                        <div class="section__transactions-status">Completed</div>
+                                    </li>
+                                    <li class="section__transactions-info">
+                                        <div class="section__transactions-circle section__transactions-circle--green">
+                                        </div>
+                                        <div class="section__transactions-name">Oluwaben Jamin</div>
+                                        <div class="section__transactions-source">Direct Pay</div>
+                                        <div class="section__transactions-date">06.Mar.2023 - 09:39</div>
+                                        <div class="section__transactions-value">- 10,000.00</div>
+                                        <div class="section__transactions-status">Completed</div>
+                                    </li>
+                                    <li class="section__transactions-info">
+                                        <div class="section__transactions-circle section__transactions-circle--red">
+                                        </div>
+                                        <div class="section__transactions-name">Oluwaben Jamin</div>
+                                        <div class="section__transactions-source">Bank Transfer</div>
+                                        <div class="section__transactions-date">06.Mar.2023 - 09:39</div>
+                                        <div class="section__transactions-value">- 10,000.00</div>
+                                        <div class="section__transactions-status">Completed</div>
+                                    </li>
+                                    <li class="section__transactions-info">
+                                        <div class="section__transactions-circle section__transactions-circle--green">
+                                        </div>
+                                        <div class="section__transactions-name">Oluwaben Jamin</div>
+                                        <div class="section__transactions-source">Direct Pay</div>
+                                        <div class="section__transactions-date">06.Mar.2023 - 09:39</div>
+                                        <div class="section__transactions-value">- 10,000.00</div>
+                                        <div class="section__transactions-status">Completed</div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="dashboard__section dashboard__section--profile" id="section-profile">
+                            <div class="section__profile-content">
+                                <div class="section__profile-image">
+                                    <img src="images/profile-img-placeholder.webp"
+                                        alt="Profile photo placeholder, default avatar for banking dashboard user account"
+                                        class="profile-image">
+                                    <div class="section__profile-image-edit">
+                                        <input type="file" id="image-change">
+                                        <span class="icon-fi-rr-pencil"></span>
+                                    </div>
+                                </div>
+                                <h2 class="section__profile-name">Maureen Oguche</h2>
+                                <div class="section__profile-subscription">Pro User</div>
+                                <ul class="section__profile-list">
+                                    <li class="section__profile-item section__profile-email">
+                                        <span>Email</span>
+                                        oguchemaureenm@gmail.com
+                                    </li>
+                                    <li class="section__profile-item section__profile-phone">
+                                        <span>Phone Number</span>
+                                        +1 234 567 8901
+                                    </li>
+                                    <li class="section__profile-item section__profile-gender">
+                                        <span>Gender</span>
+                                        Female
+                                    </li>
+                                </ul>
+                                <div class="section__profile-button button button-green">Reset Password</div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+                <div class="dashboard__modals">
+                    <div class="account__modal account__modal-add modal">
+                        <h2 class="account__title">Add Account</h2>
+                        <div class="account__input">
+                            <label for="account__name">Account Name</label>
+                            <input type="text" name="account__name" id="account__name" placeholder="Enter Name">
+                        </div>
+                        <div class="account__buttons">
+                            <button class="account__button account__button-cancel">Cancel</button>
+                            <button class="account__button account__button-green button">Add</button>
+                        </div>
+                    </div>
+                    <div class="account__message account__message-add modal">
+                        <h3><span>Account Name</span> has been created successfully!</h3>
+                        <button class="account__button account__button-cancel">Go back</button>
+                        <button class="account__button account__button-green button">Fund Account</button>
+                    </div>
+                    <div class="account__modal account__modal-withdraw modal">
+                        <h2 class="account__title">Withdraw</h2>
+                        <form action="" method="post">
+                            <div class="account__input">
+                                <label for="account__amount-withdraw">Amount</label>
+                                <input type="number" name="account__amount-withdraw" id="account__amount-withdraw"
+                                    placeholder="100.00">
+                            </div>
+                            <div class="account__input">
+                                <label for="account__number">Account Number</label>
+                                <input type="number" name="account__number" id="account__number"
+                                    placeholder="00 00 00 00 00">
+                            </div>
+                            <div class="account__input">
+                                <label for="account__name-withdraw">Account Name</label>
+                                <input type="text" name="account__name-withdraw" id="account__name-withdraw"
+                                    placeholder="Enter account name">
+                            </div>
+                            <div class="account__input">
+                                <label for="account__bank">Account Bank</label>
+                                <select name="account__bank" id="account__bank">
+                                    <option value="">Bank Name</option>
+                                    <option value="Chase">Chase</option>
+                                    <option value="Bank of America">Bank of America</option>
+                                    <option value="Discover">Discover</option>
+                                    <option value="Wells Fargo">Wells Fargo</option>
+                                    <option value="Capital One">Capital One</option>
+                                    <option value="Citi">Citi</option>
+                                </select>
+                            </div>
+                            <div class="account__buttons">
+                                <button class="account__button account__button-cancel">Cancel</button>
+                                <button class="account__button account__button-green button">Withdraw</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="account__message account__message-withdraw modal">
+                        <h3><span>$ 1000.00</span> has been sent to your Bank Account!</h3>
+                        <button class="account__button account__button-green account__button-cancel button">Go
+                            back</button>
+                    </div>
+                    <div class="account__modal account__modal-fund modal">
+                        <h2 class="account__title">Fund Wallet</h2>
+                        <form action="" method="post" id="form__fund">
+                            <div class="account__input-select">
+                                <h3>Select Payment Method</h3>
+                                <label for="account__directpay" class="account__input account__input-radio"
+                                    data-payment="directpay">
+                                    <input type="radio" name="account__payment" id="account__directpay" checked>
+                                    Direct Pay
+                                </label>
+                                <label for="account__credit" class="account__input account__input-radio"
+                                    data-payment="credit">
+                                    <input type="radio" name="account__payment" id="account__credit">
+                                    Credit Card
+                                </label>
+                            </div>
+                            <div class="account__fund-section active" id="form__fund-directpay">
+                                <div class="account__input">
+                                    <label for="account__amount-fund--direct">Amount</label>
+                                    <input type="number" name="account__amount-fund--direct"
+                                        id="account__amount-fund--direct" placeholder="100.00" data-source="Direct Pay">
+                                </div>
+                            </div>
+                            <div class="account__fund-section" id="form__fund-credit">
+                                <div class="account__input">
+                                    <label for="account__amount-fund--credit">Amount</label>
+                                    <input type="number" name="account__amount-fund--credit"
+                                        id="account__amount-fund--credit" placeholder="100.00"
+                                        data-source="Credit Card">
+                                </div>
+                                <div class="account__input">
+                                    <label for="account__card-num">Card Number</label>
+                                    <input type="number" name="account__card-num" id="account__card-num"
+                                        placeholder="0000 0000 0000 0000">
+                                </div>
+                                <div class="account__input">
+                                    <label for="account__card-name">Card holder name</label>
+                                    <input type="text" name="account__card-name" id="account__card-name"
+                                        placeholder="Enter card holder name">
+                                </div>
+                                <div class="account__input">
+                                    <label for="account__card-expiry">Expiry date</label>
+                                    <input type="text" name="account__card-expiry" id="account__card-expiry"
+                                        placeholder="MM/YY">
+                                </div>
+                                <div class="account__input">
+                                    <label for="account__card-cvc">CVC</label>
+                                    <input type="number" name="account__card-cvc" id="account__card-cvc"
+                                        placeholder="000">
+                                </div>
+                            </div>
+                            <div class="account__buttons">
+                                <button class="account__button account__button-cancel">Cancel</button>
+                                <button class="account__button account__button-green button">Fund</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="account__message account__message-fund modal">
+                        <h3><span>$ 1000.00</span> has been added to your Wallet!</h3>
+                        <button class="account__button account__button-green account__button-cancel button">Go
+                            back</button>
+                    </div>
+                    <div class="account__message account__message-logout modal">
+                        <h3>Are you sure you want to Logout?</h3>
+                        <button class="account__button account__button-cancel">Cancell</button>
+                        <button class="account__button account__button-green button">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

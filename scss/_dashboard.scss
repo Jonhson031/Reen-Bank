@@ -1,0 +1,1174 @@
+// ? Dashboard: works after login
+.dashboard {
+    // position: fixed;
+    // display: block;
+    // visibility: hidden;
+    // width: 100%;
+    // height: 100%;
+    // opacity: 0;
+    // left: 0;
+    // top: 0;
+    // background-color: #fff;
+    // transition: all 1s;
+    // overflow: auto;
+    // z-index: -1;
+
+    // &.active {
+    //     opacity: 1;
+    //     visibility: visible;
+    //     z-index: 3;
+    // }
+
+    // .dashboard__container
+
+    &__container {
+        position: relative;
+        padding: 4em 15px;
+        display: flex;
+        min-height: 100%;
+    }
+
+    // .dashboard__sidebar
+
+    &__sidebar {
+        padding-top: 4em;
+        width: 8em;
+        position: fixed;
+        height: 100vh;
+        top: 0;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+
+    }
+
+    // .dashboard__logo
+
+    &__logo {
+        margin-bottom: 7.5rem;
+    }
+
+    // .dashboard__sections-list
+
+    &__sections-list {
+        display: flex;
+        flex-direction: column;
+        gap: 2.5em;
+        flex-grow: 0.8;
+    }
+
+    // .dashboard__item
+
+    &__item {
+        color: #555;
+        font-family: "DM Sans";
+        font-size: 1.25rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: color 0.2s;
+
+        &.active {
+            color: #33B786;
+        }
+    }
+
+
+    // .dashboard__logout
+
+    &__logout {
+        color: #555;
+        font-family: "DM Sans";
+        font-size: 1.25rem;
+        font-weight: 500;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: flex-end;
+    }
+
+    &__content {
+        position: relative;
+        display: flex;
+        flex: 0 1 100%;
+        flex-direction: column;
+        margin-left: 14.5em;
+    }
+
+    // .dashboard__header
+
+    &__header {
+        display: grid;
+        justify-content: space-between;
+        grid-template-columns: 1fr auto auto;
+    }
+
+    // .dashboard__title
+
+    &__title {
+        color: #252525;
+        font-family: "DM Sans";
+        font-size: 2.5rem;
+        font-weight: 700;
+    }
+
+    // .dashboard__account-info
+
+    &__account-info {
+        text-align: right;
+    }
+
+    // .dashboard__account-name
+
+    &__account-name {
+        color: #33B786;
+        font-family: "DM Sans";
+        font-size: 1rem;
+        font-weight: 500;
+        margin-bottom: 0.25rem;
+    }
+
+    // .dashboard__account-number
+
+    &__account-number {
+        color: #252525;
+        font-family: "Bebas Neue";
+        font-size: 2.5rem;
+        font-weight: 400;
+        line-height: 1;
+    }
+
+    // .dashboard__left
+
+    &__left {
+        display: flex;
+        align-items: center;
+        margin-left: 6.94em;
+        justify-content: space-between;
+    }
+
+    // .dashboard__search
+
+    &__search {
+        display: flex;
+        align-items: center;
+        flex: 0 0 22.5625rem;
+        /* 361/16 */
+    }
+
+    // .dashboard__search-icon
+
+    &__search-icon {
+        border: none;
+        cursor: pointer;
+        margin-right: 1em;
+    }
+
+    // .dashboard__search-input
+
+    &__search-input {
+        border: none;
+        color: #8C8C8C;
+        font-family: "DM Sans";
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
+    // .dashboard__notifications
+
+    &__notifications {
+        margin-right: 2.5em;
+    }
+
+    // .dashboard__img
+
+    &__img {
+        border-radius: 50%;
+
+        & img {
+            max-width: 100%;
+            height: 56px;
+            width: 56px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+    }
+
+    &__sections {
+        margin-top: 5em;
+    }
+
+    // .dashboard__section
+    &__section {
+        display: none;
+        visibility: hidden;
+        opacity: 0;
+
+        &.active {
+            transition: opacity 0.25s ease;
+            display: block;
+            visibility: visible;
+            opacity: 1;
+            z-index: 3;
+            transition: opacity 0.25s ease;
+        }
+    }
+
+    &__section--overview {
+        grid-template-columns: minmax(0, 54.57%) minmax(0, 36.91%);
+        gap: 10px;
+        justify-content: space-between;
+
+        &.active {
+            display: grid;
+        }
+    }
+}
+
+// ? Section styles + overview section
+.section {
+
+    // .section__row
+
+    &__row {
+        margin-bottom: 4.19em;
+    }
+
+    // .section__header
+
+    &__header {
+        margin-bottom: 2em;
+        display: grid;
+        grid-template-columns: 1fr auto auto;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    // .section__title
+
+    &__title {
+        color: #252525;
+        font-family: "DM Sans";
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
+
+    // .section__hide
+
+    &__hide {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.875rem;
+        height: 2.875rem;
+        border-radius: 0.5rem;
+        background-color: #F0F0F0;
+        margin-right: 1em;
+        cursor: pointer;
+    }
+
+    // .section__sort
+
+    &__sort {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        color: #555;
+        font-family: "DM Sans";
+        font-size: 0.75rem;
+        font-weight: 700;
+        line-height: 1;
+
+        & select {
+            border: none;
+            appearance: none;
+            width: 13.125rem;
+            padding: 0.94em 2.56em 0.94em 3em;
+            border-radius: 0.5rem;
+            background: #F0F0F0;
+        }
+    }
+
+    // .section__arrow
+    &__calendar {
+        margin-right: -2.5em;
+        z-index: 2;
+    }
+
+    &__arrow {
+        margin-left: -2em;
+        z-index: 2;
+    }
+
+    // .section__content
+
+    &__content {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    &__content-balance {
+        border-radius: 0.75em;
+        background: #D4F3E7;
+        padding: 2.5em;
+    }
+
+
+    // .section__block
+
+    &__block {
+        padding: 0 2.5em;
+        cursor: pointer;
+        box-sizing: border-box;
+
+        & h4 {
+            color: #46237A;
+            font-family: "DM Sans";
+            font-size: 1em;
+            font-weight: 500;
+        }
+
+        & p {
+            color: #252525;
+            font-family: "Bebas Neue";
+            font-size: 2em;
+            font-weight: 400;
+            line-height: 1;
+            margin-top: 0.31rem;
+        }
+
+        &.active {
+            position: relative;
+
+            &::before {
+                content: '';
+                position: absolute;
+                height: 100%;
+                background-color: #46237A;
+                width: 0.5rem;
+                left: 0;
+                top: 0;
+            }
+        }
+    }
+
+    &__block-value {
+        min-width: 100.75px;
+    }
+
+    &__content-accounts &__block {
+        border-radius: 0.75rem;
+        background: #D4F3E7;
+        padding: 2.6em 2.7em;
+    }
+
+    &__content-accounts {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2.87em;
+    }
+
+    // .section__add
+
+    &__add {
+        position: relative;
+        width: 2.875rem;
+        height: 2.875rem;
+        background-color: #F0F0F0;
+        border-radius: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+        &::before,
+        &::after {
+            content: '';
+            position: absolute;
+            background-color: #555555;
+            width: 16px;
+            height: 3px;
+            border-radius: 0.5rem;
+        }
+
+        &::before {
+            transform: rotate(90deg);
+        }
+    }
+
+
+    &__statistics-sort {
+        & select {
+            padding: 0.94em 2.5em 0.94em 1.06em;
+            width: initial;
+        }
+    }
+
+    &__statistics &__content {
+        flex-direction: column;
+        gap: 2.5em;
+    }
+
+    // .section__statistics-row
+
+    &__statistics-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        & p {
+            color: #555;
+            font-family: "DM Sans";
+            font-size: 1.25rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+    }
+
+    // .section__statistics-img
+
+    &__statistics-img {
+        & img {
+            max-width: 100%;
+
+        }
+
+        margin-right: 2.5em;
+        width: 3em;
+        height: 3em;
+    }
+
+    // .section__statistics-range
+
+    &__statistics-range {
+        flex: 0 1 18.5em;
+        margin: 0 4em;
+        height: 1em;
+        border-radius: 0.25rem;
+
+        & span {
+            display: block;
+            height: 100%;
+            border-radius: 0.25rem;
+        }
+    }
+
+    // .section__statistics-range--income
+
+    &__statistics-range--income {
+        background-color: #33B786;
+        width: 90%;
+    }
+
+    // .section__statistics-value
+
+    &__statistics-value {
+        color: #555;
+        font-family: "Bebas Neue";
+        font-size: 2rem;
+        font-weight: 400;
+        line-height: 1;
+    }
+
+    // .section__statistics-range--expense
+
+    &__statistics-range--expense {
+        width: 70%;
+        background-color: #E74F5B;
+        ;
+    }
+
+    // .section__transactions-list
+
+    &__transactions-list {
+        & li:last-child {
+            border: none;
+        }
+    }
+
+    // .section__transactions-info
+
+    &__transactions-info {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        justify-content: space-between;
+        padding: 1em 0;
+        align-items: center;
+        border-bottom: 1px solid #D9D9D9;
+    }
+
+    // .section__transactions-name
+
+    &__transactions-name,
+    &__transactions-date {
+        color: #8C8C8C;
+        font-family: "DM Sans";
+        font-size: 1rem;
+        font-weight: 500;
+        line-height: 1;
+    }
+
+    // .section__transactions-value
+
+    &__transactions-value {
+
+        text-align: right;
+        font-family: "Bebas Neue";
+        font-size: 1.5rem;
+        font-weight: 400;
+        line-height: 1;
+    }
+
+    &__transactions-value--withdrawal {
+        color: #E74F5B;
+    }
+
+    &__transactions-value--deposit {
+        color: #33B786;
+    }
+
+    // .section__banner
+
+    &__banner {
+        display: flex;
+        flex-direction: column;
+        margin-top: 2em;
+        padding: 1.5em;
+        height: 13.5625em;
+        border-radius: 0.9375rem;
+        background-image: url('../images/banner.svg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        color: #FFF;
+        font-family: "DM Sans";
+        font-size: 1rem;
+        font-weight: 500;
+        line-height: 1;
+
+        & span {
+            display: block;
+            font-weight: 700;
+            font-size: 2em;
+            color: #D4F3E7;
+            margin-bottom: 0.2em;
+        }
+    }
+
+    &__banner-btn {
+        padding: 0.62rem;
+        flex: 0 1 100%;
+        cursor: pointer;
+    }
+}
+
+// ? Accounts section
+.section {
+    // ? section accounts
+
+
+    // .section__accounts-row
+    &__accounts-row {
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 4.06em;
+    }
+
+    &__accounts-detailed {
+        display: flex;
+        gap: 4.06em;
+        flex-wrap: wrap;
+    }
+
+    &__accounts-detailed &__block {
+        flex: 0 1 25%;
+    }
+
+    &__accounts-row &__block {
+        position: relative;
+        border-radius: 0 0.75rem 0.75rem 0;
+        background-color: #D4F3E7;
+        padding: 2em;
+    }
+
+
+
+    // .section__accounts-hide
+
+    &__accounts-hide {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        cursor: pointer;
+    }
+
+    // .section__accounts-buttons
+    &__accounts-buttons {
+        display: flex;
+        gap: 1.06em;
+        margin-top: 1.5em;
+    }
+
+    &__account-button {
+        color: #252525;
+        font-family: "DM Sans";
+        font-size: 0.75rem;
+        font-weight: 700;
+        line-height: 1;
+        border: none;
+        border-radius: 0.375rem;
+        cursor: pointer;
+    }
+
+
+    // .section__accounts-fund
+
+    &__accounts-fund {
+        color: #fff;
+        padding: 0.65rem 1.56rem;
+        background-color: #33B786;
+    }
+
+    &__accounts-withdraw {
+        padding: 0.65rem 1.88rem 0.65rem 1.81rem;
+        color: #252525;
+        background-color: #D4D4D4;
+    }
+
+    // .section__accounts-add
+
+    &__accounts-row &__accounts-add {
+        display: grid;
+        align-items: center;
+        grid-template-rows: auto 1fr;
+        grid-template-columns: auto auto;
+        background-color: rgba(240, 240, 240, 0.75);
+        max-height: 11.5rem;
+        box-sizing: border-box;
+
+        & p {
+            align-self: flex-end;
+        }
+
+        & h4 {
+            font-weight: 700;
+            color: #555;
+        }
+    }
+
+    // .section__accounts-add--btn
+
+    &__accounts-add--btn {
+        border: none;
+        outline: none;
+    }
+
+    // .section__transactions-btn
+
+    &__transactions-btn {
+        cursor: pointer;
+        border: none;
+        outline: none;
+        display: flex;
+        align-items: center;
+        gap: 1em;
+
+        & span {
+            color: #33B786;
+            font-family: "DM Sans";
+            font-size: 1rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+    }
+
+    // .section__transactions-info
+
+    &__transactions-list--full &__transactions-info {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+    }
+
+    // .section__transactions-circle
+
+    &__transactions-circle {
+        position: relative;
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+        background-color: #E74F5B;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
+
+    &__transactions-circle--deposit {
+        background-color: #33B786;
+
+        &::before,
+        &::after {
+            content: '';
+            position: absolute;
+            background-color: #fff;
+            width: 12px;
+            height: 2px;
+            border-radius: 0.5rem;
+        }
+
+        &::before {
+            transform: rotate(90deg);
+        }
+
+    }
+
+    &__transactions-circle--withdrawal {
+        background-color: #E74F5B;
+
+        &::after {
+            content: '';
+            position: absolute;
+            background-color: #fff;
+            width: 12px;
+            height: 2px;
+            border-radius: 0.5rem;
+        }
+    }
+
+    // .section__transactions-source
+
+    &__transactions-source {
+        color: #8C8C8C;
+        font-family: "DM Sans";
+        font-size: 1rem;
+        font-weight: 500;
+        line-height: 1;
+    }
+
+    // .section__transactions-value
+
+    &__transactions-list--full &__transactions-value {
+        justify-self: center;
+    }
+
+    &__transactions-status {
+        justify-self: flex-end;
+        padding: 0.6em 3.56em 0.6em 3.83em;
+        color: #FFF;
+        text-align: center;
+        font-family: "DM Sans";
+        font-size: 1rem;
+        font-weight: 700;
+        line-height: 1;
+        border-radius: 0.5rem;
+        background-color: #33B786;
+    }
+}
+
+// ? Transactions section
+.section {
+
+    // ? section transactions
+    &__accounts-transactions {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    &__transactions-all>&__row {
+        column-gap: 5.5em;
+    }
+
+    &__transactions-all>&__row>&__block {
+        flex: 0 1 33%;
+    }
+}
+
+// ? Profile section
+.section {
+
+    // .section__profile-content
+
+    &__profile-content {
+        width: 22.3125rem;
+        margin: 0 auto;
+    }
+
+    // .section__profile-image
+
+    &__profile-image {
+        position: relative;
+        width: 10rem;
+        height: 10rem;
+        margin: 0 auto;
+        border-radius: 50%;
+
+        & img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+    }
+
+    // .section__profile-image-edit
+
+    &__profile-image-edit {
+        position: absolute;
+        border-radius: 50%;
+        width: 2rem;
+        height: 2rem;
+        top: 0;
+        right: 0;
+        background-color: #D4D4D4;
+        display: flex;
+        align-items: center;
+
+        & input {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+
+            & #file-upload-button {
+                display: none;
+            }
+        }
+
+        input[type="file"] {
+            appearance: none;
+            -webkit-appearance: none;
+            border: none;
+            background: none;
+            color: transparent;
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            outline: none;
+            cursor: pointer;
+        }
+
+        input[type="file"]::-webkit-file-upload-button {
+            display: none;
+        }
+
+        input[type="file"]::file-selector-button {
+            display: none;
+        }
+
+        & span {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+
+    // .section__profile-name
+
+    &__profile-name {
+        margin-top: 1.5rem;
+        margin-bottom: 0.81rem;
+        color: #252525;
+        font-family: "DM Sans";
+        font-size: 2rem;
+        font-weight: 700;
+        line-height: 1;
+        text-align: center;
+    }
+
+    // .section__profile-subscription
+
+    &__profile-subscription {
+        color: #46237A;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "DM Sans";
+        font-size: 1rem;
+        font-weight: 700;
+        line-height: 1;
+        border-radius: 0.5rem;
+        background-color: #E4D2FF;
+        width: 7.1875rem;
+        height: 2.3125rem;
+        margin: 0 auto;
+    }
+
+    // .section__profile-list
+
+    &__profile-list {
+        display: grid;
+        gap: 2rem;
+        margin-top: 3.5rem;
+        margin-bottom: 3.5rem;
+
+        & li:last-child {
+            border: none;
+            padding: 0;
+        }
+    }
+
+    // .section__profile-item
+
+    &__profile-item {
+        color: #252525;
+        font-family: "DM Sans";
+        font-size: 1.5rem;
+        font-weight: 700;
+        line-height: 1;
+        padding-bottom: 2rem;
+        border-bottom: 2px solid #D9D9D9;
+        ;
+
+        &::after {
+            content: '';
+
+        }
+
+        & span {
+            display: block;
+            color: #33B786;
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+    }
+
+    // .section__profile-button
+
+    &__profile-button {
+        text-align: center;
+    }
+}
+
+
+// ? Modal windows
+.account {
+    // ? Modal windows
+
+    &__modal,
+    &__message {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        max-height: 100%;
+        box-sizing: border-box;
+        border-radius: 1.5em;
+        overflow: auto;
+        transition: all 0.5s;
+        padding: 4.5rem 5rem;
+        border-radius: 2rem;
+        box-shadow: 0 0 200px 25px rgba(51, 183, 134, 0.25);
+        min-width: 29.8%;
+        font-family: 1em;
+        visibility: hidden;
+        opacity: 0;
+        overflow-y: auto;
+
+        & form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        overflow-y: auto;
+
+        &.active {
+            visibility: visible;
+            opacity: 1;
+            z-index: 15;
+        }
+    }
+
+    &__modal-add {
+        height: 32.1875rem;
+    }
+
+    &__modal-fund {
+        & form {
+            position: relative;
+        }
+
+        margin-top: 3rem;
+        padding-bottom: 5rem;
+    }
+
+    &__fund-section {
+        position: absolute;
+        max-height: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        visibility: hidden;
+        opacity: 0;
+        display: none;
+        transition: max-height 0.4s ease, opacity 0.3s ease;
+
+        &.active {
+            transition: all 0.3s;
+            position: initial;
+            visibility: visible;
+            opacity: 1;
+            display: flex;
+            max-height: initial;
+        }
+    }
+
+    // .account__title
+
+    &__title {
+        color: #33B786;
+        font-family: "DM Sans";
+        font-size: 3rem;
+        font-weight: 700;
+        line-height: 114%;
+        margin-bottom: 2.5rem;
+    }
+
+    // .account__input
+
+    &__input {
+        font-family: "DM Sans";
+        font-size: 1rem;
+        font-weight: 700;
+        line-height: 1;
+
+        & label {
+            color: #252525;
+            margin-bottom: 0.44rem;
+            display: block;
+        }
+
+        & input,
+        & select {
+            font-family: "DM Sans";
+            font-size: 1rem;
+            font-weight: 700;
+            line-height: 1;
+            padding: 1.31rem 0 1.37em 1.5em;
+            border-radius: 0.75rem;
+            border: 1px solid #8A8A8A;
+            box-shadow: 0 0 50px 0.5px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            box-sizing: border-box;
+
+            &::placeholder {
+                color: #B8B8B8;
+            }
+        }
+
+        & select {
+            color: #B8B8B8;
+            appearance: none;
+
+            & option {
+                color: #252525;
+            }
+        }
+    }
+
+    &__input-select {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        justify-content: space-between;
+        column-gap: 2.5rem;
+
+        h3 {
+            grid-column: 1 / -1;
+            color: #252525;
+            font-family: "DM Sans";
+            font-size: 1rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 0.44rem;
+        }
+    }
+
+    &__input-radio {
+        display: flex;
+        align-items: center;
+        border-radius: 0.75rem;
+        border: 1px solid #8A8A8A;
+        background: #FFF;
+        box-shadow: 0 0 50px 0.5px rgba(0, 0, 0, 0.05);
+        padding: 1.35rem 2.06rem 1.35rem 2rem;
+        margin: 0;
+
+        input[type="radio"] {
+            accent-color: #E74F5B;
+        }
+
+        & input {
+            width: initial;
+            margin: 0;
+            margin-right: 0.5rem;
+        }
+    }
+
+    // .account__buttons
+
+    &__buttons {
+        display: flex;
+        gap: 2.5rem;
+        margin-top: 3rem;
+        flex: 0 1 100%;
+        justify-content: space-between;
+    }
+
+    // .account__button
+
+    &__button {
+        padding: 1.25rem 2rem;
+        width: 100%;
+        border-radius: 0.75rem;
+        background-color: #D4D4D4;
+        color: #252525;
+        font-family: "DM Sans";
+        font-size: 1.5rem;
+        font-weight: 700;
+        line-height: 1;
+    }
+
+    // .account__button-green
+
+    &__button-green {
+        background-color: #33B786;
+        color: #fff;
+    }
+
+    // .account__message
+
+    &__message {
+        position: fixed;
+        min-width: 37.1%;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        gap: 1.5rem;
+        height: 29.9375rem;
+        justify-content: flex-end;
+
+        & h3 {
+            color: #6C6C6C;
+            font-family: "DM Sans";
+            font-size: 1.5rem;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 2rem;
+
+            & span {
+                color: #33B786;
+            }
+        }
+    }
+
+    &__message-add {
+        height: 35.4375rem;
+    }
+}

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Reen Bank</title>
+    <link rel="stylesheet" href="css/main.css">
+    <script type="module" src="scripts/controller.js"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="login">
+            <div class="overlay-login overlay"></div>
+            <div class="login__container">
+                <div class="login__content">
+                    <a href="index.html" class="login__logo logo">
+                        <img src="images/logo.svg" alt="Logo Reen Bank">
+                        <span>Reen Bank</span>
+                    </a>
+                    <div class="login__box--text">
+                        <h2 class="login__subtitle hero__subtitle">Reen Bank</h2>
+                        <h2 class="login__title hero__title">Welcome Back</h2>
+                        <p class="login__text hero__text">
+                            Enter Your Details to login to your Banking Dashboard again!
+                        </p>
+                    </div>
+                    <div class="login__socials socials">
+                        <ul class="socials__list">
+                            <li class="socials__item"><span class="icon-facebook"></span></li>
+                            <li class="socials__item"><span class="icon-instagram"></span></li>
+                            <li class="socials__item"><span class="icon-twitter"></span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="login__boxes">
+                    <div class="login__box active">
+                        <h3 class="login__form-title">Login</h3>
+                        <form action="" method="post" class="login__form">
+                            <div class="login__input">
+                                <label for="login__email">Email</label>
+                                <div class="login__input-box">
+                                    <input type="email" placeholder="Enter your Email" id="login__email"
+                                        name="login__email" value="test@email.com" required>
+                                    <span class="login__input-icon icon-fi-rr-envelope"></span>
+                                </div>
+                            </div>
+                            <div class="login__input">
+                                <label for="login__password">Password</label>
+                                <div class="login__input-box login__password-box">
+                                    <input type="password" placeholder="Enter your Password" id="login__password"
+                                        name="login__password" value="test" required>
+                                    <div class="login__password-forgot">
+                                        Forgot?
+                                    </div>
+                                    <span class="login__input-icon icon-fi-rr-lock"></span>
+                                </div>
+                            </div>
+                            <button class="login__button button">Login</button>
+                        </form>
+                        <div class="login__question">
+                            Don’t Have an Account?
+                            <button class="register__question-btn login__question-btn--register">Register</button>
+                        </div>
+                    </div>
+                    <div class="register__box">
+                        <h3 class="login__form-title register__form-title">Register</h3>
+                        <form action="" method="post" class="register__form">
+                            <div class="login__input">
+                                <label for="register__name">Name</label>
+                                <div class="login__input-box">
+                                    <input type="email" placeholder="Enter name here" id="register__name"
+                                        name="register__name" required>
+                                    <span class="login__input-icon icon-fi-rr-user"></span>
+                                </div>
+                                <div class="register__error register__error-name">This field cannot be left blank.</div>
+                            </div>
+                            <div class="login__input">
+                                <label for="register__email">Email</label>
+                                <div class="login__input-box">
+                                    <input type="email" placeholder="Enter your Email" id="register__email"
+                                        name="register__email" required>
+                                    <span class="login__input-icon icon-fi-rr-envelope"></span>
+                                </div>
+                                <div class="register__error register__error-email">Please enter a valid email
+                                    address.</div>
+                            </div>
+                            <div class="login__input">
+                                <label for="register__password">Password</label>
+                                <div class="login__input-box register__password-box">
+                                    <input type="password" placeholder="Enter your Password" id="register__password"
+                                        name="register__password" required>
+                                    <span class="login__input-icon icon-fi-rr-lock"></span>
+                                </div>
+                                <div class="register__error register__error-password">
+                                    <ul class="register__error-password--requirements">
+                                        <li>At least 8 characters</li>
+                                        <!-- <li>At least one uppercase letter (A-Z)</li>
+                                        <li>At least one lowercase letter (a-z)</li>
+                                        <li>At least one number (0-9)</li>
+                                        <li>At least one special character (!@#$%^&*)</li> -->
+                                    </ul>
+                                </div>
+                            </div>
+                            <button class="register__button button">Register</button>
+                        </form>
+                        <div class="register__question">
+                            Already Have an Account?
+                            <button class="register__question-btn register__question-btn--login">Login</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="account__message account__message-register modal">
+                    <h3>Your account has been created Successfully!</h3>
+                    <button class="account__button account__button-green button">Go to Dashboard</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
