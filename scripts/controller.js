@@ -18,6 +18,30 @@ if (dashboardEl) {
 
 const { modalFund, modalWithdraw, modalAdd, accountAddOverview } = View.accountModals;
 
+function getOS() {
+    const ua = navigator.userAgent;
+
+    if (ua.includes("Windows")) return "Windows";
+    if (ua.includes("Macintosh")) return "MacOS";
+    if (ua.includes("iPhone") || ua.includes("iPad")) return "iOS";
+    if (ua.includes("Android")) return "Android";
+    if (ua.includes("Linux")) return "Linux";
+
+    return "Unknown OS";
+}
+
+function getBrowser() {
+    const ua = navigator.userAgent;
+
+    if (ua.includes("Chrome") && !ua.includes("Edg")) return "Chrome";
+    if (ua.includes("Firefox")) return "Firefox";
+    if (ua.includes("Safari") && !ua.includes("Chrome")) return "Safari";
+    if (ua.includes("Edg")) return "Edge";
+    if (ua.includes("Opera") || ua.includes("OPR")) return "Opera";
+
+    return "Unknown Browser";
+}
+
 function accountFundHandler(modal, user, currentAccount) {
     const radioBtns = modal.querySelectorAll('.account__input-radio');
     const btnFund = modal.querySelector('.account__button-green');
@@ -48,13 +72,16 @@ function accountFundHandler(modal, user, currentAccount) {
             const sortedAccountMovements = View.displayUI(user, Model.getAllMovements);
             toggleActiveAccount(user, document.querySelector('.section__transactions-list--accounts'), document.querySelector('.section__transactions-list--all'), sortedAccountMovements);
             View.modalMessage(message, amountValue, user);
+            Model.addNotification(user, 'Your account was credited with', amountValue);
+            sessionStorage.setItem('currentUser', JSON.stringify(user));
+            View.displayNotifications(user);
         }
     });
 }
 
 function closeActiveModal() {
-  const activeModal = document.querySelector('.modal.active');
-  if (activeModal) View.modalRemoveActive(activeModal);
+    const activeModal = document.querySelector('.modal.active');
+    if (activeModal) View.modalRemoveActive(activeModal);
 }
 
 View.initModalCloseEvents(closeActiveModal);
@@ -78,6 +105,9 @@ function accountWithdrawHandler(modal, user, currentAccount) {
             const sortedAccountMovements = View.displayUI(user, Model.getAllMovements);
             toggleActiveAccount(user, document.querySelector('.section__transactions-list--accounts'), document.querySelector('.section__transactions-list--all'), sortedAccountMovements);
             View.modalMessage(message, amountValue, user);
+            Model.addNotification(user, 'Your account was debited with', -amountValue);
+            sessionStorage.setItem('currentUser', JSON.stringify(user));
+            View.displayNotifications(user);
         }
     });
 }
@@ -101,6 +131,7 @@ function accountAddHandler(modal, user) {
             const sortedAccountMovements = View.displayUI(user, Model.getAllMovements);
             toggleActiveAccount(user, document.querySelector('.section__transactions-list--accounts'), document.querySelector('.section__transactions-list--all'), sortedAccountMovements);
             View.modalMessage(message, accountName, user);
+
         }
     });
 }
@@ -190,7 +221,13 @@ function changeSectionAttach(user) {
     document.querySelectorAll('.section__transactions-btn').forEach(btn => {
         btn.addEventListener('click', function (e) {
             e.preventDefault();
-            sectionBtn.forEach(btn => { btn.classList.remove('active'); if (btn.dataset.btn === 'transactions') { btn.classList.add('active'); dashboardTitle.textContent = btn.dataset.btn.at(0).toUpperCase() + btn.dataset.btn.slice(1); } });
+            sectionBtn.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.btn === 'transactions') {
+                    btn.classList.add('active');
+                    dashboardTitle.textContent = btn.dataset.btn.at(0).toUpperCase() + btn.dataset.btn.slice(1);
+                }
+            });
             sections.forEach(section => section.classList.remove('active'));
             sectionTransactions.classList.add('active');
             const sortedAccountMovements = View.displayUI(user, Model.getAllMovements);
@@ -199,6 +236,44 @@ function changeSectionAttach(user) {
     })
 }
 
+function markSeen(user, index, element, counter) {
+    if (user.notifications[index].seen) return;
+
+    // Update model
+    user.notifications[index].seen = true;
+    Model.saveUsers();
+
+    // Update UI
+    element.classList.add('dashboard__notifications-item--seen');
+
+    View.displayNotifications(user);
+}
+
+function attachNotificationEvents(user) {
+    const list = document.querySelector('.dashboard__notifications-list');
+    const counter = document.querySelector('.dashboard__notifications-count');
+
+    if (!list) return;
+
+    list.addEventListener('mouseover', function (e) {
+        const item = e.target.closest('.dashboard__notifications-item');
+        if (!item) return;
+
+        const index = Number(item.dataset.index);
+        markSeen(user, index, item, counter);
+        sessionStorage.setItem('currentUser', JSON.stringify(user));
+    });
+
+    list.addEventListener('click', function (e) {
+        const item = e.target.closest('.dashboard__notifications-item');
+        if (!item) return;
+        const index = Number(item.dataset.index);
+        markSeen(user, index, item, counter);
+        sessionStorage.setItem('currentUser', JSON.stringify(user));
+    });
+}
+
+
 function initApp() {
     // Attach a few static handlers
     attachHideHandlers();
@@ -206,6 +281,8 @@ function initApp() {
     // If on dashboard page and user is logged in, initialize dashboard
     if (dashboardEl && currentUser) {
         View.setProfileUI(currentUser);
+        View.displayNotifications(currentUser);
+        attachNotificationEvents(currentUser);
         const sortedAccountMovements = View.displayUI(currentUser, Model.getAllMovements);
         toggleActiveAccount(currentUser, document.querySelector('.section__transactions-list--accounts'), document.querySelector('.section__transactions-list--all'), sortedAccountMovements);
         changeSectionAttach(currentUser);
@@ -221,15 +298,19 @@ function initApp() {
     const loginText = document.querySelector('.login__text');
     const loginBox = document.querySelector('.login__box');
     const registerBox = document.querySelector('.register__box');
+    const os = getOS();
+    const browser = getBrowser();
 
     loginBtn?.addEventListener('click', function (e) {
         e.preventDefault();
         currentUser = Model.findUserByEmail(loginEmail.value);
         if (currentUser?.password === loginPassword.value) {
+            Model.addNotification(currentUser, `'New login from ${browser} on ${os}`);
             // Store current user in sessionStorage so dashboard can access it
             sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
             // Navigate to dashboard page
             window.location.href = 'dashboard.html';
+            View.displayNotifications(currentUser);
         }
     })
 
@@ -252,6 +333,8 @@ function initApp() {
     const userName = document.getElementById('register__name');
     const userEmail = document.getElementById('register__email');
     const userPassword = document.getElementById('register__password');
+    const userPhone = document.getElementById('register__phone');
+    const userGender = document.getElementById('register__gender');
     const nameError = document.querySelector('.register__error-name');
     const emailError = document.querySelector('.register__error-email');
     const passwordError = document.querySelector('.register__error-password');
@@ -290,9 +373,12 @@ function initApp() {
         const newUser = {
             owner: userName.value,
             email: userEmail.value,
+            phone: userPhone?.value || '',
+            gender: userGender?.value || '',
             id: Date.now().toString().slice(-10),
             password: userPassword.value,
             img: 'images/profile-img-placeholder.webp',
+            notifications: [],
             accounts: [{
                 name: 'Main Account',
                 currency: 'USD',
@@ -303,14 +389,21 @@ function initApp() {
         userName.value = '';
         userEmail.value = '';
         userPassword.value = '';
+        if (userPhone) userPhone.value = '';
+        if (userGender) userGender.value = '';
         currentUser = Model.users[Model.users.length - 1];
         const message = document.querySelector('.account__message-register');
+        View.modalMessage(message, null, currentUser);
+        Model.addNotification(currentUser, 'Welcome to Reen Bank!');
+        sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
         message.querySelector('.account__button-green').addEventListener('click', (e) => {
             e.preventDefault();
-            sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
             window.location.href = 'dashboard.html';
         })
-        View.modalMessage(message, null, currentUser);
+        setTimeout(() => {
+            window.location.href = 'dashboard.html';
+        }, 3000);
+        View.displayNotifications(currentUser);
     }
 
 
@@ -393,15 +486,10 @@ function initApp() {
             window.location.href = 'index.html';
         })
     })
-
 }
 
-// Start the app only if it's not dashboard or if currentUser is set
-if (!dashboardEl || currentUser) {
-    initApp();
-}
-if (dashboardEl) {
-    if (!currentUser) {
-        window.location.href = 'login.html';
-    }
+initApp();
+
+if (dashboardEl && !currentUser) {
+    window.location.href = 'login.html';
 }

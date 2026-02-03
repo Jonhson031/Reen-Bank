@@ -4,9 +4,16 @@ export const users = [
     {
         owner: 'Joe Doe',
         email: 'test@email.com',
+        phone: '+1 234 567 8901',
+        gender: 'Female',
         id: '1234567890',
         password: 'test',
         img: 'images/profile-img.svg',
+        notifications: [
+            { message: 'Your account has been updated.', date: '2020-02-15T12:30:00.000Z', seen: false },
+            { message: 'Your account was credited with', value: 1000, date: '2020-02-15T12:30:00.000Z', seen: false },
+            { message: 'Your account was debited with', value: -500, date: '2020-02-15T12:30:00.000Z', seen: false },
+        ],
         accounts: [
             {
                 name: 'Main Account',
@@ -101,3 +108,15 @@ export const addMovement = function (account, movement) {
 export const getAllMovements = function (user) {
     return user.accounts.flatMap(account => account.movements);
 };
+
+export const addNotification = function (user, message, value = undefined) {
+    const notification = {
+        message,
+        value,
+        date: new Date().toISOString(),
+        seen: false,
+    };
+    user.notifications.push(notification);
+    saveUsers();
+    return notification;
+}

@@ -110,11 +110,11 @@ export function modalRemoveActive(modal) {
 }
 
 export function initModalCloseEvents(onClose) {
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') onClose();
-  });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') onClose();
+    });
 
-  overlay?.addEventListener('click', onClose);
+    overlay?.addEventListener('click', onClose);
 }
 
 export function modalFunc(modal) {
@@ -150,7 +150,7 @@ export function modalMessage(message, amount = null, user) {
         })
 
     }
-    if (message.classList.contains('.account__message-fund') || message.classList.contains('.account__message-withdraw')) {
+    if (message.classList.contains('account__message-fund') || message.classList.contains('account__message-withdraw')) {
         message.querySelector('span').textContent = `$${amount}`;
     }
     if (message.classList.contains('account__message-register')) {
@@ -188,6 +188,14 @@ export function setProfileUI(currentUser) {
     labelName.textContent = currentUser.owner;
     labelAccountNum.textContent = currentUser.id;
     images.forEach(img => img.src = currentUser.img)
+    const profileNameEl = document.querySelector('.section__profile-name');
+    const profileEmailEl = document.querySelector('.section__profile-email');
+    const profilePhoneEl = document.querySelector('.section__profile-phone');
+    const profileGenderEl = document.querySelector('.section__profile-gender');
+    if (profileNameEl) profileNameEl.textContent = currentUser.owner;
+    if (profileEmailEl) profileEmailEl.innerHTML = `<span>Email</span> ${currentUser.email || ''}`;
+    if (profilePhoneEl) profilePhoneEl.innerHTML = `<span>Phone Number</span> ${currentUser.phone || ''}`;
+    if (profileGenderEl) profileGenderEl.innerHTML = `<span>Gender</span> ${currentUser.gender || ''}`;
 }
 
 export function displayUI(user, getAllMovements) {
@@ -250,6 +258,63 @@ export function movements(user, getAllMovements) {
     }
 
     return sortedAccountMovements;
+}
+
+function formatNotificationDate(dateString) {
+    const now = new Date();
+    const notifDate = new Date(dateString);
+    const diffMs = now - notifDate;
+
+    const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+    const diffDays = Math.floor(diffHours / 24);
+
+    if (diffHours < 1) {
+        const diffMinutes = Math.floor(diffMs / (1000 * 60));
+        if (diffMinutes < 1) return "Just now";
+        return diffMinutes === 1 ? "1 minute ago" : `${diffMinutes} minutes ago`;
+    }
+
+    if (diffHours < 24) {
+        return diffHours === 1 ? "1 hour ago" : `${diffHours} hours ago`;
+    }
+
+    if (diffDays === 1) return "1 day ago";
+    if (diffDays === 3) return "3 days ago";
+    if (diffDays === 7) return "7 days ago";
+
+    // More than 7 days → show real date
+    return notifDate.toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric"
+    });
+}
+
+export function displayNotifications(user) {
+    const notificationsContainer = document.querySelector('.dashboard__notifications-list');
+    const notificationsCounter = document.querySelector('.dashboard__notifications-count');
+    if (notificationsCounter && user.notifications) {
+        const unreadCount = user.notifications.filter(notif => !notif.seen).length;
+        console.log(unreadCount)
+        notificationsCounter.textContent = unreadCount;
+        notificationsCounter.style.display = unreadCount > 0 ? 'flex' : 'none';
+    }
+    if (!notificationsContainer || !user.notifications) return;
+    notificationsContainer.innerHTML = '';
+    user.notifications.sort((a, b) => new Date(b.date) - new Date(a.date)).forEach((notif, index) => {
+        const displayDate = formatNotificationDate(notif.date);
+        const notifValue = notif.value > 0
+            ? `<span class="dashboard__notifications-item--deposit">$${notif.value.toFixed(2)}</span>`
+            : `<span class="dashboard__notifications-item--withdraw">$${Math.abs(notif.value).toFixed(2)}</span>`;
+        const seenClass = notif.seen ? 'dashboard__notifications-item--seen' : '';
+        const notifHTML = `
+            <li 
+                class="dashboard__notifications-item ${seenClass}" data-index="${index}">
+            <p class="dashboard__notifications-text">${notif.message} ${notif.value ? notifValue : ''}</p>
+            <span class="dashboard__notifications-time">${displayDate}</span>
+         </li>`;
+        notificationsContainer.insertAdjacentHTML('beforeend', notifHTML);
+    });
 }
 
 export const accountModals = { modalFund, modalWithdraw, modalAdd, accountAddOverview };
