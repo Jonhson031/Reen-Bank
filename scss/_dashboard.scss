@@ -233,7 +233,14 @@
         z-index: 1000;
     }
 
-    &__notifications:focus-within &__notifications-list {
+    // &__notifications:focus-within &__notifications-list {
+    //     opacity: 1;
+    //     visibility: visible;
+    //     pointer-events: auto;
+    //     transform: translateY(0);
+    // }
+
+    &__notifications.active &__notifications-list {
         opacity: 1;
         visibility: visible;
         pointer-events: auto;

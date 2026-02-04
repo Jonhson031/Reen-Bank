@@ -748,7 +748,7 @@ button {
   list-style: none;
   z-index: 1000;
 }
-.dashboard__notifications:focus-within .dashboard__notifications-list {
+.dashboard__notifications.active .dashboard__notifications-list {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;

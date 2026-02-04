@@ -273,6 +273,18 @@ function attachNotificationEvents(user) {
     });
 }
 
+function initNotificationsHandler() {
+    const notificationsBtn = document.querySelector('.dashboard__notifications');
+    const notificationsContainer = document.querySelector('.dashboard__notifications-list');
+    if (!notificationsBtn || !notificationsContainer) return;
+    notificationsBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        notificationsBtn.classList.toggle('active');
+    });
+    document.addEventListener('click', (e) => {
+        notificationsBtn.classList.remove('active');
+    });
+}
 
 function initApp() {
     // Attach a few static handlers
@@ -282,6 +294,7 @@ function initApp() {
     if (dashboardEl && currentUser) {
         View.setProfileUI(currentUser);
         View.displayNotifications(currentUser);
+        initNotificationsHandler();
         attachNotificationEvents(currentUser);
         const sortedAccountMovements = View.displayUI(currentUser, Model.getAllMovements);
         toggleActiveAccount(currentUser, document.querySelector('.section__transactions-list--accounts'), document.querySelector('.section__transactions-list--all'), sortedAccountMovements);
@@ -487,6 +500,7 @@ function initApp() {
         })
     })
 }
+
 
 initApp();
 

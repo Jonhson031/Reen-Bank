@@ -295,7 +295,6 @@ export function displayNotifications(user) {
     const notificationsCounter = document.querySelector('.dashboard__notifications-count');
     if (notificationsCounter && user.notifications) {
         const unreadCount = user.notifications.filter(notif => !notif.seen).length;
-        console.log(unreadCount)
         notificationsCounter.textContent = unreadCount;
         notificationsCounter.style.display = unreadCount > 0 ? 'flex' : 'none';
     }
