@@ -1,8 +1,5 @@
-/* View: DOM rendering and UI helpers */
 'use strict';
 // DOM selectors used by view
-const login = document.querySelector('.login');
-const body = document.querySelector('body');
 const labelSumIn = document.querySelectorAll('.section__statistics-value--income');
 const labelSumOut = document.querySelectorAll('.section__statistics-value--expense')
 const labelBalance = document.querySelector('.total-balance');
@@ -12,7 +9,6 @@ const containerTransactionsAccounts = document.querySelector('.section__transact
 const labelName = document.querySelector('.dashboard__account-name');
 const labelAccountNum = document.querySelector('.dashboard__account-number');
 const overlay = document.querySelector('.overlay');
-const overlayLogin = document.querySelector('.overlay-login');
 const accountsRowDetailed = document.querySelector('.section__accounts-detailed');
 const accountAddOverview = document.querySelector('.section__accound-add');
 const modalFund = document.querySelector('.account__modal-fund');
@@ -95,75 +91,6 @@ export function displayBalance(user, getAllMovements) {
     const totalBalance = Number(allMovements.reduce((sum, curr) => sum + curr.amount, 0).toFixed(2));
     labelBalance.textContent = `$ ${totalBalance}`;
     user.totalBalance = totalBalance;
-}
-
-export function modalActive(modal) {
-    if (!modal) return;
-    modal.classList.add('active');
-    overlay.classList.add('active');
-}
-
-export function modalRemoveActive(modal) {
-    if (!modal) return;
-    modal.classList.remove('active');
-    overlay.classList.remove('active');
-}
-
-export function initModalCloseEvents(onClose) {
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') onClose();
-    });
-
-    overlay?.addEventListener('click', onClose);
-}
-
-export function modalFunc(modal) {
-    modalActive(modal);
-    const cancelBtn = modal.querySelector('.account__button-cancel');
-    if (cancelBtn) {
-        cancelBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            modalRemoveActive(modal);
-        })
-    };
-}
-
-export function modalMessage(message, amount = null, user) {
-    if (!message) return;
-    overlay.classList.add('active');
-    message.classList.add('active');
-
-    message.querySelector('button').addEventListener('click', e => {
-        e.preventDefault();
-        overlay.classList.remove('active');
-        message.classList.remove('active');
-    })
-
-    if (message.classList.contains('account__message-add')) {
-        message.querySelector('span').textContent = `${amount}`;
-        const newAccount = user.accounts.find(acc => acc.name === amount);
-        message.querySelector('.account__button-green').addEventListener('click', (e) => {
-            e.preventDefault();
-            overlay.classList.remove('active');
-            message.classList.remove('active');
-            modalFunc(modalFund);
-        })
-
-    }
-    if (message.classList.contains('account__message-fund') || message.classList.contains('account__message-withdraw')) {
-        message.querySelector('span').textContent = `$${amount}`;
-    }
-    if (message.classList.contains('account__message-register')) {
-        overlayLogin.classList.add('active');
-        message.querySelector('.account__button-green').addEventListener('click', (e) => {
-            e.preventDefault();
-            overlayLogin.classList.remove('active');
-            message.classList.remove('active');
-            login.classList.remove('active');
-            document.querySelector('.dashboard').classList.add('active');
-            body.classList.add('lock');
-        })
-    }
 }
 
 export function toggleValue(value, img) {
@@ -317,3 +244,319 @@ export function displayNotifications(user) {
 }
 
 export const accountModals = { modalFund, modalWithdraw, modalAdd, accountAddOverview };
+
+// Event handler setup functions for controller callbacks
+
+export function attachHideHandlers(onToggleValue) {
+    document.querySelectorAll('.section__accounts-row').forEach(row => row.addEventListener('click', function (e) {
+        const clickedHide = e.target.closest('.section__accounts-hide')
+        if (!clickedHide) return;
+        e.stopPropagation();
+        const block = clickedHide.closest('.section__block');
+        const value = block.querySelector('.section__block-value');
+        const img = clickedHide.querySelector('img');
+        onToggleValue(value, img);
+    }))
+
+    document.querySelector('.section__hide')?.addEventListener('click', function (e) {
+        e.preventDefault();
+        const img = document.querySelector('.section__hide > img');
+        const values = document.getElementById('section-overview')?.querySelectorAll('.section__block-value');
+        values?.forEach(value => {
+            onToggleValue(value, img);
+        })
+    })
+}
+
+export function attachAccountRowEvents(user, onAccountSelect) {
+    const currentRow = document.querySelector('.dashboard__section.active')?.querySelector('.section__accounts-row');
+    if (!currentRow) return;
+    const allBlocks = currentRow.querySelectorAll('.section__block');
+    allBlocks.forEach(block => block.classList.remove('active'));
+    if (allBlocks.length > 0) allBlocks[0].classList.add('active');
+
+    currentRow.addEventListener('click', function (e) {
+        const clickedBlock = e.target.closest('.section__block');
+        if (!clickedBlock) return;
+
+        onAccountSelect(e, clickedBlock, allBlocks, user);
+    });
+}
+
+export function attachSectionChangeEvents(onSectionChange) {
+    const sectionBtnList = document.querySelector('.dashboard__sections-list');
+    const sectionBtn = document.querySelectorAll('.dashboard__item');
+    const sections = document.querySelectorAll('.dashboard__section');
+    const dashboardTitle = document.querySelector('.dashboard__title');
+
+    sectionBtnList?.addEventListener('click', function (e) {
+        const currentBtn = e.target.closest('.dashboard__item');
+        if (!currentBtn) return;
+        sectionBtn.forEach(btn => btn.classList.remove('active'));
+        sections.forEach(section => section.classList.remove('active'));
+        currentBtn.classList.add('active');
+        document.querySelector(`.dashboard__section--${currentBtn.dataset.btn}`).classList.add('active');
+        dashboardTitle.textContent = currentBtn.dataset.btn.at(0).toUpperCase() + currentBtn.dataset.btn.slice(1);
+        onSectionChange();
+    })
+
+    document.querySelectorAll('.section__transactions-btn').forEach(btn => {
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            sectionBtn.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.btn === 'transactions') {
+                    btn.classList.add('active');
+                    dashboardTitle.textContent = btn.dataset.btn.at(0).toUpperCase() + btn.dataset.btn.slice(1);
+                }
+            });
+            sections.forEach(section => section.classList.remove('active'));
+            document.getElementById('section-transactions').classList.add('active');
+            onSectionChange();
+        })
+    })
+}
+
+export function attachNotificationEvents(onNotificationHover, onNotificationClick) {
+    const list = document.querySelector('.dashboard__notifications-list');
+
+    if (!list) return;
+
+    list.addEventListener('mouseover', function (e) {
+        const item = e.target.closest('.dashboard__notifications-item');
+        if (!item) return;
+        const index = Number(item.dataset.index);
+        onNotificationHover(index, item);
+    });
+
+    list.addEventListener('click', function (e) {
+        const item = e.target.closest('.dashboard__notifications-item');
+        if (!item) return;
+        const index = Number(item.dataset.index);
+        onNotificationClick(index, item);
+    });
+}
+
+export function initNotificationsHandler(onNotificationToggle) {
+    const notificationsBtn = document.querySelector('.dashboard__notifications');
+    const notificationsContainer = document.querySelector('.dashboard__notifications-list');
+    if (!notificationsBtn || !notificationsContainer) return;
+    notificationsBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        notificationsBtn.classList.toggle('active');
+        onNotificationToggle();
+    });
+    document.addEventListener('click', (e) => {
+        notificationsBtn.classList.remove('active');
+    });
+}
+
+export function attachAccountFundModalEvents(onFundSubmit) {
+    const radioBtns = modalFund.querySelectorAll('.account__input-radio');
+    const btnFund = modalFund.querySelector('.account__button-green');
+    const newBtnFund = btnFund.cloneNode(true);
+    btnFund.parentNode.replaceChild(newBtnFund, btnFund);
+
+    radioBtns.forEach(btn => {
+        btn.addEventListener('click', function () {
+            document.querySelectorAll('.account__fund-section').forEach(section => section.classList.remove('active'));
+            const payment = document.getElementById(`form__fund-${btn.dataset.payment}`);
+            if (payment) payment.classList.add('active');
+        });
+    });
+
+    newBtnFund.addEventListener('click', function (e) {
+        e.preventDefault();
+        const activePayment = modalFund.querySelector('.account__fund-section.active');
+        if (!activePayment) return;
+        const input = activePayment.querySelector('input[type="number"], input[type="text"]');
+        const amountValue = parseFloat(input?.value || 0);
+
+        onFundSubmit(amountValue, input);
+    });
+}
+
+export function attachAccountWithdrawModalEvents(onWithdrawSubmit) {
+    const btnWithdraw = modalWithdraw.querySelector('.account__button-green');
+    const newBtnWithdraw = btnWithdraw.cloneNode(true);
+    btnWithdraw.parentNode.replaceChild(newBtnWithdraw, btnWithdraw);
+
+    newBtnWithdraw.addEventListener('click', function (e) {
+        e.preventDefault();
+        const input = modalWithdraw.querySelector('input[type="number"], input[type="text"]');
+        const amountValue = parseFloat(input?.value || 0);
+
+        onWithdrawSubmit(amountValue, input);
+    });
+}
+
+export function attachAccountAddModalEvents(onAddSubmit) {
+    const btnAdd = modalAdd.querySelector('.account__button-green');
+    const newBtnAdd = btnAdd.cloneNode(true);
+    btnAdd.parentNode.replaceChild(newBtnAdd, btnAdd);
+
+    newBtnAdd.addEventListener('click', function (e) {
+        e.preventDefault();
+        const input = modalAdd.querySelector('input[type="text"]');
+        const accountName = input.value;
+
+        onAddSubmit(accountName, input);
+    });
+}
+
+export function attachAccountAddOverviewEvents(onAccountAddClick) {
+    accountAddOverview?.addEventListener('click', function (e) {
+        e.preventDefault();
+        onAccountAddClick();
+    })
+}
+
+export function attachLoginFormEvents(onLoginSubmit, onRegisterToggle, onLoginToggle) {
+    const loginEmail = document.getElementById('login__email');
+    const loginPassword = document.getElementById('login__password');
+    const loginBtn = document.querySelector('.login__button');
+    const questionRegisterBtn = document.querySelector('.login__question-btn--register');
+    const questionLoginBtn = document.querySelector('.register__question-btn--login');
+    const loginTitle = document.querySelector('.login__title');
+    const loginText = document.querySelector('.login__text');
+    const loginBox = document.querySelector('.login__box');
+    const registerBox = document.querySelector('.register__box');
+
+    loginBtn?.addEventListener('click', function (e) {
+        e.preventDefault();
+        onLoginSubmit(loginEmail.value, loginPassword.value);
+    })
+
+    questionRegisterBtn?.addEventListener('click', function (e) {
+        e.preventDefault();
+        loginTitle.innerHTML = document.querySelector('.hero__title').innerHTML;
+        loginText.innerHTML = document.querySelector('.hero__text').innerHTML;
+        loginBox.classList.remove('active');
+        registerBox.classList.add('active');
+        onRegisterToggle();
+    })
+
+    questionLoginBtn?.addEventListener('click', function (e) {
+        e.preventDefault();
+        loginTitle.innerHTML = 'Welcome Back';
+        loginText.innerHTML = 'Enter Your Details to login to your Banking Dashboard again!';
+        loginBox.classList.add('active');
+        registerBox.classList.remove('active');
+        onLoginToggle();
+    })
+}
+
+export function attachRegisterFormEvents(onRegisterSubmit) {
+    const registerForm = document.querySelector('.register__form');
+    const userName = document.getElementById('register__name');
+    const userEmail = document.getElementById('register__email');
+    const userPassword = document.getElementById('register__password');
+    const userPhone = document.getElementById('register__phone');
+    const userGender = document.getElementById('register__gender');
+    const nameError = document.querySelector('.register__error-name');
+    const emailError = document.querySelector('.register__error-email');
+    const passwordError = document.querySelector('.register__error-password');
+
+    const validateForm = function () {
+        let valid = true;
+        if (!userName.value.trim() || userName.value.trim().length < 1) {
+            nameError.style.display = 'block'; valid = false;
+        }
+        else { nameError.style.display = 'none'; }
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(userEmail.value.trim())) {
+            emailError.style.display = 'block';
+            valid = false;
+        }
+        else {
+            emailError.style.display = 'none';
+        }
+        if (!userPassword.value.trim() || userPassword.value.trim().length < 8) {
+            passwordError.style.display = 'block';
+            valid = false;
+        }
+        else {
+            passwordError.style.display = 'none';
+        }
+        return valid;
+    }
+
+    registerForm?.querySelectorAll('input').forEach(input => {
+        input.addEventListener('input', validateForm)
+    })
+
+    document.querySelector('.register__button')?.addEventListener('click', function (e) {
+        e.preventDefault();
+        if (!validateForm()) return;
+        onRegisterSubmit(
+            userName.value,
+            userEmail.value,
+            userPassword.value,
+            userPhone?.value || '',
+            userGender?.value || '',
+            nameError,
+            emailError,
+            passwordError
+        );
+    })
+}
+
+export function attachProfileImageChangeEvents(onImageChange) {
+    const imageChangeInput = document.getElementById('image-change');
+    imageChangeInput?.addEventListener('change', function (e) {
+        const file = e.target.files[0];
+        if (!file?.type.startsWith('image/')) return;
+        const url = URL.createObjectURL(file);
+        images.forEach(img => { img.src = url; img.onload = () => URL.revokeObjectURL(url); })
+        onImageChange(url);
+    })
+}
+
+export function attachFaqsTabEvents() {
+    const faqsTabs = document.querySelector('.faqs__tabs');
+    faqsTabs?.addEventListener('click', function (e) {
+        const clickedTab = e.target.closest('.faqs__tab');
+        if (!clickedTab) return;
+        document.querySelectorAll('.faqs__content').forEach(content => content.classList.remove('active'));
+        document.querySelectorAll('.faqs__tab').forEach(tab => tab.classList.remove('active'));
+        clickedTab.classList.add('active');
+        document.querySelector(`.faqs__content-${clickedTab.dataset.tab}`).classList.add('active');
+    })
+}
+
+export function attachSidebarEvents(onSidebarToggle, onSectionClick, onLogoutClick) {
+    const burgerBtn = document.querySelector('.burger');
+    const sidebar = document.querySelector('.dashboard__sidebar');
+    const logoutBtn = document.querySelector('.dashboard__logout');
+
+    function sidebarRemoveActive() {
+        burgerBtn?.classList.remove('active');
+        overlay?.classList.remove('active');
+        sidebar?.classList.remove('active');
+        document.body.classList.remove('lock');
+    }
+
+    if (burgerBtn) {
+        burgerBtn.addEventListener('click', function () {
+            burgerBtn.classList.add('active');
+            overlay?.classList.add('active');
+            sidebar?.classList.add('active');
+            document.body.classList.add('lock');
+            onSidebarToggle();
+        })
+        overlay?.addEventListener('click', function () {
+            sidebarRemoveActive();
+        })
+        document.querySelector('.dashboard__sections-list')?.addEventListener('click', function (e) {
+            if (e.target.closest('.dashboard__item')) {
+                sidebarRemoveActive();
+                onSectionClick();
+            }
+        })
+    }
+
+    logoutBtn?.addEventListener('click', function (e) {
+        e.preventDefault();
+        onLogoutClick(sidebarRemoveActive);
+    })
+}

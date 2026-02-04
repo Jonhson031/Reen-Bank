@@ -1,6 +1,7 @@
 'use strict';
 import * as Model from './model.js';
 import * as View from './view.js';
+import * as Modals from './views/modalView.js';
 
 // Load persisted users
 Model.loadUsers();
@@ -68,10 +69,10 @@ function accountFundHandler(modal, user, currentAccount) {
             const newMovement = { amount: Number(amountValue.toFixed(2)), date: new Date(), source: `${input.dataset.source}` };
             Model.addMovement(currentAccount, newMovement);
             if (input) input.value = '';
-            View.modalRemoveActive(modal);
+            Modals.modalRemoveActive(modal);
             const sortedAccountMovements = View.displayUI(user, Model.getAllMovements);
             toggleActiveAccount(user, document.querySelector('.section__transactions-list--accounts'), document.querySelector('.section__transactions-list--all'), sortedAccountMovements);
-            View.modalMessage(message, amountValue, user);
+            Modals.modalMessage(message, amountValue, user);
             Model.addNotification(user, 'Your account was credited with', amountValue);
             sessionStorage.setItem('currentUser', JSON.stringify(user));
             View.displayNotifications(user);
@@ -81,10 +82,10 @@ function accountFundHandler(modal, user, currentAccount) {
 
 function closeActiveModal() {
     const activeModal = document.querySelector('.modal.active');
-    if (activeModal) View.modalRemoveActive(activeModal);
+    if (activeModal) Modals.modalRemoveActive(activeModal);
 }
 
-View.initModalCloseEvents(closeActiveModal);
+Modals.initModalCloseEvents(closeActiveModal);
 
 function accountWithdrawHandler(modal, user, currentAccount) {
     const btnWithdraw = modal.querySelector('.account__button-green');
@@ -101,10 +102,10 @@ function accountWithdrawHandler(modal, user, currentAccount) {
             const newMovement = { amount: Number(-amountValue.toFixed(2)), date: new Date(), source: `Withdraw` };
             Model.addMovement(currentAccount, newMovement);
             if (input) input.value = '';
-            View.modalRemoveActive(modal);
+            Modals.modalRemoveActive(modal);
             const sortedAccountMovements = View.displayUI(user, Model.getAllMovements);
             toggleActiveAccount(user, document.querySelector('.section__transactions-list--accounts'), document.querySelector('.section__transactions-list--all'), sortedAccountMovements);
-            View.modalMessage(message, amountValue, user);
+            Modals.modalMessage(message, amountValue, user);
             Model.addNotification(user, 'Your account was debited with', -amountValue);
             sessionStorage.setItem('currentUser', JSON.stringify(user));
             View.displayNotifications(user);
@@ -126,12 +127,16 @@ function accountAddHandler(modal, user) {
         if (accountName.trim().length > 0 && !accountExist) {
             const newAccount = { name: accountName, currency: 'USD', movements: [] };
             Model.addAccount(user, newAccount);
+            const currentAccount = user.accounts.find(account => account.name === newAccount.name);
             if (input) input.value = '';
-            View.modalRemoveActive(modal);
+            Modals.modalRemoveActive(modal);
             const sortedAccountMovements = View.displayUI(user, Model.getAllMovements);
             toggleActiveAccount(user, document.querySelector('.section__transactions-list--accounts'), document.querySelector('.section__transactions-list--all'), sortedAccountMovements);
-            View.modalMessage(message, accountName, user);
-
+            const handler = function () {
+                Modals.modalFunc(modalFund);
+                accountFundHandler(modalFund, user, currentAccount);
+            }
+            Modals.modalMessage(message, accountName, handler);
         }
     });
 }
@@ -147,7 +152,7 @@ function toggleActiveAccount(user, containerTransactionsAccounts, containerTrans
         const clickedBlock = e.target.closest('.section__block');
         if (clickedBlock && clickedBlock.classList.contains('section__accounts-add')) {
             e.stopPropagation();
-            View.modalFunc(modalAdd);
+            Modals.modalFunc(modalAdd);
             accountAddHandler(modalAdd, user);
             return;
         }
@@ -165,13 +170,13 @@ function toggleActiveAccount(user, containerTransactionsAccounts, containerTrans
 
         if (e.target.classList.contains('section__accounts-fund')) {
             e.stopPropagation();
-            View.modalFunc(modalFund);
+            Modals.modalFunc(modalFund);
             accountFundHandler(modalFund, user, currentAccount);
             return
         }
         if (e.target.classList.contains('section__accounts-withdraw')) {
             e.stopPropagation();
-            View.modalFunc(modalWithdraw);
+            Modals.modalFunc(modalWithdraw);
             accountWithdrawHandler(modalWithdraw, user, currentAccount);
             return
         }
@@ -236,7 +241,7 @@ function changeSectionAttach(user) {
     })
 }
 
-function markSeen(user, index, element, counter) {
+function markSeen(user, index, element) {
     if (user.notifications[index].seen) return;
 
     // Update model
@@ -406,7 +411,7 @@ function initApp() {
         if (userGender) userGender.value = '';
         currentUser = Model.users[Model.users.length - 1];
         const message = document.querySelector('.account__message-register');
-        View.modalMessage(message, null, currentUser);
+        Modals.modalMessage(message, null, currentUser);
         Model.addNotification(currentUser, 'Welcome to Reen Bank!');
         sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
         message.querySelector('.account__button-green').addEventListener('click', (e) => {
@@ -428,7 +433,7 @@ function initApp() {
     // Account Add button at overview section
     accountAddOverview?.addEventListener('click', function (e) {
         e.preventDefault();
-        View.modalFunc(modalAdd);
+        Modals.modalFunc(modalAdd);
         accountAddHandler(modalAdd, currentUser);
     })
 
@@ -486,7 +491,7 @@ function initApp() {
     logoutBtn?.addEventListener('click', function (e) {
         e.preventDefault();
         const message = document.querySelector('.account__message-logout');
-        View.modalMessage(message)
+        Modals.modalMessage(message)
         message.querySelector('button').addEventListener('click', e => {
             e.preventDefault();
             message.classList.remove('active');
