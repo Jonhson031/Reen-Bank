@@ -2,7 +2,7 @@
 .login,
 .register {
     background-color: #D4F3E7;
-
+    overflow: auto;
     &__container {
         display: flex;
         justify-content: space-between;
@@ -27,16 +27,15 @@
     }
 
     &__boxes {
-        width: 45.38%;
+        flex: 1 1 45.38%;
         position: relative;
         min-height: 100%;
         display: flex;
         align-items: center;
     }
-
     &__box {
         position: absolute;
-        visibility: none;
+        visibility: hidden;
         opacity: 0;
         border-radius: 2rem;
         background-color: #FFF;
@@ -46,7 +45,6 @@
         box-sizing: border-box;
         right: 0;
         transition: all 1s;
-
         &.active {
             visibility: visible;
             opacity: 1;

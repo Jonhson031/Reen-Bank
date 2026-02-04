@@ -178,7 +178,6 @@
         margin-right: 2.5em;
     }
 
-    /* Container positioning */
     &__notifications {
         position: relative;
         display: inline-block;
@@ -190,6 +189,11 @@
         border: none;
         padding: 0.5rem;
         cursor: pointer;
+        & img{
+            width: 1.5rem;
+            height: 1.5rem;
+            max-width: initial;
+        }
     }
 
     &__notifications-count {

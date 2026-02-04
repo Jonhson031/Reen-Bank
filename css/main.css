@@ -589,9 +589,6 @@ button {
   font-size: clamp(1.25rem, 1.163rem + 0.4348vw, 1.5rem);
 }
 
-.dashboard {
-  /* Container positioning */
-}
 .dashboard__container {
   position: relative;
   padding: 4em 15px;
@@ -710,6 +707,11 @@ button {
   border: none;
   padding: 0.5rem;
   cursor: pointer;
+}
+.dashboard__notifications-button img {
+  width: 1.5rem;
+  height: 1.5rem;
+  max-width: initial;
 }
 .dashboard__notifications-count {
   position: absolute;
@@ -1542,333 +1544,10 @@ button {
   height: 35.4375rem;
 }
 
-@media (max-width: 1439px) {
-  .header__container {
-    grid-template-columns: auto 1fr;
-  }
-  .hero__image {
-    display: flex;
-    justify-content: center;
-    flex: 0 1 100%;
-  }
-  .hero__image img {
-    max-width: 70%;
-  }
-  .dashboard__header {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto;
-    gap: 1rem;
-  }
-  .dashboard__title {
-    grid-column: 1;
-    grid-row: 1;
-  }
-  .dashboard__account-info {
-    grid-column: 2;
-    grid-row: 1;
-  }
-  .dashboard__left {
-    grid-column: 1/span 2;
-    grid-row: 2;
-  }
-  .dashboard__left {
-    margin-left: 0;
-  }
-  .dashboard__search {
-    flex: 0 1 90%;
-  }
-  .dashboard__section--overview {
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
-  .section__accounts-transactions {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .footer__container {
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-  }
-  .footer__content {
-    display: grid;
-    grid-template-columns: auto 0.9fr;
-    grid-template-rows: auto auto;
-    gap: 3rem;
-    width: 100%;
-    justify-content: space-between;
-  }
-  .footer__navigation {
-    grid-column: 2;
-    grid-row: 1/span 2;
-  }
-  .footer__banner {
-    width: 100%;
-    min-height: 50rem;
-  }
-  .footer__banner::before {
-    width: 100%;
-    height: 100%;
-  }
-}
-@media (max-width: 1023px) {
-  .support__list {
-    row-gap: 5rem;
-  }
-  .support__item {
-    flex: 0 1 45%;
-  }
-  .support__item img {
-    max-width: 75%;
-  }
-  .section__content {
-    gap: 1em;
-  }
-  .section__content-accounts {
-    grid-template-columns: auto auto;
-    grid-template-rows: auto auto;
-  }
-  .section__accounts-row {
-    -moz-column-gap: 0;
-         column-gap: 0;
-  }
-  .login__container {
-    flex-wrap: wrap;
-    gap: 10rem;
-    justify-content: center;
-    padding-top: 3rem;
-    padding-bottom: 7.5rem;
-  }
-  .login__content {
-    flex: 0 1 100%;
-  }
-  .login__box--text {
-    flex: 0 1 100%;
-    margin-top: 7rem;
-    margin-bottom: 2rem;
-  }
-  .login__box--text p {
-    margin-bottom: 0;
-  }
-  .login__boxes {
-    flex: 0 1 100%;
-  }
-  .login__box {
-    padding: 4rem 0.5rem;
-  }
-  .account__message {
-    width: 80%;
-  }
-  .faqs__container {
-    gap: 0;
-    row-gap: 4rem;
-  }
-  .faqs__tabs {
-    grid-row: 3;
-    grid-column: initial;
-    gap: 3.06rem;
-  }
-  .footer__content {
-    grid-template-columns: 0.7fr 0.9fr;
-  }
-  .footer__banner {
-    padding-right: 2rem;
-    padding-left: 2rem;
-  }
-}
-@media (max-width: 767px) {
-  .burger {
-    display: block;
-    position: absolute;
-    top: 4.35rem;
-    left: 1rem;
-    z-index: 13;
-  }
-  .header__container {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto;
-    gap: 0;
-    row-gap: 2rem;
-  }
-  .header__logo {
-    grid-column: 1/span 2;
-    display: flex;
-    justify-content: center;
-  }
-  .support__list {
-    row-gap: 5rem;
-  }
-  .support__item {
-    flex: 0 1 40%;
-  }
-  .support__item img {
-    max-width: 100%;
-  }
-  .dashboard__header {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto;
-  }
-  .dashboard__burger {
-    grid-row: 1;
-    grid-column: 1;
-  }
-  .dashboard__title {
-    grid-column: 1/span 2;
-    grid-row: 1;
-    text-align: end;
-  }
-  .dashboard__account-info {
-    grid-column: 1/span 2;
-    grid-row: 2;
-  }
-  .dashboard__search {
-    flex: 0 1 60%;
-  }
-  .dashboard__search-icon {
-    width: 1.5rem;
-    height: 1.5rem;
-  }
-  .dashboard__search-icon img {
-    max-width: -moz-fit-content;
-    max-width: fit-content;
-  }
-  .dashboard__left {
-    grid-column: 1/span 2;
-    grid-row: 3;
-    margin-left: 0;
-    gap: 0.25rem;
-  }
-  .dashboard__logo {
-    display: none;
-  }
-  .dashboard__sidebar {
-    display: block;
-    position: fixed;
-    left: -200%;
-    padding-left: 1.25rem;
-    z-index: 11;
-    width: 60%;
-    height: 100%;
-    flex: 0 1 auto;
-    padding-top: 10em;
-    transition: all 0.2s ease;
-    flex-direction: column;
-    background-color: #fff;
-    border-radius: 1.25rem 1.25rem 0rem 0rem;
-  }
-  .dashboard__sidebar.active {
-    left: 0;
-  }
-  .dashboard__logout {
-    margin-top: 3rem;
-  }
-  .dashboard__content {
-    margin-left: 0;
-  }
-  .section {
-    /* ---- Row 1 ---- */
-    /* ---- Row 2 ---- */
-  }
-  .section__accounts-row {
-    grid-template-columns: 1fr;
-  }
-  .section__content-accounts .section__block {
-    border-radius: 0.75rem;
-    background: #D4F3E7;
-    padding: 1.5em 1.5em;
-  }
-  .section__accounts-transactions {
-    grid-template-columns: 1fr;
-    gap: 2em;
-    max-width: 100%;
-  }
-  .section__statistics-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr auto;
-  }
-  .section__statistics-img {
-    display: none;
-  }
-  .section__statistics-range {
-    margin: 0.5em;
-  }
-  .section__transactions-all > .section__row {
-    gap: 2em;
-    max-width: 100%;
-    box-sizing: border-box;
-  }
-  .section__transactions-list--full .section__transactions-info {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  .section__transactions-info {
-    display: grid;
-    -moz-column-gap: 1rem;
-         column-gap: 1rem;
-    row-gap: 1rem;
-    align-items: center;
-  }
-  .section__transactions-circle {
-    grid-column: 1;
-    grid-row: 1;
-  }
-  .section__transactions-date {
-    grid-column: 2;
-    grid-row: 1;
-  }
-  .section__transactions-list--full .section__transactions-value {
-    grid-column: 3;
-    grid-row: 1;
-    justify-self: flex-end;
-  }
-  .section__transactions-source {
-    grid-column: 1/span 2;
-    grid-row: 2;
-  }
-  .section__transactions-status {
-    grid-column: 2/span 3;
-    grid-row: 2;
-    text-align: right;
-  }
-  .account__modal, .account__message {
-    width: 95%;
-    padding: 3rem 2rem;
-  }
-  .account__input-select {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  .account__buttons {
-    flex-direction: column;
-  }
-  .footer__container {
-    position: relative;
-  }
-  .footer__content {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto;
-    gap: 4.5rem;
-  }
-  .footer__navigation {
-    grid-column: 1;
-    grid-row: 3;
-  }
-  .footer__title {
-    margin-bottom: 3rem;
-  }
-  .footer__form {
-    flex-direction: column;
-    gap: 3rem;
-  }
-  .footer__form input {
-    min-width: 100%;
-  }
-  .footer__button {
-    min-width: 100%;
-  }
-}
 .login,
 .register {
   background-color: #D4F3E7;
+  overflow: auto;
 }
 .login__container,
 .register__container {
@@ -1895,7 +1574,7 @@ button {
 }
 .login__boxes,
 .register__boxes {
-  width: 45.38%;
+  flex: 1 1 45.38%;
   position: relative;
   min-height: 100%;
   display: flex;
@@ -1904,7 +1583,7 @@ button {
 .login__box,
 .register__box {
   position: absolute;
-  visibility: none;
+  visibility: hidden;
   opacity: 0;
   border-radius: 2rem;
   background-color: #FFF;
@@ -2049,4 +1728,335 @@ button {
 .login__question-btn:hover,
 .register__question-btn:hover {
   text-decoration: underline;
+}
+
+@media (max-width: 1439px) {
+  .header__container {
+    grid-template-columns: auto 1fr;
+  }
+  .hero__image {
+    display: flex;
+    justify-content: center;
+    flex: 0 1 100%;
+  }
+  .hero__image img {
+    max-width: 70%;
+  }
+  .dashboard__header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 1rem;
+  }
+  .dashboard__title {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .dashboard__account-info {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .dashboard__left {
+    grid-column: 1/span 2;
+    grid-row: 2;
+  }
+  .dashboard__left {
+    margin-left: 0;
+  }
+  .dashboard__search {
+    flex: 0 1 90%;
+  }
+  .dashboard__section--overview {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .section__accounts-transactions {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .footer__container {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+  .footer__content {
+    display: grid;
+    grid-template-columns: auto 0.9fr;
+    grid-template-rows: auto auto;
+    gap: 3rem;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .footer__navigation {
+    grid-column: 2;
+    grid-row: 1/span 2;
+  }
+  .footer__banner {
+    width: 100%;
+    min-height: 50rem;
+  }
+  .footer__banner::before {
+    width: 100%;
+    height: 100%;
+  }
+}
+@media (max-width: 1023px) {
+  .support__list {
+    row-gap: 5rem;
+  }
+  .support__item {
+    flex: 0 1 45%;
+  }
+  .support__item img {
+    max-width: 75%;
+  }
+  .section {
+    /* ---- Row 1 ---- */
+    /* ---- Row 2 ---- */
+  }
+  .section__content {
+    gap: 1em;
+  }
+  .section__content-accounts {
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+  }
+  .section__accounts-row {
+    -moz-column-gap: 0;
+         column-gap: 0;
+  }
+  .section__transactions-list--full .section__transactions-info {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .section__transactions-info {
+    display: grid;
+    -moz-column-gap: 1rem;
+         column-gap: 1rem;
+    row-gap: 1rem;
+    align-items: center;
+  }
+  .section__transactions-circle {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .section__transactions-date {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .section__transactions-list--full .section__transactions-value {
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: flex-end;
+  }
+  .section__transactions-source {
+    grid-column: 1/span 2;
+    grid-row: 2;
+  }
+  .section__transactions-status {
+    grid-column: 2/span 3;
+    grid-row: 2;
+    text-align: right;
+  }
+  .login__container {
+    flex-wrap: wrap;
+    gap: 0rem;
+    justify-content: center;
+    padding-top: 3rem;
+    padding: 3rem 0.5rem 0 0.5rem;
+  }
+  .login__content {
+    flex: 0 1 100%;
+  }
+  .login__box--text {
+    flex: 0 1 100%;
+    margin-top: 7rem;
+    margin-bottom: 2rem;
+  }
+  .login__box--text p {
+    margin-bottom: 0;
+  }
+  .login__boxes {
+    flex: 0 1 100%;
+  }
+  .login__box {
+    padding: 4rem 0.5rem;
+  }
+  .register__box {
+    margin-top: 10rem;
+  }
+  .account__message {
+    width: 80%;
+  }
+  .faqs__container {
+    gap: 0;
+    row-gap: 4rem;
+  }
+  .faqs__tabs {
+    grid-row: 3;
+    grid-column: initial;
+    gap: 3.06rem;
+  }
+  .footer__content {
+    grid-template-columns: 0.7fr 0.9fr;
+  }
+  .footer__banner {
+    padding-right: 2rem;
+    padding-left: 2rem;
+  }
+}
+@media (max-width: 767px) {
+  .burger {
+    display: block;
+    position: absolute;
+    top: 4.35rem;
+    left: 1rem;
+    z-index: 13;
+  }
+  .header__container {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    gap: 0;
+    row-gap: 2rem;
+  }
+  .header__logo {
+    grid-column: 1/span 2;
+    display: flex;
+    justify-content: center;
+  }
+  .support__list {
+    row-gap: 5rem;
+  }
+  .support__item {
+    flex: 0 1 40%;
+  }
+  .support__item img {
+    max-width: 100%;
+  }
+  .dashboard__header {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+  }
+  .dashboard__burger {
+    grid-row: 1;
+    grid-column: 1;
+  }
+  .dashboard__title {
+    grid-column: 1/span 2;
+    grid-row: 1;
+    text-align: end;
+  }
+  .dashboard__account-info {
+    grid-column: 1/span 2;
+    grid-row: 2;
+  }
+  .dashboard__search {
+    flex: 0 1 60%;
+  }
+  .dashboard__search-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  .dashboard__search-icon img {
+    max-width: -moz-fit-content;
+    max-width: fit-content;
+  }
+  .dashboard__left {
+    grid-column: 1/span 2;
+    grid-row: 3;
+    margin-left: 0;
+    gap: 0.25rem;
+  }
+  .dashboard__logo {
+    display: none;
+  }
+  .dashboard__sidebar {
+    display: block;
+    position: fixed;
+    left: -200%;
+    padding-left: 1.25rem;
+    z-index: 11;
+    width: 60%;
+    height: 100%;
+    flex: 0 1 auto;
+    padding-top: 10em;
+    transition: all 0.2s ease;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 1.25rem 1.25rem 0rem 0rem;
+  }
+  .dashboard__sidebar.active {
+    left: 0;
+  }
+  .dashboard__logout {
+    margin-top: 3rem;
+  }
+  .dashboard__content {
+    margin-left: 0;
+  }
+  .dashboard__notifications-list {
+    right: -310%;
+  }
+  .section__accounts-row {
+    grid-template-columns: 1fr;
+  }
+  .section__content-accounts .section__block {
+    border-radius: 0.75rem;
+    background: #D4F3E7;
+    padding: 1.5em 1.5em;
+  }
+  .section__accounts-transactions {
+    grid-template-columns: 1fr;
+    gap: 2em;
+    max-width: 100%;
+  }
+  .section__statistics-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+  }
+  .section__statistics-img {
+    display: none;
+  }
+  .section__statistics-range {
+    margin: 0.5em;
+  }
+  .section__transactions-all > .section__row {
+    gap: 2em;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  .account__modal, .account__message {
+    width: 95%;
+    padding: 3rem 2rem;
+  }
+  .account__input-select {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .account__buttons {
+    flex-direction: column;
+  }
+  .footer__container {
+    position: relative;
+  }
+  .footer__content {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 4.5rem;
+  }
+  .footer__navigation {
+    grid-column: 1;
+    grid-row: 3;
+  }
+  .footer__title {
+    margin-bottom: 3rem;
+  }
+  .footer__form {
+    flex-direction: column;
+    gap: 3rem;
+  }
+  .footer__form input {
+    min-width: 100%;
+  }
+  .footer__button {
+    min-width: 100%;
+  }
 }
