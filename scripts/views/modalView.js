@@ -1,6 +1,14 @@
 const overlay = document.querySelector('.overlay');
 const login = document.querySelector('.login');
 const body = document.querySelector('body');
+const modalFund = document.querySelector('.account__modal-fund');
+const modalWithdraw = document.querySelector('.account__modal-withdraw');
+const modalAdd = document.querySelector('.account__modal-add');
+
+function closeActiveModal() {
+    const activeModal = document.querySelector('.modal.active');
+    if (activeModal) modalRemoveActive(activeModal);
+}
 
 export function modalActive(modal) {
     if (!modal) return;
@@ -14,12 +22,12 @@ export function modalRemoveActive(modal) {
     overlay.classList.remove('active');
 }
 
-export function initModalCloseEvents(onClose) {
+export function initModalCloseEvents() {
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') onClose();
     });
 
-    overlay?.addEventListener('click', onClose);
+    overlay?.addEventListener('click', closeActiveModal);
 }
 
 export function modalFunc(modal, onCancel = null) {
@@ -72,3 +80,5 @@ export function modalMessage(message, amount = null, handler = null) {
         })
     }
 }
+
+export const accountModals = { modalFund, modalWithdraw, modalAdd};

@@ -2059,4 +2059,21 @@ button {
   .footer__button {
     min-width: 100%;
   }
+}ion {
+    grid-column: 1;
+    grid-row: 3;
+  }
+  .footer__title {
+    margin-bottom: 3rem;
+  }
+  .footer__form {
+    flex-direction: column;
+    gap: 3rem;
+  }
+  .footer__form input {
+    min-width: 100%;
+  }
+  .footer__button {
+    min-width: 100%;
+  }
 }

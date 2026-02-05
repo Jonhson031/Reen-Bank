@@ -87,22 +87,48 @@ export const findUserByEmail = function (email) {
     return users.find(u => u.email === email);
 };
 
-export const addUser = function (userObj) {
-    users.push(userObj);
+export const addUser = function (userName, userEmail, userPassword, userPhone, userGender) {
+    const newUser = {
+        owner: userName,
+        email: userEmail,
+        phone: userPhone?.value || '',
+        gender: userGender?.value || '',
+        id: Date.now().toString().slice(-10),
+        password: userPassword,
+        img: 'images/profile-img-placeholder.webp',
+        notifications: [],
+        accounts: [{
+            name: 'Main Account',
+            currency: 'USD',
+            movements: []
+        },],
+    };
+    users.push(newUser);
     saveUsers();
-    return userObj;
+    return newUser;
 };
 
-export const addAccount = function (user, account) {
-    user.accounts.push(account);
+export const addAccount = function (user, accountName) {
+    const newAccount = {
+        name: accountName,
+        currency: 'USD',
+        movements: []
+    };
+    user.accounts.push(newAccount);
     saveUsers();
-    return account;
+    return newAccount;
 };
 
-export const addMovement = function (account, movement) {
-    account.movements.push(movement);
+export const addMovement = function (account, amount, source) {
+
+    const newMovement = {
+        amount: Number(amount.toFixed(2)),
+        date: new Date(),
+        source,
+    };
+    account.movements.push(newMovement);
     saveUsers();
-    return movement;
+    return newMovement;
 };
 
 export const getAllMovements = function (user) {

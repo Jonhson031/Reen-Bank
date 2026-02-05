@@ -1,7 +1,6 @@
-/* Form View: Login and Register form event handling */
 'use strict';
 
-export function attachLoginFormEvents(onLoginSubmit, onRegisterToggle, onLoginToggle) {
+export function attachLoginFormEvents(onLoginSubmit) {
     const loginEmail = document.getElementById('login__email');
     const loginPassword = document.getElementById('login__password');
     const loginBtn = document.querySelector('.login__button');
@@ -23,7 +22,7 @@ export function attachLoginFormEvents(onLoginSubmit, onRegisterToggle, onLoginTo
         loginText.innerHTML = document.querySelector('.hero__text').innerHTML;
         loginBox.classList.remove('active');
         registerBox.classList.add('active');
-        onRegisterToggle();
+        // onRegisterToggle();
     })
 
     questionLoginBtn?.addEventListener('click', function (e) {
@@ -32,11 +31,11 @@ export function attachLoginFormEvents(onLoginSubmit, onRegisterToggle, onLoginTo
         loginText.innerHTML = 'Enter Your Details to login to your Banking Dashboard again!';
         loginBox.classList.add('active');
         registerBox.classList.remove('active');
-        onLoginToggle();
+        // onLoginToggle();
     })
 }
 
-export function attachRegisterFormEvents(onRegisterSubmit) {
+export function attachRegisterFormEvents(onRegisterSubmit, currentUser) {
     const registerForm = document.querySelector('.register__form');
     const userName = document.getElementById('register__name');
     const userEmail = document.getElementById('register__email');
@@ -46,15 +45,16 @@ export function attachRegisterFormEvents(onRegisterSubmit) {
     const nameError = document.querySelector('.register__error-name');
     const emailError = document.querySelector('.register__error-email');
     const passwordError = document.querySelector('.register__error-password');
+    const message = document.querySelector('.account__message-register');
 
     const validateForm = function () {
         let valid = true;
         if (!userName.value.trim() || userName.value.trim().length < 1) {
-            nameError.style.display = 'block'; 
+            nameError.style.display = 'block';
             valid = false;
         }
-        else { 
-            nameError.style.display = 'none'; 
+        else {
+            nameError.style.display = 'none';
         }
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailPattern.test(userEmail.value.trim())) {
@@ -78,8 +78,8 @@ export function attachRegisterFormEvents(onRegisterSubmit) {
         input.addEventListener('input', validateForm)
     })
 
-    document.querySelector('.register__button')?.addEventListener('click', function (e) { 
-        e.preventDefault(); 
+    document.querySelector('.register__button')?.addEventListener('click', function (e) {
+        e.preventDefault();
         if (!validateForm()) return;
         onRegisterSubmit(
             userName.value,
@@ -87,9 +87,15 @@ export function attachRegisterFormEvents(onRegisterSubmit) {
             userPassword.value,
             userPhone?.value || '',
             userGender?.value || '',
-            nameError,
-            emailError,
-            passwordError
         );
+        userName.value = '';
+        userEmail.value = '';
+        userPassword.value = '';
+        if (userPhone) userPhone.value = '';
+        if (userGender) userGender.value = '';
+        message.querySelector('.account__button-green').addEventListener('click', (e) => {
+            e.preventDefault();
+            window.location.href = 'dashboard.html';
+        })
     })
 }
