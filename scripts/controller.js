@@ -6,7 +6,7 @@ import * as FormView from './views/formView.js';
 import { attachBurgerEvents, attachLogoutEvent } from './views/sliderbarView.js';
 import * as DashboardView from './views/dashboardView.js';
 import { attachNotificationEvent, initNotificationsHandler, displayNotifications } from './views/notificationView.js';
-import attachAccountFundEvent from './views/fundVIew.js';
+import attachAccountFundEvent from './views/fundView.js';
 import attachAccountWithdrawEvent from './views/withdrawalView.js';
 import { attatchAddNewAccountEvent, attachAccountAddOverviewEvent } from './views/addNewAccountView.js';
 

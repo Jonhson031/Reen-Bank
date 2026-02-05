@@ -1,0 +1,23 @@
+{
+  "name": "reen-bank",
+  "version": "1.0.0",
+  "description": "Reen Bank is a responsive frontend banking application that simulates real-world online banking functionality. The project focuses heavily on JavaScript-driven logic, user interaction, and clean UI behavior.",
+  "homepage": "https://Jonhson031.github.io/Reen-Bank/",
+  "bugs": {
+    "url": "https://github.com/Jonhson031/Reen-Bank/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jonhson031/Reen-Bank.git"
+  },
+  "license": "ISC",
+  "author": "Maksym Yaremko",
+  "type": "module",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html --public-url ./"
+  },
+  "devDependencies": {
+    "parcel": "^2.16.4"
+  }
+}

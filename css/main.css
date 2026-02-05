@@ -1,19 +1,88 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 @import url(../fonts/style.css);
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
   margin: 0;
   padding: 0;
   border: 0;
@@ -23,8 +92,17 @@ time, mark, audio, video {
 }
 
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
   display: block;
 }
 
@@ -32,16 +110,20 @@ body {
   line-height: 1;
 }
 
-ol, ul {
+ol,
+ul {
   list-style: none;
 }
 
-blockquote, q {
+blockquote,
+q {
   quotes: none;
 }
 
-blockquote:before, blockquote:after,
-q:before, q:after {
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
   content: "";
   content: none;
 }
@@ -79,6 +161,7 @@ body {
   /* 2.4rem */
   background-color: #fff;
 }
+
 body.lock {
   overflow: hidden;
 }
@@ -126,6 +209,7 @@ img {
   height: 18px;
   position: relative;
 }
+
 .burger span {
   position: absolute;
   background-color: #000;
@@ -136,7 +220,9 @@ img {
   transition: all 0.3s ease 0s;
   border-radius: 30px;
 }
-.burger:before, .burger:after {
+
+.burger:before,
+.burger:after {
   content: "";
   background-color: #000;
   position: absolute;
@@ -146,22 +232,27 @@ img {
   transition: all 0.3s ease 0s;
   border-radius: 30px;
 }
+
 .burger:after {
   top: 100%;
 }
+
 .burger.active {
   z-index: 12;
   transition-duration: 0.3s;
 }
+
 .burger.active span {
   display: none;
 }
+
 .burger.active::before {
   transform: rotate(45deg);
   top: 9px;
   width: 30px;
   height: 2px;
 }
+
 .burger.active::after {
   transform: rotate(-45deg);
   top: 9px;
@@ -179,6 +270,7 @@ img {
   opacity: 0;
   transition: all 0.2s;
 }
+
 .overlay.active,
 .overlay-login.active {
   visibility: visible;
@@ -203,11 +295,13 @@ button {
   cursor: pointer;
   box-sizing: border-box;
 }
+
 .button:hover {
   background-color: #288F69;
   border-color: #288F69;
   color: #fff;
 }
+
 .button:hover span::before {
   color: #fff;
 }
@@ -221,6 +315,7 @@ button {
   display: flex;
   gap: 1rem;
 }
+
 .socials__item {
   width: 2.5rem;
   height: 2.5rem;
@@ -233,6 +328,7 @@ button {
   transition: all 0.2s;
   cursor: pointer;
 }
+
 .socials__item:hover {
   background-color: #288F69;
 }
@@ -241,6 +337,7 @@ button {
   background-color: #D4F3E7;
   padding: 4em 15px;
 }
+
 .header__container {
   display: grid;
   grid-template-columns: 0.3fr 1fr;
@@ -248,10 +345,12 @@ button {
   align-items: center;
   justify-content: space-between;
 }
+
 .header__logo {
   flex: 0 1 24.392857%;
   /* 393/1680 */
 }
+
 .header__navigator {
   display: flex;
   align-items: center;
@@ -259,11 +358,13 @@ button {
   flex: 0 1 73%;
   flex-wrap: wrap;
 }
+
 .header__list {
   display: flex;
   align-items: center;
   gap: clamp(2rem, 1.5328rem + 2.3358vw, 4rem);
 }
+
 .header__link {
   color: #252525;
   font-family: "DM Sans";
@@ -271,6 +372,7 @@ button {
   font-weight: 400;
   line-height: 1;
 }
+
 .header__link:hover {
   text-decoration: underline;
 }
@@ -278,6 +380,7 @@ button {
 .hero {
   background-color: #D4F3E7;
 }
+
 .hero__container {
   display: flex;
   align-items: center;
@@ -287,9 +390,11 @@ button {
   padding-top: 4rem;
   gap: 4rem;
 }
+
 .hero__content {
   max-width: 48.3125rem;
 }
+
 .hero__subtitle {
   color: #33B786;
   font-family: "DM Sans";
@@ -298,6 +403,7 @@ button {
   line-height: 1;
   margin-bottom: 0.25rem;
 }
+
 .hero__title {
   color: #252525;
   font-family: "DM Sans";
@@ -306,6 +412,7 @@ button {
   line-height: 1;
   margin-bottom: 2.5rem;
 }
+
 .hero__text {
   color: #555;
   font-family: "DM Sans";
@@ -315,15 +422,18 @@ button {
   max-width: 45rem;
   margin-bottom: 5rem;
 }
+
 .hero__buttons {
   display: flex;
   gap: 2.5rem;
   flex-wrap: wrap;
 }
+
 .hero__button {
   display: flex;
   align-items: center;
 }
+
 .hero__button span {
   display: inline-block;
   margin-left: 0.5rem;
@@ -333,6 +443,7 @@ button {
   padding-top: 7.5em;
   padding-bottom: 7.5em;
 }
+
 .services__title {
   color: #252525;
   font-family: "DM Sans";
@@ -341,17 +452,20 @@ button {
   line-height: 1;
   margin-bottom: 6rem;
 }
+
 .services__list {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: clamp(3rem, 2.2993rem + 3.5036vw, 6rem);
 }
+
 .services__item {
   display: flex;
   flex-wrap: wrap;
   gap: 2.5rem;
 }
+
 .services__item-title {
   margin-bottom: 1.5rem;
   color: #33B786;
@@ -360,6 +474,7 @@ button {
   font-weight: 700;
   line-height: 1;
 }
+
 .services__item-text {
   max-width: 40rem;
   color: #555;
@@ -373,11 +488,13 @@ button {
   background-color: #D4F3E7;
   padding: 7.5rem 0;
 }
+
 .faqs__container {
   display: grid;
   align-items: center;
   gap: 6rem;
 }
+
 .faqs__title {
   grid-column: 1/span 2;
   grid-row: 1;
@@ -387,13 +504,16 @@ button {
   font-weight: 700;
   line-height: 1;
 }
+
 .faqs__content {
   display: none;
   max-width: 55.5rem;
 }
+
 .faqs__content.active {
   display: block;
 }
+
 .faqs__question {
   color: #33B786;
   font-family: "DM Sans";
@@ -403,6 +523,7 @@ button {
   line-height: 1.2;
   max-width: 43.5rem;
 }
+
 .faqs__text {
   color: #555;
   font-family: "DM Sans";
@@ -411,12 +532,14 @@ button {
   line-height: 160%;
   margin-top: 4rem;
 }
+
 .faqs__tabs {
   display: grid;
   grid-row: 2;
   grid-column: 2;
   gap: 3.06rem;
 }
+
 .faqs__tab {
   display: flex;
   align-items: center;
@@ -431,15 +554,19 @@ button {
   line-height: 1;
   cursor: pointer;
 }
+
 .faqs__tab.active span:first-child {
   text-decoration: underline;
 }
+
 .faqs__tab span {
   display: inline-block;
 }
+
 .faqs__tab span:first-child {
   flex: 0 1 35rem;
 }
+
 .faqs__tab span::before {
   color: #46237A;
 }
@@ -449,6 +576,7 @@ button {
   padding-top: 7.5em;
   padding-bottom: 7.5em;
 }
+
 .support__title {
   color: #252525;
   text-align: center;
@@ -458,6 +586,7 @@ button {
   line-height: 1;
   margin-bottom: 6rem;
 }
+
 .support__list {
   display: flex;
   align-items: center;
@@ -470,21 +599,25 @@ button {
   background-color: #D4F3E7;
   padding-top: 7.5rem;
 }
+
 .footer__container {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
 }
+
 .footer__content {
   flex: 0 1 32.781065%;
   display: grid;
   gap: 9rem;
   padding-bottom: 6rem;
 }
+
 .footer__navigation {
   display: flex;
   justify-content: space-between;
 }
+
 .footer__block-title {
   color: #33B786;
   font-family: "DM Sans";
@@ -494,6 +627,7 @@ button {
   text-transform: uppercase;
   margin-bottom: 2.5rem;
 }
+
 .footer__block-list {
   display: grid;
   gap: 1.5rem;
@@ -503,9 +637,11 @@ button {
   font-weight: 500;
   line-height: 160%;
 }
+
 .footer__block-list li:hover {
   text-decoration: underline;
 }
+
 .footer__copyright {
   color: #6C6C6C;
   font-family: "DM Sans";
@@ -514,6 +650,7 @@ button {
   line-height: 160%;
   margin-bottom: 1.5rem;
 }
+
 .footer__banner {
   position: relative;
   display: flex;
@@ -525,6 +662,7 @@ button {
   box-sizing: border-box;
   padding: 0rem 7.5rem 6rem 7.5rem;
 }
+
 .footer__banner::before {
   content: "";
   position: absolute;
@@ -533,10 +671,12 @@ button {
   mix-blend-mode: multiply;
   z-index: 0;
 }
-.footer__banner > * {
+
+.footer__banner>* {
   position: relative;
   z-index: 1;
 }
+
 .footer__question {
   color: #FFF;
   font-family: "DM Sans";
@@ -544,6 +684,7 @@ button {
   font-weight: 400;
   line-height: 1;
 }
+
 .footer__title {
   color: #FFF;
   font-family: "DM Sans";
@@ -554,11 +695,13 @@ button {
   margin-bottom: 2.62rem;
   max-width: 37rem;
 }
+
 .footer__form {
   display: flex;
   align-items: center;
   gap: 2rem;
 }
+
 .footer__form input {
   padding: 1rem 0rem 1.13rem 1.69rem;
   border-radius: 0.75rem;
@@ -566,7 +709,7 @@ button {
   background: rgba(255, 255, 255, 0.1);
   box-shadow: 0 0 50px 0.5px rgba(0, 0, 0, 0.05);
   -webkit-backdrop-filter: blur(5px);
-          backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
   color: #B8B8B8;
   font-family: "DM Sans";
   font-size: clamp(1.25rem, 1.163rem + 0.4348vw, 1.5rem);
@@ -575,12 +718,15 @@ button {
   flex-grow: 1;
   box-sizing: border-box;
 }
+
 .footer__form input::-moz-placeholder {
   color: #B8B8B8;
 }
+
 .footer__form input::placeholder {
   color: #B8B8B8;
 }
+
 .footer__button {
   padding-left: 3.25rem;
   padding-right: 3.25rem;
@@ -595,6 +741,7 @@ button {
   display: flex;
   min-height: 100%;
 }
+
 .dashboard__sidebar {
   padding-top: 4em;
   width: 8em;
@@ -605,15 +752,18 @@ button {
   flex-direction: column;
   overflow-y: auto;
 }
+
 .dashboard__logo {
   margin-bottom: 7.5rem;
 }
+
 .dashboard__sections-list {
   display: flex;
   flex-direction: column;
   gap: 2.5em;
   flex-grow: 0.8;
 }
+
 .dashboard__item {
   color: #555;
   font-family: "DM Sans";
@@ -622,9 +772,11 @@ button {
   cursor: pointer;
   transition: color 0.2s;
 }
+
 .dashboard__item.active {
   color: #33B786;
 }
+
 .dashboard__logout {
   color: #555;
   font-family: "DM Sans";
@@ -635,6 +787,7 @@ button {
   display: flex;
   align-items: flex-end;
 }
+
 .dashboard__content {
   position: relative;
   display: flex;
@@ -642,20 +795,24 @@ button {
   flex-direction: column;
   margin-left: 14.5em;
 }
+
 .dashboard__header {
   display: grid;
   justify-content: space-between;
   grid-template-columns: 1fr auto auto;
 }
+
 .dashboard__title {
   color: #252525;
   font-family: "DM Sans";
   font-size: 2.5rem;
   font-weight: 700;
 }
+
 .dashboard__account-info {
   text-align: right;
 }
+
 .dashboard__account-name {
   color: #33B786;
   font-family: "DM Sans";
@@ -663,6 +820,7 @@ button {
   font-weight: 500;
   margin-bottom: 0.25rem;
 }
+
 .dashboard__account-number {
   color: #252525;
   font-family: "Bebas Neue";
@@ -670,23 +828,27 @@ button {
   font-weight: 400;
   line-height: 1;
 }
+
 .dashboard__left {
   display: flex;
   align-items: center;
   margin-left: 6.94em;
   justify-content: space-between;
 }
+
 .dashboard__search {
   display: flex;
   align-items: center;
   flex: 0 0 22.5625rem;
   /* 361/16 */
 }
+
 .dashboard__search-icon {
   border: none;
   cursor: pointer;
   margin-right: 1em;
 }
+
 .dashboard__search-input {
   border: none;
   color: #8C8C8C;
@@ -694,25 +856,30 @@ button {
   font-size: 1rem;
   font-weight: 500;
 }
+
 .dashboard__notifications {
   margin-right: 2.5em;
 }
+
 .dashboard__notifications {
   position: relative;
   display: inline-block;
   font-family: "DM Sans", sans-serif;
 }
+
 .dashboard__notifications-button {
   background: none;
   border: none;
   padding: 0.5rem;
   cursor: pointer;
 }
+
 .dashboard__notifications-button img {
   width: 1.5rem;
   height: 1.5rem;
   max-width: initial;
 }
+
 .dashboard__notifications-count {
   position: absolute;
   top: 0;
@@ -729,6 +896,7 @@ button {
   align-items: center;
   justify-content: center;
 }
+
 .dashboard__notifications-list {
   position: absolute;
   top: calc(100% + 8px);
@@ -748,12 +916,14 @@ button {
   list-style: none;
   z-index: 1000;
 }
+
 .dashboard__notifications.active .dashboard__notifications-list {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
   transform: translateY(0);
 }
+
 .dashboard__notifications-item {
   display: flex;
   flex-direction: column;
@@ -763,56 +933,69 @@ button {
   width: 100%;
   transition: background-color 0.2s ease, opacity 0.2s ease;
 }
+
 .dashboard__notifications-item:hover {
   cursor: pointer;
 }
+
 .dashboard__notifications-item span {
   font-weight: 600;
 }
+
 .dashboard__notifications-item:not(:last-child) {
   border-bottom: 1px solid #f0f0f0;
 }
+
 .dashboard__notifications-item--seen {
   opacity: 0.6;
   background: #f5f5f5;
 }
+
 .dashboard__notifications-text {
   font-size: 0.95rem;
   color: #8C8C8C;
   margin: 0;
 }
+
 .dashboard__notifications-time {
   font-size: 0.875rem;
   color: #8C8C8C;
   opacity: 0.8;
 }
+
 .dashboard__notifications-item--deposit {
   color: #33B786;
   font-weight: 500;
 }
+
 .dashboard__notifications-item--withdraw {
   color: #E74F5B;
   font-weight: 500;
 }
+
 .dashboard__img {
   border-radius: 50%;
 }
+
 .dashboard__img img {
   max-width: 100%;
   height: 56px;
   width: 56px;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   border-radius: 50%;
 }
+
 .dashboard__sections {
   margin-top: 5em;
 }
+
 .dashboard__section {
   display: none;
   visibility: hidden;
   opacity: 0;
 }
+
 .dashboard__section.active {
   position: relative;
   transition: opacity 0.25s ease;
@@ -822,11 +1005,13 @@ button {
   z-index: 3;
   transition: opacity 0.25s ease;
 }
+
 .dashboard__section--overview {
   grid-template-columns: minmax(0, 54.57%) minmax(0, 36.91%);
   gap: 10px;
   justify-content: space-between;
 }
+
 .dashboard__section--overview.active {
   display: grid;
 }
@@ -834,6 +1019,7 @@ button {
 .section__row {
   margin-bottom: 4.19em;
 }
+
 .section__header {
   margin-bottom: 2em;
   display: grid;
@@ -841,12 +1027,14 @@ button {
   align-items: center;
   justify-content: space-between;
 }
+
 .section__title {
   color: #252525;
   font-family: "DM Sans";
   font-size: 1.5rem;
   font-weight: 700;
 }
+
 .section__hide {
   display: flex;
   align-items: center;
@@ -858,6 +1046,7 @@ button {
   margin-right: 1em;
   cursor: pointer;
 }
+
 .section__sort {
   cursor: pointer;
   display: flex;
@@ -868,45 +1057,53 @@ button {
   font-weight: 700;
   line-height: 1;
 }
+
 .section__sort select {
   border: none;
   -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   width: 13.125rem;
   padding: 0.94em 2.56em 0.94em 3em;
   border-radius: 0.5rem;
   background: #F0F0F0;
 }
+
 .section__calendar {
   margin-right: -2.5em;
   z-index: 2;
 }
+
 .section__arrow {
   margin-left: -2em;
   z-index: 2;
 }
+
 .section__content {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
 }
+
 .section__content-balance {
   border-radius: 0.75em;
   background: #D4F3E7;
   padding: 2.5em;
 }
+
 .section__block {
   padding: 0 2.5em;
   cursor: pointer;
   box-sizing: border-box;
 }
+
 .section__block h4 {
   color: #46237A;
   font-family: "DM Sans";
   font-size: 1em;
   font-weight: 500;
 }
+
 .section__block p {
   color: #252525;
   font-family: "Bebas Neue";
@@ -915,9 +1112,11 @@ button {
   line-height: 1;
   margin-top: 0.31rem;
 }
+
 .section__block.active {
   position: relative;
 }
+
 .section__block.active::before {
   content: "";
   position: absolute;
@@ -927,19 +1126,23 @@ button {
   left: 0;
   top: 0;
 }
+
 .section__block-value {
   min-width: 100.75px;
 }
+
 .section__content-accounts .section__block {
   border-radius: 0.75rem;
   background: #D4F3E7;
   padding: 2.6em 2.7em;
 }
+
 .section__content-accounts {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2.87em;
 }
+
 .section__add {
   position: relative;
   width: 2.875rem;
@@ -951,7 +1154,9 @@ button {
   justify-content: center;
   cursor: pointer;
 }
-.section__add::before, .section__add::after {
+
+.section__add::before,
+.section__add::after {
   content: "";
   position: absolute;
   background-color: #555555;
@@ -959,22 +1164,27 @@ button {
   height: 3px;
   border-radius: 0.5rem;
 }
+
 .section__add::before {
   transform: rotate(90deg);
 }
+
 .section__statistics-sort select {
   padding: 0.94em 2.5em 0.94em 1.06em;
   width: initial;
 }
+
 .section__statistics .section__content {
   flex-direction: column;
   gap: 2.5em;
 }
+
 .section__statistics-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+
 .section__statistics-row p {
   color: #555;
   font-family: "DM Sans";
@@ -982,29 +1192,35 @@ button {
   font-weight: 700;
   line-height: 1;
 }
+
 .section__statistics-img {
   margin-right: 2.5em;
   width: 3em;
   height: 3em;
 }
+
 .section__statistics-img img {
   max-width: 100%;
 }
+
 .section__statistics-range {
   flex: 0 1 18.5em;
   margin: 0 4em;
   height: 1em;
   border-radius: 0.25rem;
 }
+
 .section__statistics-range span {
   display: block;
   height: 100%;
   border-radius: 0.25rem;
 }
+
 .section__statistics-range--income {
   background-color: #33B786;
   width: 90%;
 }
+
 .section__statistics-value {
   color: #555;
   font-family: "Bebas Neue";
@@ -1012,13 +1228,16 @@ button {
   font-weight: 400;
   line-height: 1;
 }
+
 .section__statistics-range--expense {
   width: 70%;
   background-color: #E74F5B;
 }
+
 .section__transactions-list li:last-child {
   border: none;
 }
+
 .section__transactions-info {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1027,13 +1246,16 @@ button {
   align-items: center;
   border-bottom: 1px solid #D9D9D9;
 }
-.section__transactions-name, .section__transactions-date {
+
+.section__transactions-name,
+.section__transactions-date {
   color: #8C8C8C;
   font-family: "DM Sans";
   font-size: 1rem;
   font-weight: 500;
   line-height: 1;
 }
+
 .section__transactions-value {
   text-align: right;
   font-family: "Bebas Neue";
@@ -1041,12 +1263,15 @@ button {
   font-weight: 400;
   line-height: 1;
 }
+
 .section__transactions-value--withdrawal {
   color: #E74F5B;
 }
+
 .section__transactions-value--deposit {
   color: #33B786;
 }
+
 .section__banner {
   display: flex;
   flex-direction: column;
@@ -1063,6 +1288,7 @@ button {
   font-weight: 500;
   line-height: 1;
 }
+
 .section__banner span {
   display: block;
   font-weight: 700;
@@ -1070,6 +1296,7 @@ button {
   color: #D4F3E7;
   margin-bottom: 0.2em;
 }
+
 .section__banner-btn {
   padding: 0.62rem;
   flex: 0 1 100%;
@@ -1083,31 +1310,37 @@ button {
   flex-wrap: wrap;
   gap: 4.06em;
 }
+
 .section__accounts-detailed {
   display: flex;
   gap: 4.06em;
   flex-wrap: wrap;
 }
+
 .section__accounts-detailed .section__block {
   flex: 0 1 25%;
 }
+
 .section__accounts-row .section__block {
   position: relative;
   border-radius: 0 0.75rem 0.75rem 0;
   background-color: #D4F3E7;
   padding: 2em;
 }
+
 .section__accounts-hide {
   position: absolute;
   top: 2rem;
   right: 2rem;
   cursor: pointer;
 }
+
 .section__accounts-buttons {
   display: flex;
   gap: 1.06em;
   margin-top: 1.5em;
 }
+
 .section__account-button {
   color: #252525;
   font-family: "DM Sans";
@@ -1118,16 +1351,19 @@ button {
   border-radius: 0.375rem;
   cursor: pointer;
 }
+
 .section__accounts-fund {
   color: #fff;
   padding: 0.65rem 1.56rem;
   background-color: #33B786;
 }
+
 .section__accounts-withdraw {
   padding: 0.65rem 1.88rem 0.65rem 1.81rem;
   color: #252525;
   background-color: #D4D4D4;
 }
+
 .section__accounts-row .section__accounts-add {
   display: grid;
   align-items: center;
@@ -1137,17 +1373,21 @@ button {
   max-height: 11.5rem;
   box-sizing: border-box;
 }
+
 .section__accounts-row .section__accounts-add p {
   align-self: flex-end;
 }
+
 .section__accounts-row .section__accounts-add h4 {
   font-weight: 700;
   color: #555;
 }
+
 .section__accounts-add--btn {
   border: none;
   outline: none;
 }
+
 .section__transactions-btn {
   cursor: pointer;
   border: none;
@@ -1156,6 +1396,7 @@ button {
   align-items: center;
   gap: 1em;
 }
+
 .section__transactions-btn span {
   color: #33B786;
   font-family: "DM Sans";
@@ -1163,10 +1404,12 @@ button {
   font-weight: 700;
   line-height: 1;
 }
+
 .section__transactions-list--full .section__transactions-info {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
 }
+
 .section__transactions-circle {
   position: relative;
   width: 2.5rem;
@@ -1178,10 +1421,13 @@ button {
   align-items: center;
   justify-content: center;
 }
+
 .section__transactions-circle--deposit {
   background-color: #33B786;
 }
-.section__transactions-circle--deposit::before, .section__transactions-circle--deposit::after {
+
+.section__transactions-circle--deposit::before,
+.section__transactions-circle--deposit::after {
   content: "";
   position: absolute;
   background-color: #fff;
@@ -1189,12 +1435,15 @@ button {
   height: 2px;
   border-radius: 0.5rem;
 }
+
 .section__transactions-circle--deposit::before {
   transform: rotate(90deg);
 }
+
 .section__transactions-circle--withdrawal {
   background-color: #E74F5B;
 }
+
 .section__transactions-circle--withdrawal::after {
   content: "";
   position: absolute;
@@ -1203,6 +1452,7 @@ button {
   height: 2px;
   border-radius: 0.5rem;
 }
+
 .section__transactions-source {
   color: #8C8C8C;
   font-family: "DM Sans";
@@ -1210,9 +1460,11 @@ button {
   font-weight: 500;
   line-height: 1;
 }
+
 .section__transactions-list--full .section__transactions-value {
   justify-self: center;
 }
+
 .section__transactions-status {
   justify-self: flex-end;
   padding: 0.6em 3.56em 0.6em 3.83em;
@@ -1229,11 +1481,13 @@ button {
 .section__accounts-transactions {
   grid-template-columns: repeat(3, 1fr);
 }
-.section__transactions-all > .section__row {
+
+.section__transactions-all>.section__row {
   -moz-column-gap: 5.5em;
-       column-gap: 5.5em;
+  column-gap: 5.5em;
 }
-.section__transactions-all > .section__row > .section__block {
+
+.section__transactions-all>.section__row>.section__block {
   flex: 0 1 33%;
 }
 
@@ -1241,6 +1495,7 @@ button {
   width: 22.3125rem;
   margin: 0 auto;
 }
+
 .section__profile-image {
   position: relative;
   width: 10rem;
@@ -1248,13 +1503,15 @@ button {
   margin: 0 auto;
   border-radius: 50%;
 }
+
 .section__profile-image img {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   border-radius: 50%;
 }
+
 .section__profile-image-edit {
   position: absolute;
   border-radius: 50%;
@@ -1266,18 +1523,21 @@ button {
   display: flex;
   align-items: center;
 }
+
 .section__profile-image-edit input {
   position: absolute;
   width: 100%;
   height: 100%;
   z-index: 2;
 }
+
 .section__profile-image-edit input #file-upload-button {
   display: none;
 }
+
 .section__profile-image-edit input[type=file] {
   -moz-appearance: none;
-       appearance: none;
+  appearance: none;
   -webkit-appearance: none;
   border: none;
   background: none;
@@ -1289,15 +1549,18 @@ button {
   outline: none;
   cursor: pointer;
 }
+
 .section__profile-image-edit input[type=file]::file-selector-button {
   display: none;
 }
+
 .section__profile-image-edit span {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
 }
+
 .section__profile-name {
   margin-top: 1.5rem;
   margin-bottom: 0.81rem;
@@ -1308,6 +1571,7 @@ button {
   line-height: 1;
   text-align: center;
 }
+
 .section__profile-subscription {
   color: #46237A;
   display: flex;
@@ -1323,16 +1587,19 @@ button {
   height: 2.3125rem;
   margin: 0 auto;
 }
+
 .section__profile-list {
   display: grid;
   gap: 2rem;
   margin-top: 3.5rem;
   margin-bottom: 3.5rem;
 }
+
 .section__profile-list li:last-child {
   border: none;
   padding: 0;
 }
+
 .section__profile-item {
   color: #252525;
   font-family: "DM Sans";
@@ -1342,9 +1609,11 @@ button {
   padding-bottom: 2rem;
   border-bottom: 2px solid #D9D9D9;
 }
+
 .section__profile-item::after {
   content: "";
 }
+
 .section__profile-item span {
   display: block;
   color: #33B786;
@@ -1352,11 +1621,13 @@ button {
   font-weight: 500;
   margin-bottom: 0.5rem;
 }
+
 .section__profile-button {
   text-align: center;
 }
 
-.account__modal, .account__message {
+.account__modal,
+.account__message {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -1377,26 +1648,34 @@ button {
   overflow-y: auto;
   overflow-y: auto;
 }
-.account__modal form, .account__message form {
+
+.account__modal form,
+.account__message form {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
-.account__modal.active, .account__message.active {
+
+.account__modal.active,
+.account__message.active {
   visibility: visible;
   opacity: 1;
   z-index: 15;
 }
+
 .account__modal-add {
   height: 32.1875rem;
 }
+
 .account__modal-fund {
   margin-top: 3rem;
   padding-bottom: 5rem;
 }
+
 .account__modal-fund form {
   position: relative;
 }
+
 .account__fund-section {
   position: absolute;
   max-height: 0;
@@ -1408,6 +1687,7 @@ button {
   display: none;
   transition: max-height 0.4s ease, opacity 0.3s ease;
 }
+
 .account__fund-section.active {
   transition: all 0.3s;
   position: initial;
@@ -1416,6 +1696,7 @@ button {
   display: flex;
   max-height: initial;
 }
+
 .account__title {
   color: #33B786;
   font-family: "DM Sans";
@@ -1424,18 +1705,22 @@ button {
   line-height: 114%;
   margin-bottom: 2.5rem;
 }
+
 .account__input {
   font-family: "DM Sans";
   font-size: 1rem;
   font-weight: 700;
   line-height: 1;
 }
+
 .account__input label {
   color: #252525;
   margin-bottom: 0.44rem;
   display: block;
 }
-.account__input input, .account__input select {
+
+.account__input input,
+.account__input select {
   font-family: "DM Sans";
   font-size: 1rem;
   font-weight: 700;
@@ -1447,28 +1732,36 @@ button {
   width: 100%;
   box-sizing: border-box;
 }
-.account__input input::-moz-placeholder, .account__input select::-moz-placeholder {
+
+.account__input input::-moz-placeholder,
+.account__input select::-moz-placeholder {
   color: #B8B8B8;
 }
-.account__input input::placeholder, .account__input select::placeholder {
+
+.account__input input::placeholder,
+.account__input select::placeholder {
   color: #B8B8B8;
 }
+
 .account__input select {
   color: #B8B8B8;
   -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
+
 .account__input select option {
   color: #252525;
 }
+
 .account__input-select {
   display: grid;
   grid-template-columns: 1fr 1fr;
   justify-content: space-between;
   -moz-column-gap: 2.5rem;
-       column-gap: 2.5rem;
+  column-gap: 2.5rem;
 }
+
 .account__input-select h3 {
   grid-column: 1/-1;
   color: #252525;
@@ -1478,6 +1771,7 @@ button {
   line-height: 1;
   margin-bottom: 0.44rem;
 }
+
 .account__input-radio {
   display: flex;
   align-items: center;
@@ -1488,14 +1782,17 @@ button {
   padding: 1.35rem 2.06rem 1.35rem 2rem;
   margin: 0;
 }
+
 .account__input-radio input[type=radio] {
   accent-color: #E74F5B;
 }
+
 .account__input-radio input {
   width: initial;
   margin: 0;
   margin-right: 0.5rem;
 }
+
 .account__buttons {
   display: flex;
   gap: 2.5rem;
@@ -1503,6 +1800,7 @@ button {
   flex: 0 1 100%;
   justify-content: space-between;
 }
+
 .account__button {
   padding: 1.25rem 2rem;
   width: 100%;
@@ -1514,10 +1812,12 @@ button {
   font-weight: 700;
   line-height: 1;
 }
+
 .account__button-green {
   background-color: #33B786;
   color: #fff;
 }
+
 .account__message {
   position: fixed;
   min-width: 37.1%;
@@ -1528,6 +1828,7 @@ button {
   height: 29.9375rem;
   justify-content: flex-end;
 }
+
 .account__message h3 {
   color: #6C6C6C;
   font-family: "DM Sans";
@@ -1537,9 +1838,11 @@ button {
   line-height: 1;
   margin-bottom: 2rem;
 }
+
 .account__message h3 span {
   color: #33B786;
 }
+
 .account__message-add {
   height: 35.4375rem;
 }
@@ -1549,6 +1852,7 @@ button {
   background-color: #D4F3E7;
   overflow: auto;
 }
+
 .login__container,
 .register__container {
   display: flex;
@@ -1556,22 +1860,26 @@ button {
   height: 100vh;
   align-items: center;
 }
+
 .login__content,
 .register__content {
   flex: 0 1 53%;
   display: flex;
   flex-direction: column;
 }
+
 .login__box--text,
 .register__box--text {
   flex: 0 1 100%;
   margin-top: 8.5rem;
   margin-bottom: 6.5rem;
 }
+
 .login__text,
 .register__text {
   margin-bottom: 0;
 }
+
 .login__boxes,
 .register__boxes {
   flex: 1 1 45.38%;
@@ -1580,6 +1888,7 @@ button {
   display: flex;
   align-items: center;
 }
+
 .login__box,
 .register__box {
   position: absolute;
@@ -1594,12 +1903,14 @@ button {
   right: 0;
   transition: all 1s;
 }
+
 .login__box.active,
 .register__box.active {
   visibility: visible;
   opacity: 1;
   z-index: 2;
 }
+
 .login__form-title,
 .register__form-title {
   color: #33B786;
@@ -1609,6 +1920,7 @@ button {
   line-height: 114%;
   margin-bottom: 3.05rem;
 }
+
 .login__input-box,
 .register__input-box {
   flex: 0 1 100%;
@@ -1620,6 +1932,7 @@ button {
   align-items: center;
   justify-content: space-between;
 }
+
 .login__input,
 .register__input {
   display: flex;
@@ -1628,6 +1941,7 @@ button {
   background-color: #fff;
   margin-bottom: 1.5rem;
 }
+
 .login__input label,
 .register__input label {
   color: #252525;
@@ -1635,6 +1949,7 @@ button {
   font-size: 1em;
   font-weight: 700;
 }
+
 .login__input input,
 .register__input input {
   font-family: "DM Sans";
@@ -1644,13 +1959,17 @@ button {
   border: none;
   outline: none;
 }
-.login__input input::-moz-placeholder, .register__input input::-moz-placeholder {
+
+.login__input input::-moz-placeholder,
+.register__input input::-moz-placeholder {
   color: #B8B8B8;
 }
+
 .login__input input::placeholder,
 .register__input input::placeholder {
   color: #B8B8B8;
 }
+
 .login__button,
 .register__button {
   cursor: pointer;
@@ -1667,11 +1986,13 @@ button {
   border: none;
   margin-top: 1.5em;
 }
+
 .login__input-icon,
 .register__input-icon {
   font-size: 1.5rem;
   margin-right: 1.6rem;
 }
+
 .login__error,
 .register__error {
   font-size: 0.9rem;
@@ -1679,11 +2000,13 @@ button {
   font-family: "DM Sans";
   display: none;
 }
+
 .login__error-password--requirements,
 .register__error-password--requirements {
   list-style-type: disc;
   padding-left: 1.5rem;
 }
+
 .login__password-forgot,
 .register__password-forgot {
   position: relative;
@@ -1695,6 +2018,7 @@ button {
   margin-right: 1.5rem;
   cursor: pointer;
 }
+
 .login__password-forgot::before,
 .register__password-forgot::before {
   content: "";
@@ -1706,7 +2030,9 @@ button {
   height: 2.5rem;
   background-color: #B8B8B8;
 }
-.login__question, .login__question-btn,
+
+.login__question,
+.login__question-btn,
 .register__question,
 .register__question-btn {
   margin-top: 1.5rem;
@@ -1716,6 +2042,7 @@ button {
   font-weight: 500;
   line-height: 1;
 }
+
 .login__question-btn,
 .register__question-btn {
   cursor: pointer;
@@ -1725,6 +2052,7 @@ button {
   margin-left: 0.2rem;
   font-size: 1rem;
 }
+
 .login__question-btn:hover,
 .register__question-btn:hover {
   text-decoration: underline;
@@ -1734,50 +2062,62 @@ button {
   .header__container {
     grid-template-columns: auto 1fr;
   }
+
   .hero__image {
     display: flex;
     justify-content: center;
     flex: 0 1 100%;
   }
+
   .hero__image img {
     max-width: 70%;
   }
+
   .dashboard__header {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto;
     gap: 1rem;
   }
+
   .dashboard__title {
     grid-column: 1;
     grid-row: 1;
   }
+
   .dashboard__account-info {
     grid-column: 2;
     grid-row: 1;
   }
+
   .dashboard__left {
     grid-column: 1/span 2;
     grid-row: 2;
   }
+
   .dashboard__left {
     margin-left: 0;
   }
+
   .dashboard__search {
     flex: 0 1 90%;
   }
+
   .dashboard__section--overview {
     grid-template-columns: 1fr;
     gap: 10px;
   }
+
   .section__accounts-transactions {
     grid-template-columns: repeat(2, 1fr);
   }
+
   .footer__container {
     flex-direction: column;
     align-items: center;
     gap: 2rem;
   }
+
   .footer__content {
     display: grid;
     grid-template-columns: auto 0.9fr;
@@ -1786,76 +2126,94 @@ button {
     width: 100%;
     justify-content: space-between;
   }
+
   .footer__navigation {
     grid-column: 2;
     grid-row: 1/span 2;
   }
+
   .footer__banner {
     width: 100%;
     min-height: 50rem;
   }
+
   .footer__banner::before {
     width: 100%;
     height: 100%;
   }
 }
+
 @media (max-width: 1023px) {
   .support__list {
     row-gap: 5rem;
   }
+
   .support__item {
     flex: 0 1 45%;
   }
+
   .support__item img {
     max-width: 75%;
   }
+
   .section {
     /* ---- Row 1 ---- */
     /* ---- Row 2 ---- */
   }
+
   .section__content {
     gap: 1em;
   }
+
   .section__content-accounts {
     grid-template-columns: auto auto;
     grid-template-rows: auto auto;
   }
+
   .section__accounts-row {
     -moz-column-gap: 0;
-         column-gap: 0;
+    column-gap: 0;
   }
+
   .section__transactions-list--full .section__transactions-info {
     grid-template-columns: repeat(3, 1fr);
   }
+
   .section__transactions-info {
     display: grid;
     -moz-column-gap: 1rem;
-         column-gap: 1rem;
+    column-gap: 1rem;
     row-gap: 1rem;
     align-items: center;
   }
+
   .section__transactions-circle {
     grid-column: 1;
     grid-row: 1;
   }
+
   .section__transactions-date {
     grid-column: 2;
     grid-row: 1;
   }
+
   .section__transactions-list--full .section__transactions-value {
     grid-column: 3;
     grid-row: 1;
     justify-self: flex-end;
   }
+
   .section__transactions-source {
     grid-column: 1/span 2;
     grid-row: 2;
   }
+
   .section__transactions-status {
     grid-column: 2/span 3;
     grid-row: 2;
     text-align: right;
   }
+
   .login__container {
     flex-wrap: wrap;
     gap: 0rem;
@@ -1863,46 +2221,58 @@ button {
     padding-top: 3rem;
     padding: 3rem 0.5rem 0 0.5rem;
   }
+
   .login__content {
     flex: 0 1 100%;
   }
+
   .login__box--text {
     flex: 0 1 100%;
     margin-top: 7rem;
     margin-bottom: 2rem;
   }
+
   .login__box--text p {
     margin-bottom: 0;
   }
+
   .login__boxes {
     flex: 0 1 100%;
   }
+
   .login__box {
     padding: 4rem 0.5rem;
   }
+
   .register__box {
     margin-top: 10rem;
   }
+
   .account__message {
     width: 80%;
   }
+
   .faqs__container {
     gap: 0;
     row-gap: 4rem;
   }
+
   .faqs__tabs {
     grid-row: 3;
     grid-column: initial;
     gap: 3.06rem;
   }
+
   .footer__content {
     grid-template-columns: 0.7fr 0.9fr;
   }
+
   .footer__banner {
     padding-right: 2rem;
     padding-left: 2rem;
   }
 }
+
 @media (max-width: 767px) {
   .burger {
     display: block;
@@ -1911,63 +2281,78 @@ button {
     left: 1rem;
     z-index: 13;
   }
+
   .header__container {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto;
     gap: 0;
     row-gap: 2rem;
   }
+
   .header__logo {
     grid-column: 1/span 2;
     display: flex;
     justify-content: center;
   }
+
   .support__list {
     row-gap: 5rem;
   }
+
   .support__item {
     flex: 0 1 40%;
   }
+
   .support__item img {
     max-width: 100%;
   }
+
   .dashboard__header {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto;
   }
+
   .dashboard__burger {
     grid-row: 1;
     grid-column: 1;
   }
+
   .dashboard__title {
     grid-column: 1/span 2;
     grid-row: 1;
     text-align: end;
   }
+
   .dashboard__account-info {
     grid-column: 1/span 2;
     grid-row: 2;
   }
+
   .dashboard__search {
     flex: 0 1 60%;
   }
+
   .dashboard__search-icon {
     width: 1.5rem;
     height: 1.5rem;
   }
+
   .dashboard__search-icon img {
     max-width: -moz-fit-content;
     max-width: fit-content;
   }
+
   .dashboard__left {
     grid-column: 1/span 2;
     grid-row: 3;
     margin-left: 0;
     gap: 0.25rem;
   }
+
   .dashboard__logo {
     display: none;
   }
+
   .dashboard__sidebar {
     display: block;
     position: fixed;
@@ -1983,97 +2368,124 @@ button {
     background-color: #fff;
     border-radius: 1.25rem 1.25rem 0rem 0rem;
   }
+
   .dashboard__sidebar.active {
     left: 0;
   }
+
   .dashboard__logout {
     margin-top: 3rem;
   }
+
   .dashboard__content {
     margin-left: 0;
   }
+
   .dashboard__notifications-list {
     right: -310%;
   }
+
   .section__accounts-row {
     grid-template-columns: 1fr;
   }
+
   .section__content-accounts .section__block {
     border-radius: 0.75rem;
     background: #D4F3E7;
     padding: 1.5em 1.5em;
   }
+
   .section__accounts-transactions {
     grid-template-columns: 1fr;
     gap: 2em;
     max-width: 100%;
   }
+
   .section__statistics-row {
     display: grid;
     grid-template-columns: 1fr 1fr auto;
   }
+
   .section__statistics-img {
     display: none;
   }
+
   .section__statistics-range {
     margin: 0.5em;
   }
-  .section__transactions-all > .section__row {
+
+  .section__transactions-all>.section__row {
     gap: 2em;
     max-width: 100%;
     box-sizing: border-box;
   }
-  .account__modal, .account__message {
+
+  .account__modal,
+  .account__message {
     width: 95%;
     padding: 3rem 2rem;
   }
+
   .account__input-select {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
+
   .account__buttons {
     flex-direction: column;
   }
+
   .footer__container {
     position: relative;
   }
+
   .footer__content {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto;
     gap: 4.5rem;
   }
+
   .footer__navigation {
     grid-column: 1;
     grid-row: 3;
   }
+
   .footer__title {
     margin-bottom: 3rem;
   }
+
   .footer__form {
     flex-direction: column;
     gap: 3rem;
   }
+
   .footer__form input {
     min-width: 100%;
   }
+
   .footer__button {
     min-width: 100%;
   }
-}ion {
-    grid-column: 1;
-    grid-row: 3;
-  }
-  .footer__title {
-    margin-bottom: 3rem;
-  }
-  .footer__form {
-    flex-direction: column;
-    gap: 3rem;
-  }
-  .footer__form input {
-    min-width: 100%;
-  }
-  .footer__button {
-    min-width: 100%;
-  }
+}
+
+.footer__navigation {
+  grid-column: 1;
+  grid-row: 3;
+}
+
+.footer__title {
+  margin-bottom: 3rem;
+}
+
+.footer__form {
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.footer__form input {
+  min-width: 100%;
+}
+
+.footer__button {
+  min-width: 100%;
 }
