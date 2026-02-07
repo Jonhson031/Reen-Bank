@@ -20,6 +20,10 @@ export function modalRemoveActive(modal) {
     if (!modal) return;
     modal.classList.remove('active');
     overlay.classList.remove('active');
+    const inputs = modal.querySelectorAll('input');
+    inputs?.forEach(input => (input.value = ''));
+    const error = modal.querySelector('.account__modal-error');
+    if (error) error.style.display = 'none';
 }
 
 export function initModalCloseEvents() {
@@ -81,4 +85,4 @@ export function modalMessage(message, amount = null, handler = null) {
     }
 }
 
-export const accountModals = { modalFund, modalWithdraw, modalAdd};
+export const accountModals = { modalFund, modalWithdraw, modalAdd };

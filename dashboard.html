@@ -53,7 +53,9 @@
                                     name="dashboard__search-input" id="dashboard__search-input" required>
                             </form>
                             <div class="dashboard__notifications">
-                                <button class="dashboard__notifications-button"><img src="images/icons/notifications-icon.svg" alt="click here to view notifications"></button>
+                                <button class="dashboard__notifications-button"><img
+                                        src="images/icons/notifications-icon.svg"
+                                        alt="click here to view notifications"></button>
                                 <div class="dashboard__notifications-count"></div>
                                 <ul class="dashboard__notifications-list">
                                 </ul>
@@ -501,7 +503,9 @@
                         <h2 class="account__title">Add Account</h2>
                         <div class="account__input">
                             <label for="account__name">Account Name</label>
-                            <input type="text" name="account__name" id="account__name" placeholder="Enter Name">
+                            <input type="text" name="account__name" id="account__name" placeholder="Enter Name"
+                                maxlength="30">
+                            <div class="account__modal-add--error account__modal-error">An account with this name already exists.</div>
                         </div>
                         <div class="account__buttons">
                             <button class="account__button account__button-cancel">Cancel</button>
@@ -519,7 +523,9 @@
                             <div class="account__input">
                                 <label for="account__amount-withdraw">Amount</label>
                                 <input type="number" name="account__amount-withdraw" id="account__amount-withdraw"
-                                    placeholder="100.00">
+                                    placeholder="100.00" maxlength="10">
+                                <div class="account__amount-withdraw--error account__modal-error">Transaction could not be processed due to
+                                    insufficient funds.</div>
                             </div>
                             <div class="account__input">
                                 <label for="account__number">Account Number</label>

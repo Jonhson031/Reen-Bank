@@ -196,3 +196,11 @@ button {
     }
 }
 
+[class*="--error"] {
+    font-size: 0.9rem;
+    color: red;
+    font-family: "DM Sans";
+    display: none;
+    margin-top: 0.7rem;
+    margin-left: 0.3rem;
+}

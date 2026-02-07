@@ -237,6 +237,15 @@ button {
   background-color: #288F69;
 }
 
+[class*="--error"] {
+  font-size: 0.9rem;
+  color: red;
+  font-family: "DM Sans";
+  display: none;
+  margin-top: 0.7rem;
+  margin-left: 0.3rem;
+}
+
 .header {
   background-color: #D4F3E7;
   padding: 4em 15px;

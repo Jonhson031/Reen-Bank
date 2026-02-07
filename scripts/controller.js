@@ -208,6 +208,7 @@ function initApp() {
 
     // FAQs tabs
     View.attachFaqsTabEvents();
+    View.scrollIntoView();
 
     attachBurgerEvents();
     attachLogoutEvent(() => {
