@@ -109,6 +109,16 @@
     }
 
     .section {
+        &__content-balance {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+
+            & div:nth-child(3) {
+                padding: 0;
+            }
+        }
+
         &__content {
             gap: 1em;
         }
@@ -351,6 +361,13 @@
     }
 
     .section {
+        &__content-balance {
+            padding: 1.5em;
+            row-gap: 1.5em;
+            & div {
+                padding: 0;
+            }
+        }
         &__accounts-row {
             grid-template-columns: 1fr;
         }

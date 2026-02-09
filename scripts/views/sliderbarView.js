@@ -15,10 +15,10 @@ function sidebarRemoveActive() {
 
 export function attachBurgerEvents(handler) {
     burgerBtn?.addEventListener('click', function () {
-        burgerBtn.classList.add('active');
-        overlay.classList.add('active');
-        sidebar.classList.add('active');
-        document.body.classList.add('lock');
+        burgerBtn.classList.toggle('active');
+        overlay.classList.toggle('active');
+        sidebar.classList.toggle('active');
+        document.body.classList.toggle('lock');
     })
     overlay?.addEventListener('click', function () {
         sidebarRemoveActive();

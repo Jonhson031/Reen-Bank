@@ -1830,6 +1830,14 @@ button {
     /* ---- Row 1 ---- */
     /* ---- Row 2 ---- */
   }
+  .section__content-balance {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+  .section__content-balance div:nth-child(3) {
+    padding: 0;
+  }
   .section__content {
     gap: 1em;
   }
@@ -2011,6 +2019,13 @@ button {
   }
   .dashboard__notifications-list {
     right: -310%;
+  }
+  .section__content-balance {
+    padding: 1.5em;
+    row-gap: 1.5em;
+  }
+  .section__content-balance div {
+    padding: 0;
   }
   .section__accounts-row {
     grid-template-columns: 1fr;

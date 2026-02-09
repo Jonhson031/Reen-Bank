@@ -16,15 +16,15 @@ export function scrollIntoView() {
     const faqs = document.getElementById('faqs');
     const footer = document.getElementById('footer');
     const servcies = document.getElementById('services');
-    learnMoreBtn.addEventListener('click', function (e) {
+    learnMoreBtn?.addEventListener('click', function (e) {
         e.preventDefault();
         faqs.scrollIntoView({ behavior: "smooth" });
     })
-    aboutBtn.addEventListener('click', function (e) {
+    aboutBtn?.addEventListener('click', function (e) {
         e.preventDefault();
         servcies.scrollIntoView({ behavior: "smooth" });
     })
-    contactBtn.addEventListener('click', function (e) {
+    contactBtn?.addEventListener('click', function (e) {
         e.preventDefault();
         footer.scrollIntoView({ behavior: "smooth" });
     })
