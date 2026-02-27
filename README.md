@@ -19,6 +19,7 @@ Reen Bank is a responsive frontend banking application that simulates real-world
 - HTML5
 - SCSS
 - JavaScript (Vanilla JS)
+- MVC architecture
 
 All functionality is implemented using plain JavaScript to demonstrate strong core frontend logic and state management without external frameworks.
 
